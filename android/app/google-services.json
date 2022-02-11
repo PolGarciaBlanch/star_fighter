@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914229698538",
+    "project_id": "s2am-star-fighter",
+    "storage_bucket": "s2am-star-fighter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914229698538:android:81a1e9d5edd924b3a25c93",
+        "android_client_info": {
+          "package_name": "com.example.star_fighter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914229698538-fbrv33u4b24cler5cdp2k4nbsakkff08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeL5JCfkeJZoTvkE8W8RLHSOB2fSJRgHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914229698538-fbrv33u4b24cler5cdp2k4nbsakkff08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
