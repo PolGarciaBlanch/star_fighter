@@ -23,7 +23,11 @@ class _PantallaCargaState extends State<PantallaCarga> {
         body: Stack(
       children: [
 <<<<<<< HEAD
+<<<<<<< HEAD
         //Image.asset('img/backGroung.jpg'),
+=======
+        Image.asset('assets/img/backGroung.jpg'),
+>>>>>>> parent of c4527d9 (photosynthesis .png)
 =======
         Image.asset('assets/img/backGroung.jpg'),
 >>>>>>> parent of c4527d9 (photosynthesis .png)
@@ -38,8 +42,13 @@ class _PantallaCargaState extends State<PantallaCarga> {
             children: [
               Image(image: pizzaAsset, width: 400, height: 400),
 <<<<<<< HEAD
+<<<<<<< HEAD
               //Image.asset('img/backGroung.jpg'),
               //Image.asset('img/backGroung.jpg'),
+=======
+              Image.asset('assets/img/backGroung.jpg'),
+              Image.asset('assets/img/backGroung.jpg'),
+>>>>>>> parent of c4527d9 (photosynthesis .png)
 =======
               Image.asset('assets/img/backGroung.jpg'),
               Image.asset('assets/img/backGroung.jpg'),
