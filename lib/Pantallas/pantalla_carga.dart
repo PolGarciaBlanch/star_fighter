@@ -13,9 +13,29 @@ class PantallaCarga extends StatefulWidget {
   _PantallaCargaState createState() => _PantallaCargaState(appTip);
 }
 
-class _PantallaCargaState extends State<PantallaCarga> {
+class _PantallaCargaState extends State<PantallaCarga>
+    with TickerProviderStateMixin {
   final String appTip;
   _PantallaCargaState(this.appTip);
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+        setState(() {});
+      });
+    controller.repeat(reverse: true);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +66,10 @@ class _PantallaCargaState extends State<PantallaCarga> {
                         width: 300,
                         height: 300,
                         child: Image.asset('assets/img/xWing.png'),
+                      ),
+                      LinearProgressIndicator(
+                        value: controller.value,
+                        semanticsLabel: 'Linear progress indicator',
                       ),
                       Container(
                         width: 500,
