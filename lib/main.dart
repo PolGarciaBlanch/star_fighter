@@ -19,7 +19,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-AssetImage pizzaAsset = AssetImage('assets/img/AppLogo.png');
+AssetImage pizzaAsset = const AssetImage('img/AppLogo.png');
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

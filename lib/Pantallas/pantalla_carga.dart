@@ -22,7 +22,7 @@ class _PantallaCargaState extends State<PantallaCarga> {
     return Scaffold(
         body: Stack(
       children: [
-        Image.asset('assets/img/backGroung.jpg'),
+        //Image.asset('img/backGroung.jpg'),
         Container(
           padding: EdgeInsets.all(20),
           width: 500,
@@ -33,8 +33,8 @@ class _PantallaCargaState extends State<PantallaCarga> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image(image: pizzaAsset, width: 400, height: 400),
-              Image.asset('assets/img/backGroung.jpg'),
-              Image.asset('assets/img/backGroung.jpg'),
+              //Image.asset('img/backGroung.jpg'),
+              //Image.asset('img/backGroung.jpg'),
               Container(
                 width: 80,
                 height: 20,
