@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:star_fighter/main.dart';
 
 class PantallaCarga extends StatefulWidget {
+  final AssetImage backGround;
+  final AssetImage imgTop;
+  final AssetImage imgMid;
   final String appTip;
-
-  PantallaCarga({Key? key, required this.appTip}) : super(key: key);
+  PantallaCarga(
+      {Key? key,
+      required this.backGround,
+      required this.imgTop,
+      required this.imgMid,
+      required this.appTip})
+      : super(key: key);
   //default
 
   //moded
 
   @override
-  _PantallaCargaState createState() => _PantallaCargaState(appTip);
+  _PantallaCargaState createState() =>
+      _PantallaCargaState(backGround, imgTop, imgMid, appTip);
 }
 
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
+  final AssetImage backGround;
+  final AssetImage imgTop;
+  final AssetImage imgMid;
   final String appTip;
-  _PantallaCargaState(this.appTip);
+  _PantallaCargaState(this.backGround, this.imgTop, this.imgMid, this.appTip);
   late AnimationController controller;
 
   @override
@@ -46,11 +57,7 @@ class _PantallaCargaState extends State<PantallaCarga>
             color: Colors.black,
             child: (Stack(
               children: [
-                Image.asset(
-                  'assets/img/backGround.jpg',
-                  width: 500,
-                  height: 1000,
-                ),
+                Image(image: backGround, width: 500, height: 1000),
                 Container(
                   padding: const EdgeInsets.only(
                       left: 20, top: 50, right: 20, bottom: 20),
@@ -61,11 +68,11 @@ class _PantallaCargaState extends State<PantallaCarga>
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Image.asset('assets/img/AppLogo.png'),
+                      Image(image: imgTop),
                       Container(
                         width: 300,
                         height: 300,
-                        child: Image.asset('assets/img/xWing.png'),
+                        child: Image(image: imgMid),
                       ),
                       LinearProgressIndicator(
                         value: controller.value,
@@ -74,6 +81,8 @@ class _PantallaCargaState extends State<PantallaCarga>
                       Container(
                         width: 500,
                         height: 100,
+                        padding: const EdgeInsets.only(
+                            left: 20, top: 5, right: 20, bottom: 5),
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(

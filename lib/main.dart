@@ -19,9 +19,9 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-AssetImage imgLogo = AssetImage('assets/img/AppLogo.png');
-AssetImage imgBackground = AssetImage('assets/img/backGround.jpg');
-AssetImage imgShip = AssetImage('assets/img/xWing.png');
+AssetImage imgLogo = const AssetImage('assets/img/AppLogo.png');
+AssetImage imgBackground = const AssetImage('assets/img/backGround.jpg');
+AssetImage imgShip = const AssetImage('assets/img/xWing.png');
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -46,8 +46,12 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
-        'pantalla_carga': (BuildContext context) =>
-            PantallaCarga(appTip: 'blalbalbalbal'),
+        'pantalla_carga': (BuildContext context) => PantallaCarga(
+            backGround: imgBackground,
+            imgTop: imgLogo,
+            imgMid: imgShip,
+            appTip:
+                'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!'),
       },
     );
   }
