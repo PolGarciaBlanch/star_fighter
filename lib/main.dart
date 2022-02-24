@@ -7,7 +7,9 @@ import 'dart:async';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 
+import 'Pantallas/pantalla_testeo.dart';
 import 'firebase_config.dart';
 import 'tabs_page.dart';
 
@@ -16,6 +18,8 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseConfig.platformOptions);
   runApp(const MyApp());
 }
+
+AssetImage pizzaAsset = AssetImage('assets/img/AppLogo.png');
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -29,14 +33,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Firebase Analytics Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       navigatorObservers: <NavigatorObserver>[observer],
+      initialRoute: 'pantalla_testeo',
       home: MyHomePage(
         title: 'Firebase Analytics Demo',
         analytics: analytics,
         observer: observer,
       ),
+      routes: {
+        'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
+        'pantalla_carga': (BuildContext context) =>
+            PantallaCarga(appTip: 'blalbalbalbal'),
+      },
     );
   }
 }
