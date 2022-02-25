@@ -42,18 +42,20 @@ class _login extends State<Login> {
                     controller: textUsr,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2.0),
-                      ),
-                      labelText: 'Usuari',
-                    ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                        labelText: 'Email',
+                        labelStyle: const TextStyle(color: Colors.white),
+                        hintText: 'Email',
+                        hintStyle: const TextStyle(color: Colors.white)),
                   ),
                 ),
                 Padding(
@@ -64,18 +66,20 @@ class _login extends State<Login> {
                     obscureText: true,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2.0),
-                      ),
-                      labelText: 'Contrasenya',
-                    ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                        labelText: 'Contrasenya',
+                        labelStyle: const TextStyle(color: Colors.white),
+                        hintText: 'Contrasenya',
+                        hintStyle: const TextStyle(color: Colors.white)),
                   ),
                 ),
                 Padding(
@@ -125,13 +129,70 @@ class _login extends State<Login> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pwd);
+          showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('User'),
+          content: Text(userCredential.user!.email!),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text("Email no trobat"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text("Contrasenya incorrecta"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
       } else {
-        print('Usuari invalid');
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text("Email invàlid"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
       }
     }
   }
