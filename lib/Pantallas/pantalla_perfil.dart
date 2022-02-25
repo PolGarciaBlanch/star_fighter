@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-class PantallaTesteo extends StatefulWidget {
-  PantallaTesteo({Key? key}) : super(key: key);
+class PantallaPerfil extends StatefulWidget {
+  PantallaPerfil({Key? key}) : super(key: key);
   //default
 
   //moded
 
   @override
-  _PantallaTesteoState createState() => _PantallaTesteoState();
+  _PantallaPerfilState createState() => _PantallaPerfilState();
 }
 
-class _PantallaTesteoState extends State<PantallaTesteo> {
-  _PantallaTesteoState();
+class _PantallaPerfilState extends State<PantallaPerfil> {
+  _PantallaPerfilState();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('TEST MODE'),
+          title: const Text('TEST MODE'),
           backgroundColor: Colors.redAccent,
           actions: <Widget>[
             IconButton(
@@ -41,18 +41,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'pantalla_carga');
                   },
-                  child: Text("Load Screen"),
-                ),
-                // margin: EdgeInsets.only(top: 30),
-              ),
-              Container(
-                child: FlatButton(
-                  color: Colors.red,
-                  splashColor: Colors.black12,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '');
-                  },
-                  child: Text("menu list"),
+                  child: const Text("Load Screen"),
                 ),
                 // margin: EdgeInsets.only(top: 30),
               ),
