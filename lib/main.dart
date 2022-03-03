@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: 'pantalla_testeo',
+      initialRoute: 'pantalla_carga',
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(
@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
             imgMid: imgShip,
             appTip:
                 'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!'),
+                
       },
     );
   }
