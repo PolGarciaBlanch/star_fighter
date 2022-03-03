@@ -27,6 +27,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> msgCarga = [
+      'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
+      'Message 2', 'message 3'];
+
     List<String> menuText = ["Perfil"];
     List<String> menuNavigator = ["pantalla_perfil"];
     AssetImage imgLogo = const AssetImage('assets/img/AppLogo.png');
@@ -51,8 +55,7 @@ class MyApp extends StatelessWidget {
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
-            appTip:
-                'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!'),
+            appTip: msgCarga(0)),
                 
       },
     );

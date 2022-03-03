@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PantallaCarga extends StatefulWidget {
-  final String nextPage;
+
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final String appTip;
   PantallaCarga(
       {Key? key,
-      required this.nextPage,
+
       required this.backGround,
       required this.imgTop,
       required this.imgMid,
@@ -20,17 +20,17 @@ class PantallaCarga extends StatefulWidget {
 
   @override
   _PantallaCargaState createState() =>
-      _PantallaCargaState(nextPage, backGround, imgTop, imgMid, appTip);
+      _PantallaCargaState( backGround, imgTop, imgMid, appTip);
 }
 
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
-  final String nextPage
+
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final String appTip;
-  _PantallaCargaState(this.nextpage, this.backGround, this.imgTop, this.imgMid, this.appTip);
+  _PantallaCargaState( this.backGround, this.imgTop, this.imgMid, this.appTip);
   late AnimationController controller;
 
   @override
