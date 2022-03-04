@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: 'pantalla_carga',
+      initialRoute: 'login_temp',
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(
