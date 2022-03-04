@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_fighter/Pantallas/pantalla_principal.dart';
 
 class PantallaTesteo extends StatefulWidget {
   PantallaTesteo({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.pushNamed(context, 'pantalla_carga');
+                    Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaPrincipal()),);
                   },
                   child: Text("Load Screen"),
                 ),

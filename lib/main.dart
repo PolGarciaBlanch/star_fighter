@@ -1,12 +1,9 @@
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
-import 'package:star_fighter/widgets/option_display.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_principal.dart';

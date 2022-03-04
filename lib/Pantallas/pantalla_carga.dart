@@ -39,7 +39,7 @@ class _PantallaCargaState extends State<PantallaCarga>
 
   void _startCountDown(){
     Timer.periodic(Duration(seconds:5), (timer) {
-      Navigator.pushReplacementNamed(context, path);
+      Navigator.of(context).pushNamedAndRemoveUntil(path, (Route<dynamic> route) => false);
     });
   }
   @override
