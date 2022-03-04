@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_testeo' ),
+            path: 'pantalla_principal' ),
       },
     );
   }

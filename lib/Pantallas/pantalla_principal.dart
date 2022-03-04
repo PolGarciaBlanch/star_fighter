@@ -67,7 +67,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
           OSMFlutter(
             controller: controller,
             trackMyPosition: false,
-            androidHotReloadSupport: true,
             mapIsLoading: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
