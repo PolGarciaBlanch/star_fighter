@@ -112,7 +112,9 @@ class _login extends State<Login> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'pantalla_crea_usr');
+                      },
                       child: const Text('Crear Usuari'),
                     ),
                   ),

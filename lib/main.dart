@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
+import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
 import 'package:star_fighter/widgets/option_display.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pantalla_menu.dart';
@@ -42,7 +43,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
+
       initialRoute: 'login_temp',
+
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(
@@ -50,6 +53,7 @@ class MyApp extends StatelessWidget {
               navigator: menuNavigator,
             ),*/
         'pantalla_login' : (BuildContext context) => const Login(),
+        'pantalla_crea_usr' : (BuildContext context) => const Create(),
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'login_temp': (BuildContext context) => PantallaCarga(
