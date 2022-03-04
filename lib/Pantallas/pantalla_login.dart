@@ -96,6 +96,8 @@ class _login extends State<Login> {
                         if (textUsr.text.isNotEmpty &&
                             textPasswd.text.isNotEmpty) {
                           _log(textUsr.text, textPasswd.text);
+                          //carga_test
+                          Navigator.pushNamed(context, 'carga_test');
                         }
                       },
                       child: const Text('Accedir'),

@@ -38,6 +38,7 @@ class _LoadSplashState extends State<LoadSplash>
 
 
 
+
   @override
   void initState() {
     //tip= appTip[RandomLib.RandomVal(0,appTip.length)];
@@ -52,12 +53,16 @@ class _LoadSplashState extends State<LoadSplash>
     });
     controller.repeat(reverse: true);
     super.initState();
+
   }
 
 
 
   void _startCountDown(){
-    Timer.periodic(Duration(seconds:20), (timer) {
+    if(tip==''){
+      tip=appTip[RandomLib.RandomVal(0,appTip.length)];
+    }
+    Timer.periodic(Duration(seconds:5), (timer) {
       tip=appTip[RandomLib.RandomVal(0,appTip.length)];
     });
   }
@@ -126,7 +131,11 @@ class _LoadSplashState extends State<LoadSplash>
                             offset: Offset(2.0, 2.0),
                           )
                         ]),
-                  )
+                  ),
+                  LinearProgressIndicator(
+                    value: controller.value,
+                    semanticsLabel: 'Linear progress indicator',
+                  ),
                 ],
               ),
             )

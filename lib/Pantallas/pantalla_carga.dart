@@ -38,11 +38,14 @@ class _PantallaCargaState extends State<PantallaCarga>
   _PantallaCargaState(this.path, this.backGround, this.imgTop, this.imgMid, this.appTip);
 
   void _startCountDown(){
-    Timer.periodic(Duration(seconds:30), (timer) {
-      Navigator.pushReplacementNamed(context, 'path');
+    Timer.periodic(Duration(seconds:5), (timer) {
+      Navigator.pushReplacementNamed(context, path);
     });
   }
-
+  @override
+  void initState() {
+    _startCountDown();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
