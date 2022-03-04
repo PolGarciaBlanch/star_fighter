@@ -8,14 +8,13 @@ import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
-import 'control/random.dart';
 
 Future<void> main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 
