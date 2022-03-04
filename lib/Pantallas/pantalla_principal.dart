@@ -11,6 +11,7 @@ class PantallaPrincipal extends StatefulWidget {
   @override
   _PantallaPrincipalState createState() => _PantallaPrincipalState();
 }
+
 class CustomController extends MapController {
   CustomController({
     bool initMapWithUserPosition = true,
@@ -30,8 +31,8 @@ class CustomController extends MapController {
     super.init();
   }
 }
+
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
-  
   late CustomController controller;
 
   _PantallaPrincipalState();
@@ -49,7 +50,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
     //timer =
     //   Timer.periodic(Duration(seconds: 1), (Timer t) => getCurrentLocation());
-  } 
+  }
 
   Future<void> getCurrentLocation() async {
     await controller.currentLocation();
@@ -59,7 +60,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(title: Text('Home')),
       //drawer: buildDrawer(context, LiveLocationPage.route),
       body: Container(
@@ -84,19 +84,19 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 getCurrentLocation();
               }
             },
-            initZoom: 8,
+            initZoom: 18,
             minZoomLevel: 3,
             maxZoomLevel: 18,
             stepZoom: 1.0,
             userLocationMarker: UserLocationMaker(
-              personMarker: MarkerIcon(
+              personMarker: const MarkerIcon(
                 icon: Icon(
                   Icons.location_history_rounded,
                   color: Colors.red,
                   size: 48,
                 ),
               ),
-              directionArrowMarker: MarkerIcon(
+              directionArrowMarker: const MarkerIcon(
                 icon: Icon(
                   Icons.double_arrow,
                   size: 48,
@@ -107,13 +107,16 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             //trackMyPosition: trackingNotifier.value,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
-              print(myLocation);
+              controller.centerMap;
             },
+          ),
+          Container(
+            width: 800,
+            height: 800,
+            color: Color.fromRGBO(20, 20, 20, 0),
           ),
         ]),
       ),
-    
-
     );
   }
 }
