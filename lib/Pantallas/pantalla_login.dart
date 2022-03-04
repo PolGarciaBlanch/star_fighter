@@ -1,8 +1,5 @@
 import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:star_fighter/models/user.dart';
@@ -99,7 +96,7 @@ class _login extends State<Login> {
                             textPasswd.text.isNotEmpty) {
                           _log(textUsr.text, textPasswd.text);
                           //carga_test
-                          Navigator.pushNamed(context, 'carga_test');
+                          
                         }
                       },
                       child: const Text('Accedir'),
@@ -146,11 +143,11 @@ class _login extends State<Login> {
               return AlertDialog(
                 title: const Text('User'),
                 content: Text(userCredential.user!.email! +
-                    "\n" +
+                    "\nNivell: " +
                     value["level"].toString()),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'OK'),
+                    onPressed: () => Navigator.pushNamed(context, 'carga_test'),
                     child: const Text('OK'),
                   ),
                 ],
