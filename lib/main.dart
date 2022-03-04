@@ -11,6 +11,7 @@ import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
+import 'control/random.dart';
 
 Future<void> main() async {
 
@@ -28,6 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> msgCarga = [
+      'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
+      'Meteorites and proyectiles ignore shields', 'Shield tecnology protects from plasma'];
+
     List<String> menuText = ["Perfil"];
     List<String> menuNavigator = ["pantalla_perfil"];
     AssetImage imgLogo = const AssetImage('assets/img/AppLogo.png');
@@ -38,7 +43,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: 'pantalla_login',
+
+      initialRoute: 'login_temp',
+
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(
@@ -49,13 +56,21 @@ class MyApp extends StatelessWidget {
         'pantalla_crea_usr' : (BuildContext context) => const Create(),
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
-        'pantalla_carga': (BuildContext context) => PantallaCarga(
+        'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
-            appTip:
-                'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!'),
+            appTip: msgCarga,
+            path: 'pantalla_login' ),
+        'carga_test': (BuildContext context) => PantallaCarga(
+            backGround: imgBackground,
+            imgTop: imgLogo,
+            imgMid: imgShip,
+            appTip: msgCarga,
+            path: 'pantalla_testeo' ),
       },
     );
   }
+
+
 }

@@ -1,12 +1,68 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:star_fighter/widgets/load.dart';
 
 class PantallaCarga extends StatefulWidget {
+
+  final AssetImage backGround;
+  final AssetImage imgTop;
+  final AssetImage imgMid;
+  final List<String> appTip;
+  final String path;
+  PantallaCarga(
+      {Key? key,
+        required this.path,
+        required this.backGround,
+        required this.imgTop,
+        required this.imgMid,
+        required this.appTip})
+      : super(key: key);
+  //default
+
+  //moded
+
+  @override
+  _PantallaCargaState createState() =>
+      _PantallaCargaState(path, backGround, imgTop, imgMid, appTip);
+}
+
+class _PantallaCargaState extends State<PantallaCarga>
+    with TickerProviderStateMixin {
+
+  final AssetImage backGround;
+  final AssetImage imgTop;
+  final AssetImage imgMid;
+  final List<String> appTip;
+  final String path;
+  _PantallaCargaState(this.path, this.backGround, this.imgTop, this.imgMid, this.appTip);
+
+  void _startCountDown(){
+    Timer.periodic(Duration(seconds:30), (timer) {
+      Navigator.pushReplacementNamed(context, 'path');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: LoadSplash(backGround: backGround,
+      imgTop: imgTop,
+      imgMid: imgMid,
+      appTip: appTip)
+    );}
+}
+
+/*
+class PantallaCarga extends StatefulWidget {
+
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final String appTip;
   PantallaCarga(
       {Key? key,
+
       required this.backGround,
       required this.imgTop,
       required this.imgMid,
@@ -18,16 +74,17 @@ class PantallaCarga extends StatefulWidget {
 
   @override
   _PantallaCargaState createState() =>
-      _PantallaCargaState(backGround, imgTop, imgMid, appTip);
+      _PantallaCargaState( backGround, imgTop, imgMid, appTip);
 }
 
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
+
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final String appTip;
-  _PantallaCargaState(this.backGround, this.imgTop, this.imgMid, this.appTip);
+  _PantallaCargaState( this.backGround, this.imgTop, this.imgMid, this.appTip);
   late AnimationController controller;
 
   @override
@@ -109,4 +166,6 @@ class _PantallaCargaState extends State<PantallaCarga>
               ],
             ))));
   }
+  
 }
+*/
