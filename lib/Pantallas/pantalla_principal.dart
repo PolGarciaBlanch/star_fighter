@@ -67,13 +67,12 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
           OSMFlutter(
             controller: controller,
             trackMyPosition: false,
-            androidHotReloadSupport: true,
             mapIsLoading: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   CircularProgressIndicator(),
                   Text("Map is Loading.."),
                 ],
@@ -90,15 +89,15 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             maxZoomLevel: 18,
             stepZoom: 1.0,
             userLocationMarker: UserLocationMaker(
-              personMarker: const MarkerIcon(
-                icon: Icon(
+              personMarker: MarkerIcon(
+                icon: const Icon(
                   Icons.location_history_rounded,
                   color: Colors.red,
                   size: 48,
                 ),
               ),
-              directionArrowMarker: const MarkerIcon(
-                icon: Icon(
+              directionArrowMarker: MarkerIcon(
+                icon:const  Icon(
                   Icons.double_arrow,
                   size: 48,
                 ),

@@ -1,10 +1,8 @@
 import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/models/user.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -14,6 +12,7 @@ class Login extends StatefulWidget {
 
 class _login extends State<Login> {
   FirebaseAuth log = FirebaseAuth.instance;
+  FirebaseDatabase firebase = FirebaseDatabase.instance;
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
 
@@ -97,7 +96,7 @@ class _login extends State<Login> {
                             textPasswd.text.isNotEmpty) {
                           _log(textUsr.text, textPasswd.text);
                           //carga_test
-                          Navigator.pushNamed(context, 'carga_test');
+                          
                         }
                       },
                       child: const Text('Accedir'),
@@ -133,21 +132,30 @@ class _login extends State<Login> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pwd);
+      Stream<DatabaseEvent> stream =
+          firebase.ref("users/" + userCredential.user!.uid).onValue;
+      stream.listen((DatabaseEvent event) {
+        setState(() {
+          Map<dynamic, dynamic> value = event.snapshot.value! as Map;
           showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('User'),
-          content: Text(userCredential.user!.email!),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('User'),
+                content: Text(userCredential.user!.email! +
+                    "\nNivell: " +
+                    value["level"].toString()),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, 'carga_test'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        });
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showDialog(
