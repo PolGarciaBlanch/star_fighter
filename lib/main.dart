@@ -10,6 +10,7 @@ import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
+import 'control/random.dart';
 
 Future<void> main() async {
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> msgCarga = [
       'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
-      'Message 2', 'message 3'];
+      'Meteorites and proyectiles ignore shields', 'Shield tecnology protects from plasma'];
 
     List<String> menuText = ["Perfil"];
     List<String> menuNavigator = ["pantalla_perfil"];
@@ -51,13 +52,21 @@ class MyApp extends StatelessWidget {
         'pantalla_login' : (BuildContext context) => const Login(),
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
-        'pantalla_carga': (BuildContext context) => PantallaCarga(
+        'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
-            appTip: msgCarga(0)),
-                
+            appTip: msgCarga,
+            path: 'pantalla_login' ),
+        'carga_test': (BuildContext context) => PantallaCarga(
+            backGround: imgBackground,
+            imgTop: imgLogo,
+            imgMid: imgShip,
+            appTip: msgCarga,
+            path: 'pantalla_testeo' ),
       },
     );
   }
+
+
 }
