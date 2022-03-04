@@ -51,7 +51,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.pushNamed(context, '');
+                    Navigator.pushNamed(context, 'pantalla_principal');
                   },
                   child: Text("menu list"),
                 ),
