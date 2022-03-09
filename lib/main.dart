@@ -10,8 +10,6 @@ import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
 
 Future<void> main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

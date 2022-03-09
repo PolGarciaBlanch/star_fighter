@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:star_fighter/models/markers.dart';
 import 'dart:async';
 
 class PantallaPrincipal extends StatefulWidget {
@@ -34,6 +35,57 @@ class CustomController extends MapController {
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
+  List<MarkersMap> markers = [];
+  bool primerMarkador = true;
+  List<Widget> resultButton = [];
+
+  void generateMarker(double latitude, double longitude, IconData icono) {
+    MarkerIcon mrkIcon = MarkerIcon(
+      icon: Icon(
+        icono,
+        color: Color.fromRGBO(255, 255, 255, 100),
+        size: 100,
+      ),
+    );
+
+    GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
+
+    Key key = UniqueKey();
+    MarkersMap varMrk =
+        MarkersMap(location: point, iconMarker: mrkIcon, key: key);
+
+    markers.add(varMrk);
+    controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
+  }
+
+  void generarBoton(Key keyButton, int posX, int posY) {
+    FloatingActionButton button = FloatingActionButton(
+      onPressed: null,
+      key: keyButton,
+      foregroundColor: Color.fromRGBO(255, 0, 0, 100),
+    );
+  }
+
+  bool estaEnMarkers(double latitude, double longitude) {
+    GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
+    bool esta = false;
+    for (MarkersMap map in markers) {
+      if (map.location == point) {
+        esta = true;
+      }
+    }
+    return esta;
+  }
+
+  void eliminarMarker(GeoPoint point) {
+    controller.removeMarker(point);
+
+    for (MarkersMap map in markers) {
+      if (map.location == point) {
+        markers.remove(map);
+      }
+    }
+  }
 
   _PantallaPrincipalState();
 
@@ -47,15 +99,13 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
         longitude: 8.4737324,
       ),
     );
-
-    //timer =
-    //   Timer.periodic(Duration(seconds: 1), (Timer t) => getCurrentLocation());
   }
 
   Future<void> getCurrentLocation() async {
     await controller.currentLocation();
     await controller.enableTracking();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +130,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             ),
             onMapIsReady: (isReady) {
               if (isReady) {
-                print("map is ready");
                 getCurrentLocation();
               }
             },
@@ -90,14 +139,14 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             stepZoom: 1.0,
             userLocationMarker: UserLocationMaker(
               personMarker: MarkerIcon(
-                icon: const Icon(
+                icon: Icon(
                   Icons.location_history_rounded,
                   color: Colors.red,
                   size: 48,
                 ),
               ),
               directionArrowMarker: MarkerIcon(
-                icon:const  Icon(
+                icon: Icon(
                   Icons.double_arrow,
                   size: 48,
                 ),
@@ -108,6 +157,14 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
               controller.centerMap;
+              if (primerMarkador) {
+                primerMarkador = false;
+                if (!estaEnMarkers(myLocation.latitude + 0.0007,
+                    myLocation.longitude + 0.0007)) {
+                  generateMarker(myLocation.latitude + 0.0007,
+                      myLocation.longitude + 0.0007, Icons.all_out_rounded);
+                }
+              }
             },
           ),
           Container(
@@ -115,6 +172,12 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             height: 800,
             color: Color.fromRGBO(20, 20, 20, 0),
           ),
+          Stack(
+            children: List<Widget>.generate(resultButton.length, (index) => 
+              
+            
+            ),
+          )          
         ]),
       ),
     );
