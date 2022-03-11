@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/models/markers.dart';
 import 'dart:async';
+import 'dart:math';
 
 class PantallaPrincipal extends StatefulWidget {
   PantallaPrincipal({Key? key}) : super(key: key);
@@ -39,7 +40,11 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   List<MarkersMap> markers = [];
   bool primerMarkador = true;
   List<ElevatedButton> resultButton = [];
+  List<String> markersNames = [];
   late Timer timerCentrar;
+  double radMarker = 0.0005;
+  late ElevatedButton btnList;
+  bool visibleListView = false;
 
   void generateMarker(double latitude, double longitude, IconData icono) {
     MarkerIcon mrkIcon = MarkerIcon(
@@ -54,9 +59,31 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
     UniqueKey key = UniqueKey();
     MarkersMap varMrk =
-        MarkersMap(location: point, iconMarker: mrkIcon, key: key);
+        MarkersMap(location: point, iconMarker: mrkIcon, key: key, name: "red");
     markers.add(varMrk);
     controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
+  }
+
+  Widget getSizedmMarkersBox() {
+    SizedBox box;
+
+    if (visibleListView) {
+      box = SizedBox(
+          width: 200,
+          height: 200,
+          child: ListView.builder(
+            itemCount: markersNames.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(markersNames[index]),
+              );
+            },
+          ));
+    } else {
+      box = const SizedBox();
+    }
+
+    return box;
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
@@ -101,8 +128,27 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     }
   }
 
-  void showMarkersInArea() {
+  Future<void> showMarkersInArea() async {
+    if (!visibleListView) {
+      markersNames.clear();
+      GeoPoint controllerPos = await controller.centerMap;
+      for (MarkersMap marker in markers) {
+        GeoPoint mrkPos = marker.location;
 
+        double latDistance = controllerPos.latitude - mrkPos.latitude;
+        double lonDistance = controllerPos.longitude - mrkPos.longitude;
+
+        double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
+
+        if (radMarker >= Distance) {
+          markersNames.add(marker.name);
+        }
+      }
+    } else {}
+
+    setState(() {
+      visibleListView = !visibleListView;
+    });
   }
 
   _PantallaPrincipalState();
@@ -148,10 +194,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             onMapIsReady: (isReady) {
               if (isReady) {
                 getCurrentLocation();
-                timerCentrar =
-                    Timer.periodic(Duration(microseconds: 100), (timer) {
-                  controller.centerMap;
-                });
               }
             },
             initZoom: 18,
@@ -172,8 +214,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 ),
               ),
             ),
-            showContributorBadgeForOSM: true,
-            //trackMyPosition: trackingNotifier.value,
+            showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
               controller.centerMap;
@@ -183,29 +224,20 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 primerMarkador = false;
                 if (!estaEnMarkers(myLocation.latitude + 0.0007,
                     myLocation.longitude + 0.0007)) {
-                  generateMarker(myLocation.latitude + 0.0007,
-                      myLocation.longitude + 0.0007, Icons.all_out_rounded);
+                  generateMarker(myLocation.latitude + 0.0002,
+                      myLocation.longitude + 0.0002, Icons.all_out_rounded);
                 }
               }
             },
           ),
-          
           Container(
             width: 800,
             height: 800,
             color: Color.fromRGBO(20, 20, 20, 0),
           ),
-          /*
-          ElevatedButton(onPressed: CenterMap, child: null),
-          ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(items[index]),
-              );
-            },
-          )
-*/
+          getSizedmMarkersBox(),
+          btnList = ElevatedButton(onPressed: showMarkersInArea, child: null),
+
           /*
           StatefulBuilder(builder: (_context, _setState) {
             Stack stk = Stack();            
