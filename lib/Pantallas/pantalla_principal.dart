@@ -35,9 +35,11 @@ class CustomController extends MapController {
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
+  late GeoPoint actualPoint;
   List<MarkersMap> markers = [];
   bool primerMarkador = true;
-  List<Widget> resultButton = [];
+  List<ElevatedButton> resultButton = [];
+  late Timer timerCentrar;
 
   void generateMarker(double latitude, double longitude, IconData icono) {
     MarkerIcon mrkIcon = MarkerIcon(
@@ -50,20 +52,32 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
-    Key key = UniqueKey();
+    UniqueKey key = UniqueKey();
     MarkersMap varMrk =
         MarkersMap(location: point, iconMarker: mrkIcon, key: key);
-
     markers.add(varMrk);
     controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
   }
 
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.red,
+    primary: Colors.red,
+    minimumSize: Size(88, 36),
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(2)),
+    ),
+  );
+
   void generarBoton(Key keyButton, int posX, int posY) {
-    FloatingActionButton button = FloatingActionButton(
+    ElevatedButton button = ElevatedButton(
+      child: Text(""),
       onPressed: null,
       key: keyButton,
-      foregroundColor: Color.fromRGBO(255, 0, 0, 100),
+      style: raisedButtonStyle,
     );
+
+    resultButton.add(button);
   }
 
   bool estaEnMarkers(double latitude, double longitude) {
@@ -87,6 +101,10 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     }
   }
 
+  void showMarkersInArea() {
+
+  }
+
   _PantallaPrincipalState();
 
   @override
@@ -105,7 +123,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     await controller.currentLocation();
     await controller.enableTracking();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +148,10 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             onMapIsReady: (isReady) {
               if (isReady) {
                 getCurrentLocation();
+                timerCentrar =
+                    Timer.periodic(Duration(microseconds: 100), (timer) {
+                  controller.centerMap;
+                });
               }
             },
             initZoom: 18,
@@ -140,8 +161,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             userLocationMarker: UserLocationMaker(
               personMarker: MarkerIcon(
                 icon: Icon(
-                  Icons.location_history_rounded,
-                  color: Colors.red,
+                  Icons.person,
                   size: 48,
                 ),
               ),
@@ -157,6 +177,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
               controller.centerMap;
+              controller.rotateMapCamera(0);
+              actualPoint = myLocation;
               if (primerMarkador) {
                 primerMarkador = false;
                 if (!estaEnMarkers(myLocation.latitude + 0.0007,
@@ -167,17 +189,56 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               }
             },
           ),
+          
           Container(
             width: 800,
             height: 800,
             color: Color.fromRGBO(20, 20, 20, 0),
           ),
-          Stack(
-            children: List<Widget>.generate(resultButton.length, (index) => 
-              
+          /*
+          ElevatedButton(onPressed: CenterMap, child: null),
+          ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(items[index]),
+              );
+            },
+          )
+*/
+          /*
+          StatefulBuilder(builder: (_context, _setState) {
+            Stack stk = Stack();            
             
-            ),
-          )          
+            Timer t1 = Timer(Duration(microseconds: 100), () {
+              _setState(() {
+                for (MarkersMap mrk in markers) {
+                  UniqueKey key = mrk.key;
+                  if (mrk.activeMarker && mrk.inMap) {
+                    generarBoton(key, 0, 0);
+                  }
+                  else if (!mrk.activeMarker && !mrk.inMap) {
+                    for (ElevatedButton btn in resultButton) {
+                      if (btn.key == key) {
+                        stk.children.remove(btn);
+                      }
+                    }
+                  }
+                  else {
+                    
+                  }
+
+                  for (ElevatedButton btn in resultButton) {
+                    stk.children.add(btn);
+                  }
+
+                }
+              });
+            });
+
+            return stk;
+          })
+          */
         ]),
       ),
     );
