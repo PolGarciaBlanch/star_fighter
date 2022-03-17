@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
+import 'Pantallas/pant_nav.dart';
 import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'login_temp',
+      initialRoute: 'PantNav',
 
       debugShowCheckedModeBanner: false,
       routes: {
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
               text: menuText,
               navigator: menuNavigator,
             ),*/
+        'PantNav':(BuildContext)=> PantNav(lista:"Ajustes"),
         'pantalla_login' : (BuildContext context) => const Login(),
         'pantalla_crea_usr' : (BuildContext context) => const Create(),
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
