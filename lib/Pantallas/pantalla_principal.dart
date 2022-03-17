@@ -101,9 +101,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     }
   }
 
-  void showMarkersInArea() {
-
-  }
+  void showMarkersInArea() {}
 
   _PantallaPrincipalState();
 
@@ -189,12 +187,32 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               }
             },
           ),
-          
           Container(
             width: 800,
             height: 800,
             color: Color.fromRGBO(20, 20, 20, 0),
           ),
+          Positioned(
+              top: 30,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder()
+                ),
+                child: Icon(Icons.person_add),
+                onPressed: () => {},
+              )),
+
+              Positioned(
+              top: 80,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder()
+                ),
+                child: Icon(Icons.shopping_cart),
+                onPressed: () => {},
+              )),
           /*
           ElevatedButton(onPressed: CenterMap, child: null),
           ListView.builder(
