@@ -40,7 +40,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaPrincipal()),);
+                    //Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaPrincipal()),);
                   },
                   child: Text("Load Screen"),
                 ),

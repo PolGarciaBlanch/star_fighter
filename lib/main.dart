@@ -11,24 +11,22 @@ import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_testeo.dart';
 
 Future<void> main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
-
 //List<Object> parameters =[111123231323, ""]
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     List<String> msgCarga = [
       'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
-      'Meteorites and proyectiles ignore shields', 'Shield tecnology protects from plasma'];
+      'Meteorites and proyectiles ignore shields',
+      'Shield tecnology protects from plasma'
+    ];
 
     List<String> menuText = ["Perfil"];
     List<String> menuNavigator = ["pantalla_perfil"];
@@ -40,35 +38,31 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-
       initialRoute: 'PantNav',
-
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(
               text: menuText,
               navigator: menuNavigator,
             ),*/
-        'PantNav':(BuildContext)=> PantNav(lista:"Ajustes"),
-        'pantalla_login' : (BuildContext context) => const Login(),
-        'pantalla_crea_usr' : (BuildContext context) => const Create(),
-        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+        'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
+        'pantalla_login': (BuildContext context) => const Login(),
+        'pantalla_crea_usr': (BuildContext context) => const Create(),
+        // 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_login' ),
+            path: 'pantalla_login'),
         'carga_test': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_principal' ),
+            path: 'pantalla_principal'),
       },
     );
   }
-
-
 }
