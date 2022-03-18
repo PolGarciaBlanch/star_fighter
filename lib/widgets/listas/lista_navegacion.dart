@@ -28,11 +28,7 @@ class _OptionDisplayState extends State<ListaNavegacion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Characters!", style: TextStyle(color: Colors.white)),
-        centerTitle: false,
-        backgroundColor: Colors.black,
-      ),
+      backgroundColor: Colors.yellow,
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
