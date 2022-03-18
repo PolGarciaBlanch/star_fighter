@@ -15,7 +15,7 @@ class _QRView extends State<QRView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Mobile Scanner'),
+          title: const Text('Escanejar QR'),
           actions: [
             IconButton(
               color: Colors.white,
