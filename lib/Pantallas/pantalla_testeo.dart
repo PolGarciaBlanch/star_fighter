@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pantalla_principal.dart';
+import 'package:star_fighter/Pantallas/pantalla_scanqr.dart';
+import 'package:star_fighter/Pantallas/pantalla_qr.dart';
 
 class PantallaTesteo extends StatefulWidget {
   PantallaTesteo({Key? key}) : super(key: key);
@@ -40,9 +42,9 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaPrincipal()),);
+                    Navigator.push(context,  MaterialPageRoute(builder: (context) => QRShow()),);
                   },
-                  child: Text("Load Screen"),
+                  child: Text("QR"),
                 ),
                 // margin: EdgeInsets.only(top: 30),
               ),
@@ -51,9 +53,9 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.pushNamed(context, 'pantalla_principal');
+                    Navigator.push(context,  MaterialPageRoute(builder: (context) => QRView()),);
                   },
-                  child: Text("menu list"),
+                  child: Text("Scan"),
                 ),
                 // margin: EdgeInsets.only(top: 30),
               ),

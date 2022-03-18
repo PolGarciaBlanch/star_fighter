@@ -7,6 +7,7 @@ import 'package:star_fighter/models/markers.dart';
 import 'dart:math';
 import 'package:flutter_compass/flutter_compass.dart';
 
+import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
 import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
@@ -86,7 +87,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: const Text('Home')),
       //drawer: buildDrawer(context, LiveLocationPage.route),
       body: Container(
         child: Stack(children: [
@@ -115,13 +116,13 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             stepZoom: 1.0,
             userLocationMarker: UserLocationMaker(
               personMarker: MarkerIcon(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person,
                   size: 48,
                 ),
               ),
               directionArrowMarker: MarkerIcon(
-                icon: Icon(
+                icon: const Icon(
                   Icons.double_arrow,
                   size: 48,
                 ),
@@ -157,8 +158,73 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
           Container(
             width: 800,
             height: 800,
-            color: Color.fromRGBO(20, 20, 20, 0),
+            color: const Color.fromRGBO(20, 20, 20, 0),
           ),
+          Positioned(
+              top: 30,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder()
+                ),
+                child: const Icon(Icons.person_add),
+                onPressed: () => {Navigator.pop(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
+              )),
+
+              Positioned(
+              top: 80,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder()
+                ),
+                child: Icon(Icons.shopping_cart),
+                onPressed: () => {},
+              )),
+          /*
+          ElevatedButton(onPressed: CenterMap, child: null),
+          ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(items[index]),
+              );
+            },
+          )
+*/
+          /*
+          StatefulBuilder(builder: (_context, _setState) {
+            Stack stk = Stack();            
+            
+            Timer t1 = Timer(Duration(microseconds: 100), () {
+              _setState(() {
+                for (MarkersMap mrk in markers) {
+                  UniqueKey key = mrk.key;
+                  if (mrk.activeMarker && mrk.inMap) {
+                    generarBoton(key, 0, 0);
+                  }
+                  else if (!mrk.activeMarker && !mrk.inMap) {
+                    for (ElevatedButton btn in resultButton) {
+                      if (btn.key == key) {
+                        stk.children.remove(btn);
+                      }
+                    }
+                  }
+                  else {
+                    
+                  }
+
+                  for (ElevatedButton btn in resultButton) {
+                    stk.children.add(btn);
+                  }
+
+                }
+              });
+            });
+
+            return stk;
+          })
+          */
           //getSizedmMarkersBox(),
           markersInfo.MarkersListView(),
           ElevatedButton(onPressed: showMarkersInArea, child: null),
