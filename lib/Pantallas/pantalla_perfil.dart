@@ -22,7 +22,7 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
           backgroundColor: Colors.redAccent,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.update),
+              icon: const Icon(Icons.update),
               onPressed: () {},
             )
           ],
