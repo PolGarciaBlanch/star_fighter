@@ -5,12 +5,13 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 class MarkersMap {
   String name;
+  IconData icono;
   GeoPoint location;
-  UniqueKey key;
   MarkerIcon iconMarker;
-  int X_Location = 0;
-  int Y_Location = 0;
 
   MarkersMap(
-      {required this.location, required this.iconMarker, required this.key, required this.name});
+      {required this.location,
+      required this.iconMarker,
+      required this.name,
+      required this.icono});
 }
