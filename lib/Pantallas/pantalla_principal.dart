@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/models/markers.dart';
-import 'dart:async';
+import 'dart:math';
+
+import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
   PantallaPrincipal({Key? key}) : super(key: key);
@@ -36,72 +38,26 @@ class CustomController extends MapController {
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
   late GeoPoint actualPoint;
-  List<MarkersMap> markers = [];
-  bool primerMarkador = true;
-  List<ElevatedButton> resultButton = [];
-  late Timer timerCentrar;
+  MarkersInfo markersInfo = MarkersInfo();
 
-  void generateMarker(double latitude, double longitude, IconData icono) {
-    MarkerIcon mrkIcon = MarkerIcon(
-      icon: Icon(
-        icono,
-        color: Color.fromRGBO(255, 255, 255, 100),
-        size: 100,
-      ),
-    );
+  Future<void> showMarkersInArea() async {
+    markersInfo.markersNames.clear();
+    GeoPoint controllerPos = await controller.centerMap;
+    for (MarkersMap marker in markersInfo.markers) {
+      GeoPoint mrkPos = marker.location;
 
-    GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
+      double latDistance = controllerPos.latitude - mrkPos.latitude;
+      double lonDistance = controllerPos.longitude - mrkPos.longitude;
 
-    UniqueKey key = UniqueKey();
-    MarkersMap varMrk =
-        MarkersMap(location: point, iconMarker: mrkIcon, key: key);
-    markers.add(varMrk);
-    controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
-  }
+      double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
 
-  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.red,
-    primary: Colors.red,
-    minimumSize: Size(88, 36),
-    padding: EdgeInsets.symmetric(horizontal: 16),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-    ),
-  );
-
-  void generarBoton(Key keyButton, int posX, int posY) {
-    ElevatedButton button = ElevatedButton(
-      child: Text(""),
-      onPressed: null,
-      key: keyButton,
-      style: raisedButtonStyle,
-    );
-
-    resultButton.add(button);
-  }
-
-  bool estaEnMarkers(double latitude, double longitude) {
-    GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
-    bool esta = false;
-    for (MarkersMap map in markers) {
-      if (map.location == point) {
-        esta = true;
+      if (markersInfo.radMarker >= Distance) {
+        markersInfo.markersNames.add(marker.name);
       }
     }
-    return esta;
+    markersInfo.visibleListView = !markersInfo.visibleListView;
+    setState(() {});
   }
-
-  void eliminarMarker(GeoPoint point) {
-    controller.removeMarker(point);
-
-    for (MarkersMap map in markers) {
-      if (map.location == point) {
-        markers.remove(map);
-      }
-    }
-  }
-
-  void showMarkersInArea() {}
 
   _PantallaPrincipalState();
 
@@ -146,10 +102,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             onMapIsReady: (isReady) {
               if (isReady) {
                 getCurrentLocation();
-                timerCentrar =
-                    Timer.periodic(Duration(microseconds: 100), (timer) {
-                  controller.centerMap;
-                });
               }
             },
             initZoom: 18,
@@ -170,19 +122,21 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 ),
               ),
             ),
-            showContributorBadgeForOSM: true,
-            //trackMyPosition: trackingNotifier.value,
+            showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
               controller.centerMap;
               controller.rotateMapCamera(0);
               actualPoint = myLocation;
-              if (primerMarkador) {
-                primerMarkador = false;
-                if (!estaEnMarkers(myLocation.latitude + 0.0007,
-                    myLocation.longitude + 0.0007)) {
-                  generateMarker(myLocation.latitude + 0.0007,
-                      myLocation.longitude + 0.0007, Icons.all_out_rounded);
+              if (markersInfo.primerMarkador) {
+                markersInfo.primerMarkador = false;
+                if (!markersInfo.estaEnMarkers(myLocation.latitude + 0.0007,
+                    myLocation.longitude + 0.0007, controller)) {
+                  markersInfo.generateMarker(
+                      myLocation.latitude + 0.0002,
+                      myLocation.longitude + 0.0002,
+                      Icons.all_out_rounded,
+                      controller);
                 }
               }
             },
@@ -257,6 +211,9 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             return stk;
           })
           */
+          //getSizedmMarkersBox(),
+          markersInfo.MarkersListView(),
+          ElevatedButton(onPressed: showMarkersInArea, child: null),
         ]),
       ),
     );
