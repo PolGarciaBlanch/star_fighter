@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'login_temp',
+      initialRoute: 'pantalla_login',
 
       debugShowCheckedModeBanner: false,
       routes: {

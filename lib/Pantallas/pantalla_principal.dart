@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/models/markers.dart';
 import 'dart:math';
+import 'package:flutter_compass/flutter_compass.dart';
 
 import '../control/markersInfo.dart';
 
@@ -39,6 +43,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
   late GeoPoint actualPoint;
   MarkersInfo markersInfo = MarkersInfo();
+  double anguloCompas = 0;
 
   Future<void> showMarkersInArea() async {
     markersInfo.markersNames.clear();
@@ -67,8 +72,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     controller = CustomController(
       initMapWithUserPosition: false,
       initPosition: GeoPoint(
-        latitude: 47.4358055,
-        longitude: 8.4737324,
+        latitude: 41.39475816395134,
+        longitude: 2.1275533363223076,
       ),
     );
   }
@@ -125,8 +130,16 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
+              FlutterCompass.events?.listen((angle) {
+                double result = angle.heading!;
+                if (result != null) {
+                  if (result < 0) {
+                    result = 360 + result;
+                  }
+                  controller.rotateMapCamera(-result);
+                }
+              });
               controller.centerMap;
-              controller.rotateMapCamera(0);
               actualPoint = myLocation;
               if (markersInfo.primerMarkador) {
                 markersInfo.primerMarkador = false;
