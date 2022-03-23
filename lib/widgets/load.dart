@@ -6,38 +6,45 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/control/random.dart';
 
 class LoadSplash extends StatefulWidget {
+/*
+List<String> msgCarga = [
+      'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
+      'Meteorites and proyectiles ignore shields',
+      'Shield tecnology protects from plasma'
+    ];
 
+    List<String> menuText = ["Perfil"];
+    List<String> menuNavigator = ["pantalla_perfil"];
+    AssetImage imgLogo = const AssetImage('assets/img/AppLogo.png');
+    AssetImage imgBackground = const AssetImage('assets/img/backGround.jpg');
+    AssetImage imgShip = const AssetImage('assets/img/xWing.png'); */
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
-  const LoadSplash({Key? key,
-
+  const LoadSplash(
+      {Key? key,
       required this.backGround,
       required this.imgTop,
       required this.imgMid,
-      required this.appTip}) : super(key: key);
+      required this.appTip})
+      : super(key: key);
 
   @override
-  _LoadSplashState createState() => _LoadSplashState(backGround, imgTop, imgMid, appTip);
+  _LoadSplashState createState() =>
+      _LoadSplashState(backGround, imgTop, imgMid, appTip);
 }
 
-class _LoadSplashState extends State<LoadSplash>
-    with TickerProviderStateMixin {
-
+class _LoadSplashState extends State<LoadSplash> with TickerProviderStateMixin {
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
 
-
-  _LoadSplashState( this.backGround, this.imgTop, this.imgMid, this.appTip);
+  _LoadSplashState(this.backGround, this.imgTop, this.imgMid, this.appTip);
 
   late AnimationController controller;
-  late String tip='';
-
-
-
+  late String tip = '';
 
   @override
   void initState() {
@@ -49,28 +56,20 @@ class _LoadSplashState extends State<LoadSplash>
       vsync: this,
       duration: const Duration(seconds: 5),
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     controller.repeat(reverse: true);
     super.initState();
-
   }
 
-
-
-  void _startCountDown(){
-    if(tip==''){
-      tip=appTip[RandomLib.RandomVal(0,appTip.length)];
+  void _startCountDown() {
+    if (tip == '') {
+      tip = appTip[RandomLib.RandomVal(0, appTip.length)];
     }
-    Timer.periodic(Duration(seconds:5), (timer) {
-      tip=appTip[RandomLib.RandomVal(0,appTip.length)];
+    Timer.periodic(Duration(seconds: 5), (timer) {
+      tip = appTip[RandomLib.RandomVal(0, appTip.length)];
     });
   }
-
-
-
-
-
 
   @override
   void dispose() {
@@ -141,7 +140,5 @@ class _LoadSplashState extends State<LoadSplash>
             )
           ],
         )));
-
-
   }
 }

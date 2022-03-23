@@ -1,3 +1,0 @@
-//
-// lista simple
-// imputs
