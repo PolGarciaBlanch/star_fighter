@@ -7,11 +7,11 @@ import 'package:star_fighter/obj/nav_opt.dart';
 
 import '../generic_container.dart';
 
-class ListaSelect extends StatefulWidget {
+class BasicList extends StatefulWidget {
   final List<Object> objectList;
   final Function function;
 
-  ListaSelect({Key? key, required this.objectList, required this.function})
+  BasicList({Key? key, required this.objectList, required this.function})
       : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class ListaSelect extends StatefulWidget {
       _OptionDisplayState(objectList, function);
 }
 
-class _OptionDisplayState extends State<ListaSelect> {
+class _OptionDisplayState extends State<BasicList> {
   var isLoading = false;
   final List<Object> objectList;
   final Function function;

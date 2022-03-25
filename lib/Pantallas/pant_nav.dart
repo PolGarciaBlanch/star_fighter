@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
 import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
-import 'package:star_fighter/widgets/listas/lista_select.dart';
+import 'package:star_fighter/widgets/listas/basic_list.dart';
 import 'package:star_fighter/widgets/load.dart';
 
 class PantNav extends StatefulWidget {
@@ -90,7 +91,7 @@ class _PantNavState extends State<PantNav> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return ListaSelect(
+                            return BasicList(
                                 function: showData, objectList: navOpt);
                           });
                     },
@@ -100,11 +101,18 @@ class _PantNavState extends State<PantNav> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return ListaSelect(
+                            return BasicList(
                                 function: navigate, objectList: navOpt);
                           });
                     },
-                    child: Text("navegacion listas genericas"))
+                    child: Text("navegacion listas genericas")),
+                TextButton(
+                    onPressed: () {
+                      DialogLists dList = new DialogLists();
+                      dList.GenerateList(
+                          context, navOpt, dList.navigate, navOpt);
+                    },
+                    child: Text("ListasV2"))
               ],
             )));
     /*
