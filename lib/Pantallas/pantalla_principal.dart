@@ -187,7 +187,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                       myLocation.latitude + 0.0002,
                       myLocation.longitude + 0.0002,
                       Icons.all_out_rounded,
-                      controller);
+                      controller, "Marcador 1");
                 }
               }
             },

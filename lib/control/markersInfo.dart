@@ -8,18 +8,18 @@ import '../models/markers.dart';
 
 class MarkersInfo {
   List<MarkersMap> markers = [];
-  List<String> markersNames = ['prueba'];
+  List<String> markersNames = [];
   bool primerMarkador = true;
   double radMarker = 0.0005;
   bool visibleListView = false;
 
-  void generateMarker(double latitude, double longitude, IconData icono, CustomController controller) {
+  void generateMarker(double latitude, double longitude, IconData icono, CustomController controller, String name) {
     MarkerIcon mrkIcon = newMarkerIcon(icono);
 
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
     MarkersMap varMrk = MarkersMap(
-        location: point, iconMarker: mrkIcon, icono: icono, name: "Marcador 1");
+        location: point, iconMarker: mrkIcon, icono: icono, name: name);
     markers.add(varMrk);
     controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
   }
