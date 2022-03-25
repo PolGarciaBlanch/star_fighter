@@ -1,7 +1,5 @@
-
 /*
 import 'dart:async';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -153,7 +151,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                       myLocation.latitude + 0.0002,
                       myLocation.longitude + 0.0002,
                       Icons.all_out_rounded,
-                      controller, "Marcador 1");
+                      controller,
+                      "Marcador 1");
                 }
               }
             },
@@ -167,20 +166,21 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               top: 30,
               left: 10,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder()
-                ),
+                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
                 child: const Icon(Icons.person_add),
-                onPressed: () => {Navigator.pop(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
+                onPressed: () => {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(builder: (context) => PantallaTesteo()),
+                  )
+                },
               )),
 
-              Positioned(
+          Positioned(
               top: 80,
               left: 10,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder()
-                ),
+                style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.shopping_cart),
                 onPressed: () => {},
               )),
@@ -235,9 +235,5 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       ),
     );
   }
-
-}
-
-
 }
 */

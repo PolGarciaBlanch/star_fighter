@@ -40,10 +40,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      //initialRoute: 'PantNav',
+      initialRoute: 'PantNav',
 
-
-      initialRoute: 'pantalla_login',
+      //initialRoute: 'pantalla_login',
 
       debugShowCheckedModeBanner: false,
       routes: {
