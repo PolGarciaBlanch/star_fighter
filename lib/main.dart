@@ -39,7 +39,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: 'PantNav',
+
+      //initialRoute: 'PantNav',
+
+
+      initialRoute: 'pantalla_login',
+
       debugShowCheckedModeBanner: false,
       routes: {
         /*'pantalla_menu': (BuildContext context) => PantallaMenu(

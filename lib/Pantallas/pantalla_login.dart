@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:star_fighter/models/user.dart';
+import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -147,7 +148,8 @@ class _login extends State<Login> {
                     value["level"].toString()),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pushNamed(context, 'carga_test'),
+                    //onPressed: () => Navigator.pushNamed(context, 'carga_test'),
+                    onPressed: () => {Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
                     child: const Text('OK'),
                   ),
                 ],

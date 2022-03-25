@@ -1,8 +1,16 @@
-/*
+
+import 'dart:async';
+
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'dart:async';
+import 'package:star_fighter/models/markers.dart';
+import 'dart:math';
+import 'package:flutter_compass/flutter_compass.dart';
+
+import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
+import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
   PantallaPrincipal({Key? key}) : super(key: key);
@@ -36,6 +44,28 @@ class CustomController extends MapController {
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
+  late GeoPoint actualPoint;
+  MarkersInfo markersInfo = MarkersInfo();
+  double anguloCompas = 0;
+
+  Future<void> showMarkersInArea() async {
+    markersInfo.markersNames.clear();
+    GeoPoint controllerPos = await controller.centerMap;
+    for (MarkersMap marker in markersInfo.markers) {
+      GeoPoint mrkPos = marker.location;
+
+      double latDistance = controllerPos.latitude - mrkPos.latitude;
+      double lonDistance = controllerPos.longitude - mrkPos.longitude;
+
+      double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
+
+      if (markersInfo.radMarker >= Distance) {
+        markersInfo.markersNames.add(marker.name);
+      }
+    }
+    markersInfo.visibleListView = !markersInfo.visibleListView;
+    setState(() {});
+  }
 
   _PantallaPrincipalState();
 
@@ -45,13 +75,10 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     controller = CustomController(
       initMapWithUserPosition: false,
       initPosition: GeoPoint(
-        latitude: 47.4358055,
-        longitude: 8.4737324,
+        latitude: 41.39475816395134,
+        longitude: 2.1275533363223076,
       ),
     );
-
-    //timer =
-    //   Timer.periodic(Duration(seconds: 1), (Timer t) => getCurrentLocation());
   }
 
   Future<void> getCurrentLocation() async {
@@ -62,7 +89,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: const Text('Home')),
       //drawer: buildDrawer(context, LiveLocationPage.route),
       body: Container(
         child: Stack(children: [
@@ -82,7 +109,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             ),
             onMapIsReady: (isReady) {
               if (isReady) {
-                print("map is ready");
                 getCurrentLocation();
               }
             },
@@ -93,33 +119,124 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             userLocationMarker: UserLocationMaker(
               personMarker: MarkerIcon(
                 icon: const Icon(
-                  Icons.location_history_rounded,
-                  color: Colors.red,
+                  Icons.person,
                   size: 48,
                 ),
               ),
               directionArrowMarker: MarkerIcon(
-                icon:const  Icon(
+                icon: const Icon(
                   Icons.double_arrow,
                   size: 48,
                 ),
               ),
             ),
-            showContributorBadgeForOSM: true,
-            //trackMyPosition: trackingNotifier.value,
+            showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
+              FlutterCompass.events?.listen((angle) {
+                double result = angle.heading!;
+                if (result != null) {
+                  if (result < 0) {
+                    result = 360 + result;
+                  }
+                  controller.rotateMapCamera(-result);
+                }
+              });
               controller.centerMap;
+              actualPoint = myLocation;
+              if (markersInfo.primerMarkador) {
+                markersInfo.primerMarkador = false;
+                if (!markersInfo.estaEnMarkers(myLocation.latitude + 0.0007,
+                    myLocation.longitude + 0.0007, controller)) {
+                  markersInfo.generateMarker(
+                      myLocation.latitude + 0.0002,
+                      myLocation.longitude + 0.0002,
+                      Icons.all_out_rounded,
+                      controller, "Marcador 1");
+                }
+              }
             },
           ),
           Container(
             width: 800,
             height: 800,
-            color: Color.fromRGBO(20, 20, 20, 0),
+            color: const Color.fromRGBO(20, 20, 20, 0),
           ),
+          Positioned(
+              top: 30,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder()
+                ),
+                child: const Icon(Icons.person_add),
+                onPressed: () => {Navigator.pop(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
+              )),
+
+              Positioned(
+              top: 80,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder()
+                ),
+                child: Icon(Icons.shopping_cart),
+                onPressed: () => {},
+              )),
+          /*
+          ElevatedButton(onPressed: CenterMap, child: null),
+          ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(items[index]),
+              );
+            },
+          )
+*/
+          /*
+          StatefulBuilder(builder: (_context, _setState) {
+            Stack stk = Stack();            
+            
+            Timer t1 = Timer(Duration(microseconds: 100), () {
+              _setState(() {
+                for (MarkersMap mrk in markers) {
+                  UniqueKey key = mrk.key;
+                  if (mrk.activeMarker && mrk.inMap) {
+                    generarBoton(key, 0, 0);
+                  }
+                  else if (!mrk.activeMarker && !mrk.inMap) {
+                    for (ElevatedButton btn in resultButton) {
+                      if (btn.key == key) {
+                        stk.children.remove(btn);
+                      }
+                    }
+                  }
+                  else {
+                    
+                  }
+
+                  for (ElevatedButton btn in resultButton) {
+                    stk.children.add(btn);
+                  }
+
+                }
+              });
+            });
+
+            return stk;
+          })
+          */
+          //getSizedmMarkersBox(),
+          markersInfo.MarkersListView(),
+          ElevatedButton(onPressed: showMarkersInArea, child: null),
         ]),
       ),
     );
   }
+
 }
-*/
+
+
+}
+
