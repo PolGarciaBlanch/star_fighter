@@ -1,14 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/models/markers.dart';
-<<<<<<< Updated upstream
 import 'dart:math';
+import 'package:flutter_compass/flutter_compass.dart';
 
-import '../control/markersInfo.dart';
-=======
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
-import 'dart:async';
->>>>>>> Stashed changes
+import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
   PantallaPrincipal({Key? key}) : super(key: key);
@@ -43,59 +43,14 @@ class CustomController extends MapController {
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
   late GeoPoint actualPoint;
-<<<<<<< Updated upstream
   MarkersInfo markersInfo = MarkersInfo();
+  double anguloCompas = 0;
 
   Future<void> showMarkersInArea() async {
     markersInfo.markersNames.clear();
     GeoPoint controllerPos = await controller.centerMap;
     for (MarkersMap marker in markersInfo.markers) {
       GeoPoint mrkPos = marker.location;
-=======
-  List<MarkersMap> markers = [];
-  bool primerMarkador = true;
-  List<ElevatedButton> resultButton = [];
-  late Timer timerCentrar;
-
-  void generateMarker(double latitude, double longitude, IconData icono) {
-    MarkerIcon mrkIcon = MarkerIcon(
-      icon: Icon(
-        icono,
-        color: Color.fromRGBO(255, 255, 255, 100),
-        size: 100,
-      ),
-    );
-
-    GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
-
-    UniqueKey key = UniqueKey();
-    MarkersMap varMrk =
-        MarkersMap(location: point, iconMarker: mrkIcon, key: key);
-    markers.add(varMrk);
-    controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
-  }
-
-  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.red,
-    primary: Colors.red,
-    minimumSize: const Size(88, 36),
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-    ),
-  );
-
-  void generarBoton(Key keyButton, int posX, int posY) {
-    ElevatedButton button = ElevatedButton(
-      child: const Text(""),
-      onPressed: null,
-      key: keyButton,
-      style: raisedButtonStyle,
-    );
-
-    resultButton.add(button);
-  }
->>>>>>> Stashed changes
 
       double latDistance = controllerPos.latitude - mrkPos.latitude;
       double lonDistance = controllerPos.longitude - mrkPos.longitude;
@@ -118,8 +73,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     controller = CustomController(
       initMapWithUserPosition: false,
       initPosition: GeoPoint(
-        latitude: 47.4358055,
-        longitude: 8.4737324,
+        latitude: 41.39475816395134,
+        longitude: 2.1275533363223076,
       ),
     );
   }
@@ -176,8 +131,16 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
             onLocationChanged: (myLocation) {
+              FlutterCompass.events?.listen((angle) {
+                double result = angle.heading!;
+                if (result != null) {
+                  if (result < 0) {
+                    result = 360 + result;
+                  }
+                  controller.rotateMapCamera(-result);
+                }
+              });
               controller.centerMap;
-              controller.rotateMapCamera(0);
               actualPoint = myLocation;
               if (markersInfo.primerMarkador) {
                 markersInfo.primerMarkador = false;
