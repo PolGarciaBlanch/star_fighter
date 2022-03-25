@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       //initialRoute: 'PantNav',
 
 
-      initialRoute: 'pantalla_login',
+      initialRoute: 'pantalla_principal',
 
       debugShowCheckedModeBanner: false,
       routes: {
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
-        // 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
