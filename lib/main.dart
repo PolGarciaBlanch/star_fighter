@@ -43,7 +43,9 @@ class MyApp extends StatelessWidget {
       //initialRoute: 'PantNav',
 
 
+
       initialRoute: 'pantalla_principal',
+
 
       debugShowCheckedModeBanner: false,
       routes: {

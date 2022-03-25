@@ -47,8 +47,8 @@ dependencies:
 
   #flutter_osm_plugin: ^0.31.0
 
-  flutter_osm_plugin: ^0.31.0
-  flutter_compass: ^0.7.0
+  #flutter_osm_plugin: ^0.31.0
+  #flutter_compass: ^0.7.0
 
   #flutter_icons: 1.1.0
 

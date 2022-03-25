@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/Pantallas/pantalla_principal.dart';
@@ -13,7 +14,8 @@ class MarkersInfo {
   double radMarker = 0.0005;
   bool visibleListView = false;
 
-  void generateMarker(double latitude, double longitude, IconData icono, CustomController controller, String name) {
+  void generateMarker(double latitude, double longitude, IconData icono,
+      CustomController controller, String name) {
     MarkerIcon mrkIcon = newMarkerIcon(icono);
 
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
@@ -81,7 +83,8 @@ class MarkersInfo {
     }
   }
 
-  bool estaEnMarkers(double latitude, double longitude, CustomController controller) {
+  bool estaEnMarkers(
+      double latitude, double longitude, CustomController controller) {
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
     bool esta = false;
     for (MarkersMap map in markers) {
@@ -92,3 +95,4 @@ class MarkersInfo {
     return esta;
   }
 }
+*/

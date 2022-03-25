@@ -68,17 +68,9 @@ class _OptionDisplayState extends State<TrueGeneric> {
                   Navigator.pop(context, "ok");
                   function(objList[index]);
                 },
-                child: GenericContainer(
-                  child: Text(
-                    //check
-                    (objList[index] as dynamic).text[0],
-                    textDirection: TextDirection.ltr,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.yellow),
-                  ),
-                ));
+                child: GenericContainer(child: (card as dynamic)(objList[index])
+                    //chec
+                    ));
           });
     }
   }
