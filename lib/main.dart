@@ -2,13 +2,15 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/Pantallas/pant_developer_test.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pant_nav.dart';
-import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_perfil.dart';
 import 'Pantallas/pantalla_principal.dart';
+import 'Pantallas/pantalla_qr.dart';
+import 'Pantallas/pantalla_scanqr.dart';
 import 'Pantallas/pantalla_testeo.dart';
 
 Future<void> main() async {
@@ -40,22 +42,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'PantNav',
+      initialRoute: 'pantalla_developer',
 
       //initialRoute: 'pantalla_login',
 
       debugShowCheckedModeBanner: false,
       routes: {
-        /*'pantalla_menu': (BuildContext context) => PantallaMenu(
-              text: menuText,
-              navigator: menuNavigator,
-            ),*/
+        'pantalla_developer': (BuildContext) => PantDev(),
         'confPerfil': (BuildContext) => PantallaPerfil(),
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
-        // 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+        //'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
+        'pantalla_qrView': (BuildContext context) => QRView(),
+        'pnatalla_qrShow': (BuildContext context) => QRShow(),
+
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,

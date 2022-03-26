@@ -1,0 +1,76 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:star_fighter/obj/dialog_lists.dart';
+import 'package:star_fighter/obj/nav_opt.dart';
+import 'package:star_fighter/widgets/listas/cards/card_text.dart';
+import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
+import 'package:star_fighter/widgets/listas/basic_list.dart';
+import 'package:star_fighter/widgets/load.dart';
+
+class PantDev extends StatefulWidget {
+  PantDev({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _PantDevState createState() => _PantDevState();
+}
+
+class _PantDevState extends State<PantDev> {
+  DialogLists dList = new DialogLists();
+  List<NavOpt> navOpt = listNavOpt;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Developer OPT"),
+        ),
+        body: Container(
+            color: Colors.yellow,
+            width: 500,
+            child: Column(
+              children: [
+                Text("Navigate:"),
+                TextButton(
+                    onPressed: () {
+                      List<NavOpt> item = listNavOpt
+                          .where((i) => i.lists.contains('Ajustes'))
+                          .toList();
+                      dList.GenerateGenericList(context, item, item,
+                          dList.navigate, (CardText as dynamic));
+                    },
+                    child: Text("press to spawn navigation list [Ajustes]")),
+                TextButton(
+                    onPressed: () {
+                      List<NavOpt> item = listNavOpt
+                          .where((i) => i.lists.contains('Page'))
+                          .toList();
+                      dList.GenerateGenericList(context, item, item,
+                          dList.navigate, (CardText as dynamic));
+                    },
+                    child: Text("press to spawn navigation list [Pages]")),
+                Text(""),
+                TextButton(onPressed: () {}, child: Text("test load screen")),
+                Text("Navigate: All options"),
+                TextButton(onPressed: () {}, child: Text("lista de objetos")),
+                Text("Navigate: All options"),
+                TextButton(
+                    onPressed: () {},
+                    child: Text("navegacion listas genericas")),
+                Text("Navigate: All options"),
+                TextButton(
+                    onPressed: () {
+                      dList.GenerateList(
+                          context, navOpt, dList.navigate, navOpt);
+                    },
+                    child: Text("ListasV2"))
+              ],
+            )));
+    /*
+    return ListaNavegacion(
+      listNavOpt: navOpt,
+      lista: lista,
+    );*/
+  }
+}

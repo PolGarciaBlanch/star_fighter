@@ -8,11 +8,28 @@ List<NavOpt> listNavOpt = [
   NavOpt(lists: ["Ajustes"], text: ["Pantalla"], navigatorCode: "confPantalla"),
   NavOpt(lists: ["Ajustes"], text: ["Audio"], navigatorCode: "confAudio"),
   NavOpt(lists: ["Ajustes"], text: ["Acerda de:"], navigatorCode: "confInfo"),
+  NavOpt(lists: ["pantalla"], text: ["Login"], navigatorCode: "pantalla_login"),
   NavOpt(
-      lists: ["Ajustes"], text: ["Notificaciones"], navigatorCode: "confNotif"),
-  NavOpt(lists: ["Ajustes"], text: ["Pantalla"], navigatorCode: "confPantalla"),
-  NavOpt(lists: ["Ajustes"], text: ["Audio"], navigatorCode: "confAudio"),
-  NavOpt(lists: ["Ajustes"], text: ["Acerda de:"], navigatorCode: "confInfo")
+      lists: ["pantalla"],
+      text: ["Crear Usuario"],
+      navigatorCode: "pantalla_crea_usr"),
+  NavOpt(
+      lists: ["pantalla"],
+      text: ["Pantalla principal"],
+      navigatorCode: "pantalla_principal"),
+  NavOpt(
+      lists: ["pantalla"],
+      text: ["Pantalla QRView"],
+      navigatorCode: "pantalla_qrView"),
+  NavOpt(
+      lists: ["pantalla"],
+      text: ["Pantalla QRShow"],
+      navigatorCode: "pnatalla_qrShow"),
+
+  NavOpt(
+      lists: ["pantalla"],
+      text: ["Pantalla QRShow"],
+      navigatorCode: "pantalla_testeo"),
 ];
 
 class NavOpt {

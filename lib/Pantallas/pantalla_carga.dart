@@ -4,19 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/widgets/load.dart';
 
 class PantallaCarga extends StatefulWidget {
-
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
   final String path;
-  PantallaCarga(
+  const PantallaCarga(
       {Key? key,
-        required this.path,
-        required this.backGround,
-        required this.imgTop,
-        required this.imgMid,
-        required this.appTip})
+      required this.path,
+      required this.backGround,
+      required this.imgTop,
+      required this.imgMid,
+      required this.appTip})
       : super(key: key);
   //default
 
@@ -29,31 +28,35 @@ class PantallaCarga extends StatefulWidget {
 
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
-
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
   final String path;
-  _PantallaCargaState(this.path, this.backGround, this.imgTop, this.imgMid, this.appTip);
+  _PantallaCargaState(
+      this.path, this.backGround, this.imgTop, this.imgMid, this.appTip);
 
-  void _startCountDown(){
-    Timer.periodic(Duration(seconds:5), (timer) {
-      Navigator.of(context).pushNamedAndRemoveUntil(path, (Route<dynamic> route) => false);
+  void _startCountDown() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(path, (Route<dynamic> route) => false);
     });
   }
+
   @override
   void initState() {
     _startCountDown();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: LoadSplash(backGround: backGround,
-      imgTop: imgTop,
-      imgMid: imgMid,
-      appTip: appTip)
-    );}
+        body: LoadSplash(
+            backGround: backGround,
+            imgTop: imgTop,
+            imgMid: imgMid,
+            appTip: appTip));
+  }
 }
 
 /*
