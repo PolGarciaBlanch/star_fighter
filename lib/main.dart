@@ -45,6 +45,11 @@ class MyApp extends StatelessWidget {
 <<<<<<< HEAD
       initialRoute: 'pantalla_developer',
 =======
+      //initialRoute: 'PantNav',
+
+
+
+      initialRoute: 'pantalla_principal',
 >>>>>>> 99bc7fdd2241c1f7e10cec0080ae5b05a8e50a1f
 
 
