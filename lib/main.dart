@@ -42,16 +42,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-<<<<<<< HEAD
       initialRoute: 'pantalla_developer',
-=======
+
       //initialRoute: 'PantNav',
-
-
-
-      initialRoute: 'pantalla_principal',
->>>>>>> 99bc7fdd2241c1f7e10cec0080ae5b05a8e50a1f
-
 
       debugShowCheckedModeBanner: false,
       routes: {
@@ -60,14 +53,12 @@ class MyApp extends StatelessWidget {
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
-<<<<<<< HEAD
+
         //'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
-=======
-        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
->>>>>>> 99bc7fdd2241c1f7e10cec0080ae5b05a8e50a1f
+
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
-        'pantalla_qrView': (BuildContext context) => QRView(),
-        'pnatalla_qrShow': (BuildContext context) => QRShow(),
+        //'pantalla_qrView': (BuildContext context) => QRView(),
+        //'pnatalla_qrShow': (BuildContext context) => QRShow(),
 
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,

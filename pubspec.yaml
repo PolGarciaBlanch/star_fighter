@@ -36,8 +36,8 @@ dependencies:
   firebase_database_web:
 
 
-  qr_flutter:
-  mobile_scanner:
+  #qr_flutter:
+  #mobile_scanner:
 
 
   # The following adds the Cupertino Icons font to your application.

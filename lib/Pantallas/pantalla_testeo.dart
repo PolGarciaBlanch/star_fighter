@@ -42,11 +42,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-
-
-
-                    Navigator.push(context,  MaterialPageRoute(builder: (context) => QRShow()),);
-
+                    //Navigator.push(context,  MaterialPageRoute(builder: (context) => QRShow()),);
                   },
                   child: Text("QR"),
                 ),
@@ -57,7 +53,7 @@ class _PantallaTesteoState extends State<PantallaTesteo> {
                   color: Colors.red,
                   splashColor: Colors.black12,
                   onPressed: () {
-                    Navigator.push(context,  MaterialPageRoute(builder: (context) => QRView()),);
+                    // Navigator.push(context,  MaterialPageRoute(builder: (context) => QRView()),);
                   },
                   child: Text("Scan"),
                 ),

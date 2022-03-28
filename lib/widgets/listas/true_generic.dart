@@ -8,7 +8,7 @@ class TrueGeneric extends StatefulWidget {
   final List<Object> objectList;
   final List<Object> targetList;
   final Function function;
-  final Widget card;
+  final Function card;
 
   TrueGeneric(
       {Key? key,
@@ -28,7 +28,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
   final List<Object> objectList;
   final List<Object> targetList;
   final Function function;
-  final Widget card;
+  final Function card;
 
   _OptionDisplayState(
       this.objectList, this.targetList, this.function, this.card);
@@ -52,7 +52,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : _ListBuilder(listNavOpt), //body: CharacterListGen(),
+          : _ListBuilder(objectList), //body: CharacterListGen(),
     );
   }
 

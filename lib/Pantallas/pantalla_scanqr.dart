@@ -1,3 +1,6 @@
+
+
+/*
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -59,3 +62,4 @@ class _QRView extends State<QRView> {
             }));
   }
 }
+*/

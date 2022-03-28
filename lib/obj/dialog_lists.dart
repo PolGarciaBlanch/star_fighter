@@ -20,7 +20,7 @@ class DialogLists {
 
   // New sistem
   GenerateGenericList(BuildContext context, List<Object> objectList,
-      List<Object> targetList, Function function, Widget card) {
+      List<Object> targetList, Function function, Function card) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {

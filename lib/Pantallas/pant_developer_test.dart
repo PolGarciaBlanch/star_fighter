@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
 import 'package:star_fighter/widgets/listas/cards/card_text.dart';
@@ -18,7 +19,9 @@ class PantDev extends StatefulWidget {
 
 class _PantDevState extends State<PantDev> {
   DialogLists dList = new DialogLists();
+  CardBuilder cBuilder = new CardBuilder();
   List<NavOpt> navOpt = listNavOpt;
+  List<NavOpt> item = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +37,22 @@ class _PantDevState extends State<PantDev> {
                 Text("Navigate:"),
                 TextButton(
                     onPressed: () {
-                      List<NavOpt> item = listNavOpt
-                          .where((i) => i.lists.contains('Ajustes'))
+                      item = listNavOpt
+                          .where((i) => i.lists.contains("Ajustes"))
                           .toList();
+                      //dList.test(context, item, item);
+
                       dList.GenerateGenericList(context, item, item,
-                          dList.navigate, (CardText as dynamic));
+                          dList.navigate, cBuilder.TextCard);
                     },
                     child: Text("press to spawn navigation list [Ajustes]")),
                 TextButton(
                     onPressed: () {
-                      List<NavOpt> item = listNavOpt
-                          .where((i) => i.lists.contains('Page'))
+                      item = listNavOpt
+                          .where((i) => i.lists.contains("pantalla"))
                           .toList();
                       dList.GenerateGenericList(context, item, item,
-                          dList.navigate, (CardText as dynamic));
+                          dList.navigate, cBuilder.TextCard);
                     },
                     child: Text("press to spawn navigation list [Pages]")),
                 Text(""),
