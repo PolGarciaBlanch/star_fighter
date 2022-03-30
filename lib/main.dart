@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
 
 
 
-      initialRoute: 'pantalla_principal',
+      initialRoute: 'pantalla_login',
 
 
       debugShowCheckedModeBanner: false,
