@@ -43,15 +43,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-
       initialRoute: 'pantalla_developer',
 
       //initialRoute: 'PantNav',
 
-
-
       //initialRoute: 'pantalla_login',
-
 
       //initialRoute: 'PantNav',
 
@@ -60,6 +56,7 @@ class MyApp extends StatelessWidget {
         'pantalla_developer': (BuildContext) => PantDev(),
         'confPerfil': (BuildContext) => PantallaPerfil(),
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
+
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
 

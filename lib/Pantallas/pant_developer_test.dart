@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:star_fighter/control/firabase_data.dart';
 import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
@@ -9,6 +10,8 @@ import 'package:star_fighter/widgets/listas/cards/card_text.dart';
 import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
 import 'package:star_fighter/widgets/listas/basic_list.dart';
 import 'package:star_fighter/widgets/load.dart';
+
+import '../control/image_picker.dart';
 
 class PantDev extends StatefulWidget {
   PantDev({
@@ -22,6 +25,7 @@ class PantDev extends StatefulWidget {
 class _PantDevState extends State<PantDev> {
   DialogLists dList = new DialogLists();
   CardBuilder cBuilder = new CardBuilder();
+  ImagePickerLib imgLib = new ImagePickerLib();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
   CustomData FirebaseIOLib = CustomData(app: Firebase.app());
@@ -64,8 +68,17 @@ class _PantDevState extends State<PantDev> {
                       FirebaseIOLib.testSet();
                     },
                     child: Text("test set new data to database")),
-                Text("Navigate: All options"),
-                TextButton(onPressed: () {}, child: Text("lista de objetos")),
+                Text("Test Select Image"),
+                TextButton(
+                    onPressed: () {
+                      imgLib.AccCam();
+                    },
+                    child: Text("From camera")),
+                TextButton(
+                    onPressed: () {
+                      imgLib.AccGalery();
+                    },
+                    child: Text("From file")),
                 Text("Navigate: All options"),
                 TextButton(
                     onPressed: () {},

@@ -36,7 +36,7 @@ dependencies:
   firebase_core:
   firebase_database_web:
 
-  cloudinary_sdk: ^1.0.0+1
+  cloudinary_sdk: 
  
 
 
@@ -52,6 +52,11 @@ dependencies:
   flutter_osm_plugin:
   flutter_compass:
   flutter_icons: 
+
+  image_picker: 
+  dio: 
+  crypto:
+  cross_file:
 
 dev_dependencies:
   flutter_test:

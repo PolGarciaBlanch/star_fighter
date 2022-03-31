@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,6 +17,14 @@ class CustomData {
   }
 
   //read
+  /**
+   *  Stream<DatabaseEvent> stream =
+          firebase.ref("users/" + userCredential.user!.uid).onValue;
+      stream.listen((DatabaseEvent event) {
+        setState(() {
+          Map<dynamic, dynamic> value = event.snapshot.value! as Map;
+          value["level"].toString()),
+   */
 
 }
 
