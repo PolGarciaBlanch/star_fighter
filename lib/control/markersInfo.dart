@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/Pantallas/pantalla_principal.dart';
@@ -21,7 +20,7 @@ class MarkersInfo {
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
     MarkersMap varMrk = MarkersMap(
-        location: point, iconMarker: mrkIcon, icono: icono, name: name);
+        location: point, iconMarker: mrkIcon, icono: icono, text: name);
     markers.add(varMrk);
     controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
   }
@@ -66,7 +65,7 @@ class MarkersInfo {
   IconData getIconoFromListMarkers(String name) {
     IconData icono = Icons.add_box;
     for (MarkersMap mrk in markers) {
-      if (mrk.name == name) {
+      if (mrk.text == name) {
         icono = mrk.icono;
       }
     }
@@ -95,4 +94,3 @@ class MarkersInfo {
     return esta;
   }
 }
-*/
