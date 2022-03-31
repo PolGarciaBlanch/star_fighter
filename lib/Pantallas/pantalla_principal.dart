@@ -1,5 +1,3 @@
-/*
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -59,8 +57,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
       double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
 
-      if (markersInfo.radMarker >= Distance) {
-      }
+      if (markersInfo.radMarker >= Distance) {}
     }
     markersInfo.visibleListView = !markersInfo.visibleListView;
     setState(() {});
@@ -235,4 +232,3 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     );
   }
 }
-*/
