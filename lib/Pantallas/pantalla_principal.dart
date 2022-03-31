@@ -1,3 +1,4 @@
+/*
 
 import 'dart:async';
 
@@ -59,7 +60,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
 
       if (markersInfo.radMarker >= Distance) {
-        markersInfo.markersNames.add(marker.text);
       }
     }
     markersInfo.visibleListView = !markersInfo.visibleListView;
@@ -125,7 +125,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               directionArrowMarker: MarkerIcon(
                 icon: const Icon(
                   Icons.double_arrow,
-                  size: 0,
                 ),
               ),
             ),
@@ -236,4 +235,4 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     );
   }
 }
-
+*/

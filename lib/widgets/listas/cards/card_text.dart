@@ -17,7 +17,7 @@ class CardTextState extends State<CardText> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      (obj as dynamic).text[0],
+      (obj as dynamic).name,
       textDirection: TextDirection.ltr,
       style: const TextStyle(
           fontSize: 15, fontWeight: FontWeight.bold, color: Colors.yellow),

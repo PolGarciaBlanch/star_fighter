@@ -6,28 +6,32 @@ import '../generic_container.dart';
 
 class TrueGeneric extends StatefulWidget {
   final List<Object> objectList;
+  final List<Object> targetList;
   final Function function;
-  final Widget card;
+  final Function card;
 
   TrueGeneric(
       {Key? key,
       required this.objectList,
+      required this.targetList,
       required this.function,
       required this.card})
       : super(key: key);
 
   @override
   _OptionDisplayState createState() =>
-      _OptionDisplayState(objectList, function, card);
+      _OptionDisplayState(objectList, targetList, function, card);
 }
 
 class _OptionDisplayState extends State<TrueGeneric> {
   var isLoading = false;
   final List<Object> objectList;
+  final List<Object> targetList;
   final Function function;
-  final Widget card;
+  final Function card;
 
-  _OptionDisplayState(this.objectList, this.function, this.card);
+  _OptionDisplayState(
+      this.objectList, this.targetList, this.function, this.card);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +52,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : _ListBuilder(listNavOpt), //body: CharacterListGen(),
+          : _ListBuilder(objectList), //body: CharacterListGen(),
     );
   }
 
@@ -66,7 +70,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
             return GestureDetector(
                 onTap: () {
                   Navigator.pop(context, "ok");
-                  function(objList[index]);
+                  function(context, objList[index], targetList);
                 },
                 child: GenericContainer(child: (card as dynamic)(objList[index])
                     //chec

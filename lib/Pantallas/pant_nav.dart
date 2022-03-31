@@ -42,7 +42,7 @@ class _PantNavState extends State<PantNav> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Scaffold(
+          return const Scaffold(
               body: LoadSplash(
             appTip: [
               'Emp missiles disrupt electronic counter-measures but are vulnerable to flak!',
@@ -60,14 +60,14 @@ class _PantNavState extends State<PantNav> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("test nav opt stack"),
+          title: const Text("test nav opt stack"),
         ),
         body: Container(
             color: Colors.green,
             width: 500,
             child: Column(
               children: [
-                Text("this is the main window stack"),
+                const Text("this is the main window stack"),
                 TextButton(
                     onPressed: () {
                       showDialog(
@@ -80,12 +80,12 @@ class _PantNavState extends State<PantNav> {
                             );
                           });
                     },
-                    child: Text("press to spawn navigation list")),
+                    child: const Text("press to spawn navigation list")),
                 TextButton(
                     onPressed: () {
                       _testPant_carga();
                     },
-                    child: Text("test load screen")),
+                    child: const Text("test load screen")),
                 TextButton(
                     onPressed: () {
                       showDialog(
@@ -95,7 +95,7 @@ class _PantNavState extends State<PantNav> {
                                 function: showData, objectList: navOpt);
                           });
                     },
-                    child: Text("lista de objetos")),
+                    child: const Text("lista de objetos")),
                 TextButton(
                     onPressed: () {
                       showDialog(
@@ -105,14 +105,14 @@ class _PantNavState extends State<PantNav> {
                                 function: navigate, objectList: navOpt);
                           });
                     },
-                    child: Text("navegacion listas genericas")),
+                    child: const Text("navegacion listas genericas")),
                 TextButton(
                     onPressed: () {
                       DialogLists dList = new DialogLists();
                       dList.GenerateList(
                           context, navOpt, dList.navigate, navOpt);
                     },
-                    child: Text("ListasV2"))
+                    child: const Text("ListasV2"))
               ],
             )));
     /*
