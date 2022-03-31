@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/control/firabase_data.dart';
 import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
@@ -22,6 +24,7 @@ class _PantDevState extends State<PantDev> {
   CardBuilder cBuilder = new CardBuilder();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
+  CustomData FirebaseIOLib = CustomData(app: Firebase.app());
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +58,12 @@ class _PantDevState extends State<PantDev> {
                           dList.navigate, cBuilder.TextCard);
                     },
                     child: Text("press to spawn navigation list [Pages]")),
-                Text(""),
-                TextButton(onPressed: () {}, child: Text("test load screen")),
+                Text("Test firegase get"),
+                TextButton(
+                    onPressed: () {
+                      FirebaseIOLib.testSet();
+                    },
+                    child: Text("test set new data to database")),
                 Text("Navigate: All options"),
                 TextButton(onPressed: () {}, child: Text("lista de objetos")),
                 Text("Navigate: All options"),

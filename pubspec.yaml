@@ -33,7 +33,10 @@ dependencies:
   firebase_auth: 
   cloud_firestore:
   firebase_database:
+  firebase_core:
   firebase_database_web:
+  cloudinary_sdk: ^1.0.0+1
+ 
 
 
   #qr_flutter:
