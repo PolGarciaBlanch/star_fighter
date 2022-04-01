@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:star_fighter/widgets/load.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PantallaCarga extends StatefulWidget {
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
-  final String path;
   const PantallaCarga(
       {Key? key,
-      required this.path,
       required this.backGround,
       required this.imgTop,
       required this.imgMid,
@@ -23,7 +22,7 @@ class PantallaCarga extends StatefulWidget {
 
   @override
   _PantallaCargaState createState() =>
-      _PantallaCargaState(path, backGround, imgTop, imgMid, appTip);
+      _PantallaCargaState(backGround, imgTop, imgMid, appTip);
 }
 
 class _PantallaCargaState extends State<PantallaCarga>
@@ -32,24 +31,21 @@ class _PantallaCargaState extends State<PantallaCarga>
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
-  final String path;
-  _PantallaCargaState(
-      this.path, this.backGround, this.imgTop, this.imgMid, this.appTip);
+  var firebase = FirebaseAuth.instance;
+  _PantallaCargaState(this.backGround, this.imgTop, this.imgMid, this.appTip);
 
-  void _startCountDown() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(path, (Route<dynamic> route) => false);
-    });
-  }
 
   @override
   void initState() {
-    _startCountDown();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    User? user = firebase.currentUser;
+    String path = user == null ? 'pantalla_login' :'pantalla_principal';
+    Timer(const Duration(seconds: 1), () => Navigator.of(context).pushReplacementNamed(path)
+    );
     return Scaffold(
         body: LoadSplash(
             backGround: backGround,

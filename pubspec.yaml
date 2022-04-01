@@ -36,13 +36,15 @@ dependencies:
   firebase_core:
   firebase_database_web:
 
+
   cloudinary_sdk: 
  
 
 
+
   qr_flutter:
   mobile_scanner:
-
+  vibration:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -53,10 +55,12 @@ dependencies:
   flutter_compass:
   flutter_icons: 
 
+
   image_picker: 
   dio: 
   crypto:
   cross_file:
+
 
 dev_dependencies:
   flutter_test:

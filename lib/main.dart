@@ -45,6 +45,10 @@ class MyApp extends StatelessWidget {
 
       initialRoute: 'pantalla_developer',
 
+
+      //initialRoute: 'pantalla_carga',
+
+
       //initialRoute: 'PantNav',
 
       //initialRoute: 'pantalla_login',
@@ -60,7 +64,7 @@ class MyApp extends StatelessWidget {
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
 
-        //'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
 
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         //'pantalla_qrView': (BuildContext context) => QRView(),
@@ -71,13 +75,13 @@ class MyApp extends StatelessWidget {
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_login'),
-        'carga_test': (BuildContext context) => PantallaCarga(
+            ),
+        'pantalla_carga': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_principal'),
+            ),
       },
     );
   }
