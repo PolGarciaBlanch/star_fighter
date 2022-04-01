@@ -5,7 +5,7 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 class MarkersMap {
   String text;
-  IconData icono;
+  Icon? icono;
   GeoPoint location;
   MarkerIcon iconMarker;
 

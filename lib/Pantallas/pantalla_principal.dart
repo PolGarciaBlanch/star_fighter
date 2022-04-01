@@ -1,6 +1,4 @@
-
 import 'dart:async';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -118,17 +116,9 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             stepZoom: 1.0,
             userLocationMarker: UserLocationMaker(
               personMarker: MarkerIcon(
-                icon: const Icon(
-                  Icons.person,
-                  size: 48,
-                ),
-              ),
+                  icon: markersInfo.GetIconFromString("player", "black", 70)),
               directionArrowMarker: MarkerIcon(
-                icon: const Icon(
-                  Icons.double_arrow,
-                  size: 0,
-                ),
-              ),
+                  icon: markersInfo.GetIconFromString("player", "black", 70)),
             ),
             showContributorBadgeForOSM: false,
             showDefaultInfoWindow: false,
@@ -146,14 +136,41 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               actualPoint = myLocation;
               if (markersInfo.primerMarkador) {
                 markersInfo.primerMarkador = false;
+                /*
                 if (!markersInfo.estaEnMarkers(myLocation.latitude + 0.0007,
                     myLocation.longitude + 0.0007, controller)) {
+                */
+
+                markersInfo.generateMarker(
+                    myLocation.latitude + 0.0005,
+                    myLocation.longitude + 0.0002,
+                    "lootbox",
+                    "green",
+                    60,
+                    controller,
+                    "LootBox");
+
+                markersInfo.generateMarker(
+                    myLocation.latitude + 0.0002,
+                    myLocation.longitude + 0.0002,
+                    "station",
+                    "blue",
+                    60,
+                    controller,
+                    "Station");
+
+                
+                controller.setMarkerIcon(markersInfo.markers[0].location, markersInfo.markers[0].iconMarker);
+                controller.setMarkerIcon(markersInfo.markers[1].location, markersInfo.markers[1].iconMarker);
+                
+                /*
                   markersInfo.generateMarker(
-                      myLocation.latitude + 0.0002,
-                      myLocation.longitude + 0.0002,
-                      Icons.all_out_rounded,
-                      controller, "Marcador 1");
-                }
+                      myLocation.latitude + 0.0007,
+                      myLocation.longitude + 0.001,
+                      "combat", "red", 60,
+                      controller, "Combat");
+                  */
+                //}
               }
             },
           ),
@@ -162,79 +179,41 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             height: 800,
             color: const Color.fromRGBO(20, 20, 20, 0),
           ),
+          markersInfo.MarkersListView(),
           Positioned(
               top: 30,
               left: 10,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder()
-                ),
+                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
                 child: const Icon(Icons.person_add),
-                onPressed: () => {Navigator.pop(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
+                onPressed: () => {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(builder: (context) => PantallaTesteo()),
+                  )
+                },
               )),
 
-              Positioned(
+          Positioned(
               top: 80,
               left: 10,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder()
-                ),
+                style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.shopping_cart),
                 onPressed: () => {},
               )),
-          /*
-          ElevatedButton(onPressed: CenterMap, child: null),
-          ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(items[index]),
-              );
-            },
-          )
-*/
-          /*
-          StatefulBuilder(builder: (_context, _setState) {
-            Stack stk = Stack();            
-            
-            Timer t1 = Timer(Duration(microseconds: 100), () {
-              _setState(() {
-                for (MarkersMap mrk in markers) {
-                  UniqueKey key = mrk.key;
-                  if (mrk.activeMarker && mrk.inMap) {
-                    generarBoton(key, 0, 0);
-                  }
-                  else if (!mrk.activeMarker && !mrk.inMap) {
-                    for (ElevatedButton btn in resultButton) {
-                      if (btn.key == key) {
-                        stk.children.remove(btn);
-                      }
-                    }
-                  }
-                  else {
-                    
-                  }
+          Positioned(
+              top: 130,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                child: Icon(Icons.add_location_rounded),
+                onPressed: showMarkersInArea,
+              )),
 
-                  for (ElevatedButton btn in resultButton) {
-                    stk.children.add(btn);
-                  }
-
-                }
-              });
-            });
-
-            return stk;
-          })
-          */
-          //getSizedmMarkersBox(),
-          markersInfo.MarkersListView(),
-          ElevatedButton(onPressed: showMarkersInArea, child: null),
+          //ElevatedButton(onPressed: showMarkersInArea, child: null),
         ]),
       ),
     );
   }
-
 }
-
-

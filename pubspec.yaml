@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   firebase_auth: 
   cloud_firestore:
   firebase_database:
@@ -49,6 +48,9 @@ dependencies:
 
   flutter_osm_plugin: ^0.31.0
   flutter_compass: ^0.7.0
+  geocoding: ^2.0.4
+  geolocator: ^8.2.0
+  geolocator_web: ^2.1.4
 
   #flutter_icons: 1.1.0
 
@@ -73,12 +75,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   #uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/img/AppLogo.png
     - assets/img/backGround.jpg
     - assets/img/xWing.png
+    - assets/img/iconoStar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
