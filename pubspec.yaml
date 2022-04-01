@@ -35,7 +35,13 @@ dependencies:
   firebase_database:
   firebase_core:
   firebase_database_web:
-  cloudinary_sdk: ^3.0.1+7
+
+
+  cloudinary_sdk: 
+ 
+
+
+
   qr_flutter:
   mobile_scanner:
   vibration:
@@ -48,6 +54,12 @@ dependencies:
   flutter_osm_plugin:
   flutter_compass:
   flutter_icons: 
+
+
+  image_picker: 
+  dio: 
+  crypto:
+  cross_file:
 
 
 dev_dependencies:
