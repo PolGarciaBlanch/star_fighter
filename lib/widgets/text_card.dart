@@ -5,12 +5,13 @@ class CharacterStack extends StatefulWidget {
   final double width;
   final double height;
 
-  CharacterStack(
+  const CharacterStack(
       {Key? key, required this.text, required this.width, required this.height})
       : super(key: key);
 
   @override
   _CharacterStackState createState() =>
+      // ignore: no_logic_in_create_state
       _CharacterStackState(text, width, height);
 }
 
@@ -34,7 +35,7 @@ class _CharacterStackState extends State<CharacterStack> {
         child: Row(children: [
       //left container image
       //image is a stack
-      Container(
+      SizedBox(
           //margin: const EdgeInsets.only(left: 70),
           width: width,
           height: height,

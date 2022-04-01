@@ -1,8 +1,9 @@
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class QRShow extends StatefulWidget {
+  const QRShow({Key? key}) : super(key: key);
+
   @override
   _QRShow createState() => _QRShow();
 }
@@ -13,7 +14,7 @@ class _QRShow extends State<QRShow> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: Text('TEST MODE'),
+          title: const Text('TEST MODE'),
           backgroundColor: Colors.redAccent),
       body: QrImage(
         data: "1234567890",

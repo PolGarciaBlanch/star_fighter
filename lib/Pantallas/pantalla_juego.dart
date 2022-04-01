@@ -2,21 +2,20 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:star_fighter/Pantallas/pantalla_carga.dart';
-import 'package:star_fighter/Pantallas/pantalla_principal.dart';
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Game extends StatefulWidget {
+  const Game({Key? key}) : super(key: key);
   @override
-  _login createState() => _login();
+  _game createState() => _game();
 }
 
-class _login extends State<Login> {
-  FirebaseAuth log = FirebaseAuth.instance;
+class _game extends State<Game> {
+  FirebaseAuth user = FirebaseAuth.instance;
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +97,7 @@ class _login extends State<Login> {
                             textPasswd.text.isNotEmpty) {
                           _log(textUsr.text, textPasswd.text);
                           //carga_test
-
+                          
                         }
                       },
                       child: const Text('Accedir'),
@@ -150,17 +149,7 @@ class _login extends State<Login> {
                 actions: <Widget>[
                   TextButton(
                     //onPressed: () => Navigator.pushNamed(context, 'carga_test'),
-/*
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PantallaTesteo()),
-                      )
-                    },*/
-
-                    onPressed: () => {Navigator.pushReplacementNamed(context, 'carga_test')},
-
+                    onPressed: () => {Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
                     child: const Text('OK'),
                   ),
                 ],

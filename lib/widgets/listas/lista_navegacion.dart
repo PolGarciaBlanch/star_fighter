@@ -120,7 +120,7 @@ class _OptionDisplayState extends State<ListaNavegacion> {
                 },
                 child: GenericContainer(
                   child: Text(
-                    item[index].text[0],
+                    item[index].name,
                     textDirection: TextDirection.ltr,
                     style: const TextStyle(
                         fontSize: 15,

@@ -2,18 +2,22 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/Pantallas/pant_developer_test.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'Pantallas/pant_nav.dart';
-import 'Pantallas/pantalla_menu.dart';
 import 'Pantallas/pantalla_perfil.dart';
 import 'Pantallas/pantalla_principal.dart';
+import 'Pantallas/pantalla_qr.dart';
+import 'Pantallas/pantalla_scanqr.dart';
 import 'Pantallas/pantalla_testeo.dart';
+import 'control/firabase_data.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -28,9 +32,8 @@ class MyApp extends StatelessWidget {
       'Meteorites and proyectiles ignore shields',
       'Shield tecnology protects from plasma'
     ];
+    //CustomData FirebaseIOLib = CustomData(app: Firebase.app());
 
-    List<String> menuText = ["Perfil"];
-    List<String> menuNavigator = ["pantalla_perfil"];
     AssetImage imgLogo = const AssetImage('assets/img/AppLogo.png');
     AssetImage imgBackground = const AssetImage('assets/img/backGround.jpg');
     AssetImage imgShip = const AssetImage('assets/img/xWing.png');
@@ -40,35 +43,45 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
+      initialRoute: 'pantalla_developer',
+
+
+      //initialRoute: 'pantalla_carga',
+
+
       //initialRoute: 'PantNav',
 
+      //initialRoute: 'pantalla_login',
 
-      initialRoute: 'pantalla_principal',
+      //initialRoute: 'PantNav',
 
       debugShowCheckedModeBanner: false,
       routes: {
-        /*'pantalla_menu': (BuildContext context) => PantallaMenu(
-              text: menuText,
-              navigator: menuNavigator,
-            ),*/
+        'pantalla_developer': (BuildContext) => PantDev(),
         'confPerfil': (BuildContext) => PantallaPerfil(),
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
+
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
+
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
+        //'pantalla_qrView': (BuildContext context) => QRView(),
+        //'pnatalla_qrShow': (BuildContext context) => QRShow(),
+
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_login'),
-        'carga_test': (BuildContext context) => PantallaCarga(
+            ),
+        'pantalla_carga': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,
             imgTop: imgLogo,
             imgMid: imgShip,
             appTip: msgCarga,
-            path: 'pantalla_principal'),
+            ),
       },
     );
   }

@@ -201,8 +201,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 child: Icon(Icons.add_location_rounded),
                 onPressed: showMarkersInArea,
               )),
-
-          //ElevatedButton(onPressed: showMarkersInArea, child: null),
         ]),
       ),
     );

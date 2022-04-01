@@ -14,7 +14,7 @@ class Create extends StatefulWidget {
 
 class _create extends State<Create> {
   FirebaseAuth log = FirebaseAuth.instance;
-  FirebaseDatabase firebase =  FirebaseDatabase.instance;
+  FirebaseDatabase firebase = FirebaseDatabase.instance;
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
   final textUsrname = TextEditingController();
@@ -117,8 +117,10 @@ class _create extends State<Create> {
                         textStyle: const TextStyle(fontSize: 25)),
                     onPressed: () async {
                       if (textUsr.text.isNotEmpty &&
-                          textPasswd.text.isNotEmpty && textUsrname.text.isNotEmpty) {
-                        register(textUsr.text, textPasswd.text, textUsrname.text);
+                          textPasswd.text.isNotEmpty &&
+                          textUsrname.text.isNotEmpty) {
+                        register(
+                            textUsr.text, textPasswd.text, textUsrname.text);
                       }
                     },
                     child: const Text('Crear usuari'),
@@ -134,9 +136,11 @@ class _create extends State<Create> {
 
   void register(String email, String pwd, String usrname) async {
     try {
+
       UserCredential usercredentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pwd);
       firebase.ref("users/" + usercredentials.user!.uid).set({"user_name": usrname, "level": 0});
-      Navigator.pushNamed(context, 'carga_test');
+      Navigator.pushReplacementNamed(context, 'carga_test');
+
     } on FirebaseAuthException catch (e) {
       showDialog(
           context: context,
@@ -153,7 +157,7 @@ class _create extends State<Create> {
             );
           });
     } catch (e) {
-           showDialog(
+      showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(

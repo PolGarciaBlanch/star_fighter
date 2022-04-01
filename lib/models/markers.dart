@@ -8,7 +8,9 @@ class MarkersMap {
   Icon? icono;
   GeoPoint location;
   MarkerIcon iconMarker;
+  String text;
 
   MarkersMap(
       {required this.location, required this.iconMarker, required this.icono, required this.text});
+
 }
