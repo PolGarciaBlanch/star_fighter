@@ -1,13 +1,13 @@
-class ObjClan {
-  int id;
+class Clan {
+  String id;
   int rank;
   String name;
   String desc;
-  String leader;
+  int leader;
   // List<String> admin;
   // List<String> member;
 
-  ObjClan({
+  Clan({
     required this.id,
     required this.rank,
     required this.name,
@@ -16,16 +16,24 @@ class ObjClan {
     // required this.admin,
     //required this.member,
   });
-
-  factory ObjClan.fromDatabaseJson(Map<String, dynamic> data) => ObjClan(
-        id: data['id'],
+  factory Clan.fromDatabaseJson(Map<String, dynamic> data, String id) => Clan(
+        id: id,
         rank: data['rank'],
         name: data['name'],
         desc: data['desc'],
         leader: data['leader'],
         //admin: data['admin'],
         //member: data['member']
-      );
+      ); /*
+  factory Clan.fromDatabaseJson(Map<String, dynamic> data, String id) => Clan(
+        id: id,
+        rank: data['rank'],
+        name: data['name'],
+        desc: data['desc'],
+        leader: data['leader'],
+        //admin: data['admin'],
+        //member: data['member']
+      );*/
   Map<String, dynamic> toDatabaseJson() => {
         "id": id,
         "rank": rank,

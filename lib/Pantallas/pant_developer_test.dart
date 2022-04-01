@@ -6,6 +6,7 @@ import 'package:star_fighter/control/firabase_data.dart';
 import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
+import 'package:star_fighter/obj/obj_clans.dart';
 import 'package:star_fighter/widgets/listas/cards/card_text.dart';
 import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
 import 'package:star_fighter/widgets/listas/basic_list.dart';
@@ -29,7 +30,7 @@ class _PantDevState extends State<PantDev> {
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
   CustomData FirebaseIOLib = CustomData(app: Firebase.app());
-
+  FirebaseData fd = new FirebaseData();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +69,19 @@ class _PantDevState extends State<PantDev> {
                       FirebaseIOLib.testSet();
                     },
                     child: Text("test set new data to database")),
+                TextButton(
+                    onPressed: () {
+                      fd.GetClanList();
+                    },
+                    child: Text("map clans to list")),
+                TextButton(
+                    onPressed: () {
+                      fd.GetObjList(
+                          fd.listClan, Clan.fromDatabaseJson, "clans/");
+                      dList.GenerateGenericList(context, fd.listClan,
+                          fd.listClan, dList.test, cBuilder.TextCard);
+                    },
+                    child: Text("generic getList clan list")),
                 Text("Test Select Image"),
                 TextButton(
                     onPressed: () {
