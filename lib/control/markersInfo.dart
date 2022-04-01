@@ -17,10 +17,10 @@ class MarkersInfo {
       String color, double sizeIcon, CustomController controller, String name) {
     MarkerIcon mrkIcon = newMarkerIcon(iconName, color, sizeIcon);
 
+
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
-    MarkersMap varMrk = MarkersMap(
-        location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name);
+    MarkersMap varMrk = MarkersMap(location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name);
 
     markers.add(varMrk);
 

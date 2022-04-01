@@ -10,8 +10,5 @@ class MarkersMap {
   MarkerIcon iconMarker;
 
   MarkersMap(
-      {required this.location,
-      required this.iconMarker,
-      required this.text,
-      required this.icono});
+      {required this.location, required this.iconMarker, required this.icono, required this.text});
 }

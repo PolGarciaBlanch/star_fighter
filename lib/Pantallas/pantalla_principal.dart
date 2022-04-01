@@ -57,9 +57,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
       double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
 
-      if (markersInfo.radMarker >= Distance) {
-        markersInfo.markersNames.add(marker.text);
-      }
+      if (markersInfo.radMarker >= Distance) {}
     }
     markersInfo.visibleListView = !markersInfo.visibleListView;
     setState(() {});
@@ -158,19 +156,12 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     60,
                     controller,
                     "Station");
-
                 
-                controller.setMarkerIcon(markersInfo.markers[0].location, markersInfo.markers[0].iconMarker);
-                controller.setMarkerIcon(markersInfo.markers[1].location, markersInfo.markers[1].iconMarker);
-                
-                /*
                   markersInfo.generateMarker(
                       myLocation.latitude + 0.0007,
                       myLocation.longitude + 0.001,
                       "combat", "red", 60,
-                      controller, "Combat");
-                  */
-                //}
+                      controller, "Combat");                  
               }
             },
           ),
