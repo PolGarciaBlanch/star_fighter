@@ -7,6 +7,8 @@ import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
 import 'package:star_fighter/obj/obj_clans.dart';
+import 'package:star_fighter/obj/obj_ship.dart';
+import 'package:star_fighter/obj/obj_user.dart';
 import 'package:star_fighter/widgets/listas/cards/card_text.dart';
 import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
 import 'package:star_fighter/widgets/listas/basic_list.dart';
@@ -29,7 +31,7 @@ class _PantDevState extends State<PantDev> {
   ImagePickerLib imgLib = new ImagePickerLib();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
-  CustomData FirebaseIOLib = CustomData(app: Firebase.app());
+
   FirebaseData fd = new FirebaseData();
   @override
   Widget build(BuildContext context) {
@@ -63,25 +65,36 @@ class _PantDevState extends State<PantDev> {
                           dList.navigate, cBuilder.TextCard);
                     },
                     child: Text("press to spawn navigation list [Pages]")),
-                Text("Test firegase get"),
-                TextButton(
-                    onPressed: () {
-                      FirebaseIOLib.testSet();
-                    },
-                    child: Text("test set new data to database")),
-                TextButton(
-                    onPressed: () {
-                      fd.GetClanList();
-                    },
-                    child: Text("map clans to list")),
+                Text("Test firebase:"),
                 TextButton(
                     onPressed: () {
                       fd.GetObjList(
-                          fd.listClan, Clan.fromDatabaseJson, "clans/");
+                          fd.listShip, Ship.fromDatabaseJson, fd.ship);
+                      dList.GenerateGenericList(context, fd.listShip,
+                          fd.listShip, dList.test, cBuilder.TextCard);
+                    },
+                    child: Text("map ship's to list")),
+                TextButton(
+                    onPressed: () {
+                      fd.GetObjList(
+                          fd.listClan, Clan.fromDatabaseJson, fd.clan);
                       dList.GenerateGenericList(context, fd.listClan,
                           fd.listClan, dList.test, cBuilder.TextCard);
                     },
                     child: Text("generic getList clan list")),
+                TextButton(
+                    onPressed: () {
+                      Clan clan = new Clan(
+                          id: "null",
+                          rank: 111,
+                          name: "test",
+                          desc: "test",
+                          leader: 11111);
+
+                      Map<String, dynamic> map = clan.toDatabaseJson();
+                      fd.NewObj(map, fd.clan);
+                    },
+                    child: Text("set new item(generic) clan")),
                 Text("Test Select Image"),
                 TextButton(
                     onPressed: () {

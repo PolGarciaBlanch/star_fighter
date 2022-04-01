@@ -7,17 +7,23 @@ import 'package:star_fighter/obj/obj_ship.dart';
 import 'package:star_fighter/obj/obj_user.dart';
 
 class FirebaseData {
+  String clan = "clans/";
+  String mods = "shop/mods/";
+  String ship = "shop/ship";
+  String user = "users/";
+  String enemy = "Enemies/";
+
   List<Clan> listClan = [];
   List<Mod> listMod = [];
   List<Ship> listShip = [];
   List<User> listPerson = [];
 
   FirebaseDatabase firebase = FirebaseDatabase.instance;
+  var referenceDatabase = FirebaseDatabase.instance;
   //GET DATA
-  GetObj(Function converter, String refererence, String key) {
+  GetObj(Function converter, String path, String key) {
     Object obj;
-    Stream<DatabaseEvent> stream =
-        firebase.ref(refererence + "/" + key).onValue;
+    Stream<DatabaseEvent> stream = firebase.ref(path + "/" + key).onValue;
     stream.listen((DatabaseEvent event) {
       Map<String, dynamic> temp =
           Map<String, dynamic>.from(event.snapshot.value! as Map);
@@ -28,12 +34,12 @@ class FirebaseData {
     });
   }
 
-  GetObjList(List<Object> genericList, Function converter, String refererence) {
-    Stream<DatabaseEvent> stream = firebase.ref(refererence).onValue;
+  GetObjList(List<Object> genericList, Function converter, String path) {
+    Stream<DatabaseEvent> stream = firebase.ref(path).onValue;
     stream.listen((DatabaseEvent event) {
       Map<String, dynamic> temp =
           Map<String, dynamic>.from(event.snapshot.value! as Map);
-      listClan.clear();
+      //listClan.clear();
 
       for (var entry in temp.entries) {
         Map<String, dynamic> submap = Map.from(entry.value);
@@ -45,71 +51,18 @@ class FirebaseData {
   }
 
   //PUSH DATA
-  NewObj(Object obj, String reference) {}
-
-  DeleteObj(Object obj, String reference, String key) {}
-  ReplaceObj(Object obj, String reference, String key) {
-    DeleteObj(obj, reference, key);
-    NewObj(obj, reference);
-  }
-
-  GenerateKey(String reference) {}
-//--------------------------------------------------------------------
-  GetClanList() {
-    Stream<DatabaseEvent> stream = firebase.ref("clans/").onValue;
-    stream.listen((DatabaseEvent event) {
-      Map<String, dynamic> temp =
-          Map<String, dynamic>.from(event.snapshot.value! as Map);
-      listClan.clear();
-/*
-      for (var entry in temp.entries) {
-        Map<String, dynamic> submap = Map.from(entry.value);
-        //new Map<String, dynamic>.from(value);
-        listClan.add(Clan.fromDatabaseJson(submap, entry.key));
-      }*/
-      for (var entry in temp.entries) {
-        Map<String, dynamic> submap = Map.from(entry.value);
-        //new Map<String, dynamic>.from(value);
-        listClan.add(Clan.fromDatabaseJson(submap, entry.key));
-      }
-
-      int a = listClan.length;
-    });
-  }
-
-  GetMods() {}
-  GetShips() {}
-  GetPersons() {}
-}
-
-class CustomData {
-  CustomData({required this.app});
-  final FirebaseApp app;
-  final referenceDatabase = FirebaseDatabase.instance;
-
-  Test() {
+  NewObj(Map<String, dynamic> map, String path) {
     final ref = referenceDatabase.ref();
+    ref.child(path).push().set(map);
   }
 
-  testSet() {
+  DeleteObj(String path, String key) {
     final ref = referenceDatabase.ref();
-    ref.child('shop').push().child('mods').set("test").asStream();
+    ref.child(path).child(key).remove();
   }
 
-  //read
-  /**
-   *  Stream<DatabaseEvent> stream =
-          firebase.ref("users/" + userCredential.user!.uid).onValue;
-      stream.listen((DatabaseEvent event) {
-        setState(() {
-          Map<dynamic, dynamic> value = event.snapshot.value! as Map;
-          value["level"].toString()),
-   */
-
+  ReplaceObj(Map<String, dynamic> map, String path, String key) {
+    final ref = referenceDatabase.ref();
+    ref.child(path).child(key).set(map);
+  }
 }
-
-
-  //write
-
-  //lists
-

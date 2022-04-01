@@ -35,7 +35,6 @@ class Clan {
         //member: data['member']
       );*/
   Map<String, dynamic> toDatabaseJson() => {
-        "id": id,
         "rank": rank,
         "name": name,
         "desc": desc,
