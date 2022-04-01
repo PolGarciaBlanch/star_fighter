@@ -1,5 +1,5 @@
 class Ship {
-  int id;
+  String id;
   String name;
   int price;
   int speed;
@@ -15,8 +15,8 @@ class Ship {
     required this.energy,
   });
 
-  factory Ship.fromDatabaseJson(Map<String, dynamic> data) => Ship(
-      id: data['id'],
+  factory Ship.fromDatabaseJson(Map<String, dynamic> data, String id) => Ship(
+      id: id,
       name: data['name'],
       price: data['price'],
       speed: data['speed'],
@@ -24,7 +24,6 @@ class Ship {
       energy: data['energy']);
 
   Map<String, dynamic> toDatabaseJson() => {
-        "id": id,
         "name": name,
         "price": price,
         "speed": speed,

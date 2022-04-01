@@ -7,6 +7,7 @@ import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
 import 'package:star_fighter/obj/obj_clans.dart';
+import 'package:star_fighter/obj/obj_mods.dart';
 import 'package:star_fighter/obj/obj_ship.dart';
 import 'package:star_fighter/obj/obj_user.dart';
 import 'package:star_fighter/widgets/listas/cards/card_text.dart';
@@ -66,6 +67,39 @@ class _PantDevState extends State<PantDev> {
                     },
                     child: Text("press to spawn navigation list [Pages]")),
                 Text("Test firebase:"),
+                TextButton(
+                    onPressed: () {
+                      fd.GetObjList(
+                          fd.listClan, Clan.fromDatabaseJson, fd.clan);
+                      fd.GetObjList(
+                          fd.listShip, Ship.fromDatabaseJson, fd.ship);
+                      fd.GetObjList(fd.listMod, Mod.fromDatabaseJson, fd.mods);
+                      print("lol");
+                    },
+                    child: Text("Load Lists()")),
+                Text("Test lists:"),
+                TextButton(
+                    onPressed: () {
+                      dList.GenerateGenericList(context, fd.listClan,
+                          fd.listClan, dList.test, cBuilder.TextCard);
+                      print("lol");
+                    },
+                    child: Text("Load Clans")),
+                TextButton(
+                    onPressed: () {
+                      dList.GenerateGenericList(context, fd.listMod, fd.listMod,
+                          dList.test, cBuilder.TextCard);
+                      print("lol");
+                    },
+                    child: Text("Load mods")),
+                TextButton(
+                    onPressed: () {
+                      dList.GenerateGenericList(context, fd.listShip,
+                          fd.listShip, dList.test, cBuilder.TextCard);
+                      print("lol");
+                    },
+                    child: Text("Load ships")),
+                Text("========================="),
                 TextButton(
                     onPressed: () {
                       fd.GetObjList(

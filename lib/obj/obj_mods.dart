@@ -1,5 +1,5 @@
 class Mod {
-  int id;
+  String id;
   String name;
   String desc;
   int price;
@@ -13,8 +13,8 @@ class Mod {
     required this.type,
   });
 
-  factory Mod.fromDatabaseJson(Map<String, dynamic> data) => Mod(
-        id: data['id'],
+  factory Mod.fromDatabaseJson(Map<String, dynamic> data, String id) => Mod(
+        id: id,
         name: data['name'],
         desc: data['desc'],
         price: data['price'],
@@ -22,7 +22,6 @@ class Mod {
       );
 
   Map<String, dynamic> toDatabaseJson() => {
-        "id": id,
         "name": name,
         "desc": desc,
         "price": price,
