@@ -136,7 +136,7 @@ class _create extends State<Create> {
     try {
       UserCredential usercredentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pwd);
       firebase.ref("users/" + usercredentials.user!.uid).set({"user_name": usrname, "level": 0});
-      Navigator.pushNamed(context, 'carga_test');
+      Navigator.pushReplacementNamed(context, 'carga_test');
     } on FirebaseAuthException catch (e) {
       showDialog(
           context: context,
