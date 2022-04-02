@@ -43,7 +43,8 @@ class _PantDevState extends State<PantDev> {
         body: Container(
             color: Colors.yellow,
             width: 500,
-            child: Column(
+            child: new SingleChildScrollView(
+                child: Column(
               children: [
                 Text("Navigate:"),
                 TextButton(
@@ -66,6 +67,7 @@ class _PantDevState extends State<PantDev> {
                           dList.navigate, cBuilder.TextCard);
                     },
                     child: Text("press to spawn navigation list [Pages]")),
+                Text("========================="),
                 Text("Test firebase:"),
                 TextButton(
                     onPressed: () {
@@ -77,7 +79,22 @@ class _PantDevState extends State<PantDev> {
                       print("lol");
                     },
                     child: Text("Load Lists()")),
+                TextButton(
+                    onPressed: () {
+                      fd.GetObjList(
+                          fd.listUser, User.fromDatabaseJson, fd.user);
+                      print("lol");
+                    },
+                    child: Text("Load Lists User")),
+                Text("========================="),
                 Text("Test lists:"),
+                TextButton(
+                    onPressed: () {
+                      dList.GenerateGenericList(context, fd.listUser,
+                          fd.listUser, dList.test, cBuilder.TextCard);
+                      print("lol");
+                    },
+                    child: Text("Load user")),
                 TextButton(
                     onPressed: () {
                       dList.GenerateGenericList(context, fd.listClan,
@@ -99,6 +116,23 @@ class _PantDevState extends State<PantDev> {
                       print("lol");
                     },
                     child: Text("Load ships")),
+                Text("========================="),
+                Text("Generate items:"),
+                TextButton(
+                    onPressed: () {
+                      User k = User.genUser();
+                      Map<String, dynamic> a = k.toDatabaseJson();
+                      //fd.NewObj(a, "users/");
+                      fd.NewObjWithKey(a, "users/", "fffffff");
+                    },
+                    child: Text("Gen User")),
+                TextButton(onPressed: () {}, child: Text("Gen mod")),
+                TextButton(onPressed: () {}, child: Text("Gen ship")),
+                Text("========================="),
+                Text("Delete items:"),
+                TextButton(onPressed: () {}, child: Text("list Clans(delete)")),
+                TextButton(onPressed: () {}, child: Text("list mods(delete)")),
+                TextButton(onPressed: () {}, child: Text("list ships(delete)")),
                 Text("========================="),
                 TextButton(
                     onPressed: () {
@@ -152,7 +186,7 @@ class _PantDevState extends State<PantDev> {
                     },
                     child: Text("ListasV2"))
               ],
-            )));
+            ))));
     /*
     return ListaNavegacion(
       listNavOpt: navOpt,

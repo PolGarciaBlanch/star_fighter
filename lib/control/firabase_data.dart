@@ -16,7 +16,7 @@ class FirebaseData {
   List<Clan> listClan = [];
   List<Mod> listMod = [];
   List<Ship> listShip = [];
-  List<User> listPerson = [];
+  List<User> listUser = [];
 
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   var referenceDatabase = FirebaseDatabase.instance;
@@ -53,6 +53,11 @@ class FirebaseData {
   NewObj(Map<String, dynamic> map, String path) {
     final ref = referenceDatabase.ref();
     ref.child(path).push().set(map);
+  }
+
+  NewObjWithKey(Map<String, dynamic> map, String path, String key) {
+    final ref = referenceDatabase.ref();
+    ref.child(path).child(key).set(map);
   }
 
   DeleteObj(String path, String key) {
