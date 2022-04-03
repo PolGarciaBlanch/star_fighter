@@ -44,7 +44,7 @@ class _PantDevState extends State<PantDev> {
         body: Container(
             color: Colors.yellow,
             width: 500,
-            child: new SingleChildScrollView(
+            child: SingleChildScrollView(
                 child: Column(
               children: [
                 Text("Navigate:"),
@@ -151,20 +151,24 @@ class _PantDevState extends State<PantDev> {
                           fd.listClan, dList.test, cBuilder.TextCard);
                     },
                     child: Text("generic getList clan list")),
+                Text("Create Objects except users"),
                 TextButton(
                     onPressed: () {
-                      Clan clan = new Clan(
+                      //remove function in Clan obj
+                      Clan clan = Clan(
                           id: "null",
                           rank: 111,
                           name: "test",
                           desc: "test",
-                          leader: 11111,
                           member: []);
-
+                      //add this code for every operation w user & clan actions and all creation operations
                       Map<String, dynamic> map = clan.toDatabaseJson();
                       fd.NewObj(map, fd.clan);
                     },
-                    child: Text("set new item(generic) clan")),
+                    child: Text("Create New Clan[]")),
+                TextButton(onPressed: () {}, child: Text("Create New Mod[]")),
+                TextButton(onPressed: () {}, child: Text("Create New Ship[]")),
+                Text("========================="),
                 Text("Test Select Image"),
                 TextButton(
                     onPressed: () {

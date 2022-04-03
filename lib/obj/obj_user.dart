@@ -85,7 +85,7 @@ class User {
   }
 
   Map<String, dynamic> toDatabaseJson() {
-    Map<String, dynamic> returnMap = new Map();
+    Map<String, dynamic> returnMap = Map();
     returnMap['name'] = name;
     returnMap['surname'] = surname;
     returnMap['alias'] = alias;
@@ -94,7 +94,7 @@ class User {
     returnMap['clan'] = clan;
     returnMap['friends'] = friends;
     returnMap['ships'] = ships.map((attribute) {
-      Map<String, dynamic> attributeMap = new Map<String, dynamic>();
+      Map<String, dynamic> attributeMap = Map<String, dynamic>();
       attributeMap["alias"] = attribute.alias;
       attributeMap["mods"] = attribute.mods;
       attributeMap["ship"] = attribute.ship;

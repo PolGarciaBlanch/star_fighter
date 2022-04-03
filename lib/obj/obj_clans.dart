@@ -1,9 +1,10 @@
+import 'package:star_fighter/obj/obj_user.dart';
+
 class Clan {
   String id;
   int rank;
   String name;
   String desc;
-  int leader;
   List<String> member;
   // List<String> admin;
   // List<String> member;
@@ -13,7 +14,6 @@ class Clan {
     required this.rank,
     required this.name,
     required this.desc,
-    required this.leader,
     required this.member,
     // required this.admin,
     //required this.member,
@@ -30,7 +30,6 @@ class Clan {
         rank: data['rank'],
         name: data['name'],
         desc: data['desc'],
-        leader: data['leader'],
         member: _member
         //admin: data['admin'],
         //member: data['member']
@@ -38,16 +37,18 @@ class Clan {
   }
 
   Map<String, dynamic> toDatabaseJson() {
-    Map<String, dynamic> returnMap = new Map();
+    Map<String, dynamic> returnMap = Map();
     returnMap['rank'] = rank;
     returnMap['name'] = name;
     returnMap['desc'] = desc;
-    returnMap['leader'] = leader;
     returnMap['member'] = member;
 
     return returnMap; //
   }
 
+  static Clan genClan(User user) {
+    return Clan(id: "", rank: 0, name: "aaa", desc: "", member: [user.id]);
+  }
   //crear clan
   // añadir persona?
   // etc..
