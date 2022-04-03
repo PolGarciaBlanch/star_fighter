@@ -15,10 +15,17 @@ class _game extends State<Game> {
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
+  int vidaEnemy = 50;
+  int vidaUsr = 100;
   
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(const Duration(seconds: 1), (timer){
+      setState(() {
+        vidaUsr = vidaUsr - 10;
+      });
+    });
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -28,81 +35,15 @@ class _game extends State<Game> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Star Fighter',
-                  style: TextStyle(fontSize: 50, color: Colors.white),
-                ),
                 const SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    controller: textUsr,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide:
-                              const BorderSide(color: Colors.white, width: 2.0),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide:
-                              const BorderSide(color: Colors.white, width: 2.0),
-                        ),
-                        labelText: 'Email',
-                        labelStyle: const TextStyle(color: Colors.white),
-                        hintText: 'Email',
-                        hintStyle: const TextStyle(color: Colors.white)),
-                  ),
+                Text(
+                  'vidaEnemy: $vidaEnemy',
+                  style: const TextStyle(fontSize: 50, color: Colors.white),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    controller: textPasswd,
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide:
-                              const BorderSide(color: Colors.white, width: 2.0),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide:
-                              const BorderSide(color: Colors.white, width: 2.0),
-                        ),
-                        labelText: 'Contrasenya',
-                        labelStyle: const TextStyle(color: Colors.white),
-                        hintText: 'Contrasenya',
-                        hintStyle: const TextStyle(color: Colors.white)),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: SizedBox(
-                    width: 150,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          textStyle: const TextStyle(fontSize: 25)),
-                      onPressed: () async {
-                        if (textUsr.text.isNotEmpty &&
-                            textPasswd.text.isNotEmpty) {
-                          _log(textUsr.text, textPasswd.text);
-                          //carga_test
-                          
-                        }
-                      },
-                      child: const Text('Accedir'),
-                    ),
-                  ),
+                const SizedBox(
+                  height: 500,
                 ),
                 Padding(
                   padding:
@@ -115,9 +56,14 @@ class _game extends State<Game> {
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
                       onPressed: () {
-                        Navigator.pushNamed(context, 'pantalla_crea_usr');
+                        setState(() {
+                          vidaEnemy = vidaEnemy - 3;
+                          if(vidaEnemy <= 0){
+                            vidaEnemy = 0;
+                          }
+                        });
                       },
-                      child: const Text('Crear Usuari'),
+                      child: const Text('Atacar'),
                     ),
                   ),
                 ),
@@ -148,7 +94,6 @@ class _game extends State<Game> {
                     value["level"].toString()),
                 actions: <Widget>[
                   TextButton(
-                    //onPressed: () => Navigator.pushNamed(context, 'carga_test'),
                     onPressed: () => {Navigator.push(context,  MaterialPageRoute(builder: (context) => PantallaTesteo()),)},
                     child: const Text('OK'),
                   ),
