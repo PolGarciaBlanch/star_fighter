@@ -11,14 +11,18 @@ class ImageApi {
       Cloudinary(cloudinaryApiKey, cloudinaryApiSecret, cloudinaryCloudName);
   final String initUrl = "";
 
-  //GETIMAGE
+  //RUTAS
+  static String pUser = "Images/Profile";
+  static String pClan = "Images/Clan";
+  static String pShip = "Images/Ship";
+  static String pMod = "Images/Mod";
 
   ///MANAGE IMAGES
-  UploadImage(String filePath, String fileName) {
+  UploadImage(String filePath, String apiFolder, String fileName) {
     cloudinary.uploadFile(
         filePath: filePath,
-        fileName: "img2",
-        folder: cloudinaryCustomFolder,
+        fileName: fileName,
+        folder: apiFolder,
         resourceType: CloudinaryResourceType.image);
   }
 
@@ -48,12 +52,12 @@ class ImageApi {
   String GetNamefromUrl(String url) {
     return url.substring(initUrl.length, url.length - initUrl.length);
   }
-
+/*
   //deltete image
   ReplaceImage(String url, String filePath) {
     DleleteImage(url);
     UploadImage(filePath, GetNamefromUrl(url));
-  }
+  }*/
 
   //IMAGE FROM PHONE
 

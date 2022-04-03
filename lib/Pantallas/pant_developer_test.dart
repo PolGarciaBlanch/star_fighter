@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:star_fighter/control/firabase_data.dart';
+import 'package:star_fighter/control/image_api.dart';
 import 'package:star_fighter/obj/card_builder.dart';
 import 'package:star_fighter/obj/dialog_lists.dart';
 import 'package:star_fighter/obj/nav_opt.dart';
@@ -157,7 +158,8 @@ class _PantDevState extends State<PantDev> {
                           rank: 111,
                           name: "test",
                           desc: "test",
-                          leader: 11111);
+                          leader: 11111,
+                          member: []);
 
                       Map<String, dynamic> map = clan.toDatabaseJson();
                       fd.NewObj(map, fd.clan);
@@ -166,12 +168,12 @@ class _PantDevState extends State<PantDev> {
                 Text("Test Select Image"),
                 TextButton(
                     onPressed: () {
-                      imgLib.AccCam();
+                      imgLib.AccCam("key", ImageApi.pClan);
                     },
                     child: Text("From camera")),
                 TextButton(
                     onPressed: () {
-                      imgLib.AccGalery();
+                      imgLib.AccGalery("key", ImageApi.pClan);
                     },
                     child: Text("From file")),
                 Text("Navigate: All options"),
