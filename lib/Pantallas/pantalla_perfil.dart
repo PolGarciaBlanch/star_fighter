@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:star_fighter/control/image_api.dart';
+import 'package:star_fighter/control/image_picker.dart';
+import 'package:star_fighter/main.dart';
+import 'package:star_fighter/widgets/generic_container.dart';
+
+import '../obj/obj_user.dart';
+import '../widgets/image_card.dart';
 
 class PantallaPerfil extends StatefulWidget {
-  PantallaPerfil({Key? key}) : super(key: key);
+  PantallaPerfil({
+    Key? key,
+  }) : super(key: key);
   //default
 
   //moded
@@ -12,38 +22,83 @@ class PantallaPerfil extends StatefulWidget {
 
 class _PantallaPerfilState extends State<PantallaPerfil> {
   _PantallaPerfilState();
+  ImageApi img = ImageApi();
+  ImagePickerLib imgLib = ImagePickerLib();
+  User user = loggedUser[0];
+  String altPers =
+      "https://res.cloudinary.com/didy88ckl/image/upload/v1649235499/Images/noFile/nouser.jpg";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('TEST MODE'),
+          title: const Text('Profile'),
           backgroundColor: Colors.redAccent,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.update),
-              onPressed: () {},
-            )
-          ],
+          actions: <Widget>[],
         ),
         body: Container(
-          width: 300,
+          color: Colors.yellow,
+          padding: EdgeInsets.all(5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //default
-              Container(
-                child: FlatButton(
-                  color: Colors.red,
-                  splashColor: Colors.black12,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'pantalla_carga');
-                  },
-                  child: const Text("Load Screen"),
+              Row(
+                children: [
+                  SizedBox(
+                      width: 300,
+                      child: ImageFromUrl.circleImage(200, 200,
+                          img.imgUrl + img.pUser + user.id + ".jpg", altPers)),
+                  SizedBox(
+                      width: 20,
+                      child: Column(
+                        children: [
+                          IconButton(
+                              icon: Icon(Icons.camera),
+                              onPressed: () {
+                                imgLib.AccCam(user.id, img.pUser);
+                              }),
+                          IconButton(
+                              icon: Icon(Icons.filter),
+                              onPressed: () {
+                                imgLib.AccGalery(user.id, img.pUser);
+                              }),
+                        ],
+                      ))
+                ],
+              ),
+              GenericContainer(
+                child: Text("Id:" + user.id),
+              ),
+              GenericContainer(
+                  child: Row(
+                children: [
+                  SizedBox(width: 200, child: Text("Name:" + user.name)),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                        icon: Icon(Icons.edit_note),
+                        onPressed: () {
+                          imgLib.AccGalery(user.id, img.pUser);
+                        }),
+                  )
+                ],
+              )),
+              GenericContainer(
+                child: Row(
+                  children: [
+                    SizedBox(width: 200, child: Text("Alias:" + user.name)),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                          icon: Icon(Icons.edit_note),
+                          onPressed: () {
+                            imgLib.AccGalery(user.id, img.pUser);
+                          }),
+                    )
+                  ],
                 ),
-                // margin: EdgeInsets.only(top: 30),
               ),
             ],
           ),

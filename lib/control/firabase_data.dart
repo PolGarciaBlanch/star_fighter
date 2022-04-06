@@ -16,7 +16,7 @@ class FirebaseData {
   List<Clan> listClan = [];
   List<Mod> listMod = [];
   List<Ship> listShip = [];
-  List<User> listPerson = [];
+  List<User> listUser = [];
 
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   var referenceDatabase = FirebaseDatabase.instance;
@@ -37,9 +37,8 @@ class FirebaseData {
   GetObjList(List<Object> genericList, Function converter, String path) {
     Stream<DatabaseEvent> stream = firebase.ref(path).onValue;
     stream.listen((DatabaseEvent event) {
-      Map<String, dynamic> temp =
-          Map<String, dynamic>.from(event.snapshot.value! as Map);
-      //listClan.clear();
+      var temp = Map<dynamic, dynamic>.from(event.snapshot.value! as Map);
+      genericList.clear();
 
       for (var entry in temp.entries) {
         Map<String, dynamic> submap = Map.from(entry.value);
@@ -54,6 +53,11 @@ class FirebaseData {
   NewObj(Map<String, dynamic> map, String path) {
     final ref = referenceDatabase.ref();
     ref.child(path).push().set(map);
+  }
+
+  NewObjWithKey(Map<String, dynamic> map, String path, String key) {
+    final ref = referenceDatabase.ref();
+    ref.child(path).child(key).set(map);
   }
 
   DeleteObj(String path, String key) {
