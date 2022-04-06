@@ -43,14 +43,22 @@ class _game extends State<Game> {
 
   Widget build(BuildContext context) {
     if (!isLoading) {
-      timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      timer = Timer.periodic(const Duration(seconds: 5), (Timer t) async{
         if (stop) {
           timer.cancel();
         } else {
-          setState(() async {
             currentHpUsr = currentHpUsr - atacEnemy;
             if (await Vibration.hasVibrator()) {
               Vibration.vibrate();
+            }
+          setState(() {
+
+            if (currentHpUsr / vidaUsr * 100 > 50) {
+              colorStatusUsr = Colors.green;
+            } else if (currentHpUsr / vidaUsr * 100 < 25) {
+              colorStatusUsr = Colors.red;
+            } else {
+              colorStatusUsr = Colors.amber;
             }
             if (currentHpUsr <= 0) {
               currentHpUsr = 0;
@@ -99,7 +107,7 @@ class _game extends State<Game> {
                       child: LinearProgressIndicator(
                         value: currentHpEne / vidaEnemy,
                         valueColor:
-                            AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
+                            AlwaysStoppedAnimation<Color>(colorStatusEne),
                         backgroundColor: Color(0xffD6D6D6),
                       ),
                     ),
@@ -120,6 +128,20 @@ class _game extends State<Game> {
                   const SizedBox(
                     height: 50,
                   ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    width: 300,
+                    height: 20,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: LinearProgressIndicator(
+                        value: currentHpUsr / vidaUsr,
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(colorStatusUsr),
+                        backgroundColor: Color(0xffD6D6D6),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -136,6 +158,13 @@ class _game extends State<Game> {
                           }
                           setState(() {
                             currentHpEne = currentHpEne - atacUsr;
+                            if (currentHpEne / vidaEnemy * 100 > 50) {
+                              colorStatusEne = Colors.green;
+                            } else if (currentHpEne / vidaEnemy * 100 < 25) {
+                              colorStatusEne = Colors.red;
+                            } else {
+                              colorStatusEne = Colors.amber;
+                            }
                             if (currentHpEne <= 0) {
                               stop = true;
                               currentHpEne = 0;
