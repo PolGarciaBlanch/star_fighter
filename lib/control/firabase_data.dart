@@ -21,17 +21,19 @@ class FirebaseData {
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   var referenceDatabase = FirebaseDatabase.instance;
   //GET DATA
-  GetObj(Function converter, String path, String key) {
+  Future<dynamic> GetObj(Function converter, String path, String key) async {
     Object obj;
-    Stream<DatabaseEvent> stream = firebase.ref(path + "/" + key).onValue;
+    Map<String, dynamic> temp = new Map();
+    Stream<DatabaseEvent> stream = firebase.ref(path + key).onValue;
     stream.listen((DatabaseEvent event) {
-      Map<String, dynamic> temp =
-          Map<String, dynamic>.from(event.snapshot.value! as Map);
-      if (temp == null) {
-        return null;
-      }
-      return obj = converter(temp, key);
+      temp = Map<String, dynamic>.from(event.snapshot.value! as Map);
+      /*if (temp == null) {
+        return ;
+      }*/
     });
+    obj = converter(temp, key);
+
+    return obj;
   }
 
   GetObjList(List<Object> genericList, Function converter, String path) {

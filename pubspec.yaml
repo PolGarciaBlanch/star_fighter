@@ -49,8 +49,8 @@ dependencies:
   geolocator_web:
 
   cupertino_icons:
-  #flutter_osm_plugin:
-  #flutter_compass:
+  flutter_osm_plugin:
+  flutter_compass:
   flutter_icons: 
 
 

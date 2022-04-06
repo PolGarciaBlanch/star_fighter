@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:star_fighter/Pantallas/pantalla_principal.dart';
@@ -18,10 +17,10 @@ class MarkersInfo {
       String color, double sizeIcon, CustomController controller, String name) {
     MarkerIcon mrkIcon = newMarkerIcon(iconName, color, sizeIcon);
 
-
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
-    MarkersMap varMrk = MarkersMap(location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name);
+    MarkersMap varMrk = MarkersMap(
+        location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name);
 
     markers.add(varMrk);
 
@@ -163,4 +162,3 @@ class MarkersInfo {
     return icono;
   }
 }
-*/

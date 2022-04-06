@@ -164,6 +164,23 @@ class _PantDevState extends State<PantDev> {
                       print(loggedUser.length.toString());
                     },
                     child: Text("load user for testing")),
+                TextButton(
+                    onPressed: () async {
+                      loggedUser.clear();
+                      loggedUser.add(await fd.GetObj(
+                          User.fromDatabaseJson, fd.user, "90000100"));
+                      /*
+                      User user = await fd.GetObj(
+                          User.fromDatabaseJson, fd.user, "90000100");
+                      if (user != null) {
+                        loggedUser.clear();
+                        loggedUser.add(await fd.GetObj(
+                          User.fromDatabaseJson, fd.user, "90000100"));
+                      }*/
+
+                      print(loggedUser.length.toString());
+                    },
+                    child: Text("load user for testing with key")),
                 TextButton(onPressed: () {}, child: Text("userProfile")),
                 TextButton(onPressed: () {}, child: Text("list mods(delete)")),
                 TextButton(onPressed: () {}, child: Text("list ships(delete)")),

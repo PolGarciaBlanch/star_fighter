@@ -1,4 +1,3 @@
-/*
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -160,12 +159,15 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     60,
                     controller,
                     "Station");
-                
-                  markersInfo.generateMarker(
-                      myLocation.latitude + 0.0007,
-                      myLocation.longitude + 0.001,
-                      "combat", "red", 60,
-                      controller, "Combat");                  
+
+                markersInfo.generateMarker(
+                    myLocation.latitude + 0.0007,
+                    myLocation.longitude + 0.001,
+                    "combat",
+                    "red",
+                    60,
+                    controller,
+                    "Combat");
               }
             },
           ),
@@ -188,7 +190,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                   )
                 },
               )),
-
           Positioned(
               top: 80,
               left: 10,
@@ -213,4 +214,3 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     );
   }
 }
-*/

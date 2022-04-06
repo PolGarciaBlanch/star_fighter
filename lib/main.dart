@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'pantalla_carga',
+      initialRoute: 'pantalla_developer', //'pantalla_carga',
 
       //initialRoute: 'pantalla_carga',
 
@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
         'pantalla_developer': (BuildContext context) => PantDev(),
         'confPerfil': (BuildContext context) => PantallaPerfil(),
         'PantNav': (BuildContext context) => PantNav(lista: "Ajustes"),
-
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
         /* 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),*/
@@ -83,7 +82,7 @@ class MyApp extends StatelessWidget {
               imgMid: imgShip,
               appTip: msgCarga,
             ),
-        'pantalla_friends' : (BuildContext context) => const list_usr(),
+        'pantalla_friends': (BuildContext context) => const list_usr(),
       },
     );
   }
