@@ -2,10 +2,14 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'dart:math';
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
 import 'package:star_fighter/control/dbData.dart';
+import 'package:star_fighter/widgets/image_card.dart';
+import 'package:vibration/vibration.dart';
 
-class Game extends StatefulWidget  {
+class Game extends StatefulWidget {
   const Game({Key? key}) : super(key: key);
   @override
   _game createState() => _game();
@@ -16,88 +20,182 @@ class _game extends State<Game> {
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
-  int vidaUsr = 100;
-  int atacUsr = 1;
-  int vidaEnemy = 100;
-  int atacEnemy = 10;
-  
+  late int vidaUsr;
+  late int currentHpUsr;
+  late int atacUsr;
+  late int vidaEnemy;
+  late int currentHpEne;
+  late int atacEnemy;
+  var colorStatusEne = Colors.green;
+  var colorStatusUsr = Colors.green;
+  bool isLoading = true;
+  bool stop = false;
+  late Timer timer;
 
   @override
-
-    @override
+  @override
   void initState() {
+    stop = false;
+    isLoading = true;
     getStats();
     super.initState();
   }
 
-
   Widget build(BuildContext context) {
-    // Timer.periodic(const Duration(seconds: 3), (timer){
-    //   setState(() {
-    //     vidaUsr = vidaUsr - atacEnemy;
-    //   });
-    // });
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 50,
-                ),
-                Text(
-                  'vidaEnemy: $vidaEnemy',
-                  style: const TextStyle(fontSize: 50, color: Colors.white),
-                ),
-                const SizedBox(
-                  height: 500,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: SizedBox(
-                    width: 200,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          textStyle: const TextStyle(fontSize: 25)),
-                      onPressed: () {
-                        setState(() {
-                          vidaEnemy = vidaEnemy - atacUsr;
-                          if(vidaEnemy <= 0){
-                            vidaEnemy = 0;
-                          }
-                        });
-                      },
-                      child: const Text('Atacar'),
+    if (!isLoading) {
+      timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+        if (stop) {
+          timer.cancel();
+        } else {
+          setState(() async {
+            currentHpUsr = currentHpUsr - atacEnemy;
+            if (await Vibration.hasVibrator()) {
+              Vibration.vibrate();
+            }
+            if (currentHpUsr <= 0) {
+              currentHpUsr = 0;
+              stop = true;
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Derrota'),
+                    content: const Text('Has sido derrotado'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, 'OK');
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          });
+        }
+      });
+      return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'vidaEnemy: $currentHpEne',
+                    style: const TextStyle(fontSize: 50, color: Colors.white),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    width: 300,
+                    height: 20,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: LinearProgressIndicator(
+                        value: currentHpEne / vidaEnemy,
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
+                        backgroundColor: Color(0xffD6D6D6),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    height: 300,
+                    width: 300,
+                    constraints: const BoxConstraints(),
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://res.cloudinary.com/didy88ckl/image/upload/v1649273184/Images/noFile/kisspng-space-invaders-pac-man-galaxian-sticker-extraterre-space-invaders-transparent-png-5a756425d85513.3069974715176427898861_odsyeu.png'))),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            textStyle: const TextStyle(fontSize: 25)),
+                        onPressed: () async {
+                          if (await Vibration.hasVibrator()) {
+                            Vibration.vibrate();
+                          }
+                          setState(() {
+                            currentHpEne = currentHpEne - atacUsr;
+                            if (currentHpEne <= 0) {
+                              stop = true;
+                              currentHpEne = 0;
+                              var rng = Random();
+                              int credits = rng.nextInt(701) + 200;
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Victoria'),
+                                    content:
+                                        Text('Has ganado $credits créditos'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, 'OK');
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                          });
+                        },
+                        child: const Text('Atacar'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
   }
 
   void getStats() async {
-      // DatabaseEvent event = await firebase.ref("Enemies/0").once();
-      // Map<dynamic, dynamic> value = event.snapshot.value! as Map;
-      vidaEnemy = dbData.enemies["E0"]["Hp"];
-      atacEnemy = dbData.enemies["E0"]["Attack"];
-      // event = await firebase.ref("users/" + user.currentUser!.uid).once();
-      // value = event.snapshot.value! as Map;
-      int idNav = dbData.users[user.currentUser!.uid]["chosenShip"];
-      // event = await firebase.ref("shop/ship/$idNav").once();
-      // value = event.snapshot.value! as Map;
-      atacUsr = dbData.shop["ship"][idNav]["Attack"];
-      vidaUsr = dbData.shop["ship"][idNav]["Hp"];
-
+    var rng = Random();
+    int idEnemy = rng.nextInt(3);
+    DatabaseEvent event = await firebase.ref("Enemies/E$idEnemy").once();
+    Map<dynamic, dynamic> value = event.snapshot.value! as Map;
+    vidaEnemy = value["Hp"];
+    currentHpEne = vidaEnemy;
+    atacEnemy = value["Attack"];
+    event = await firebase.ref("users/" + user.currentUser!.uid).once();
+    value = event.snapshot.value! as Map;
+    int idNav = value["chosenShip"];
+    event = await firebase.ref("shop/ship/$idNav").once();
+    value = event.snapshot.value! as Map;
+    atacUsr = value["Attack"];
+    vidaUsr = value["Hp"];
+    currentHpUsr = vidaUsr;
+    setState(() {
+      isLoading = false;
+    });
   }
 }
