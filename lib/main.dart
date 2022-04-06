@@ -12,13 +12,13 @@ import 'Pantallas/pantalla_principal.dart';
 import 'Pantallas/pantalla_qr.dart';
 import 'Pantallas/pantalla_scanqr.dart';
 import 'Pantallas/pantalla_testeo.dart';
+import 'Pantallas/pantalla_friends.dart';
 import 'control/firabase_data.dart';
 import 'Pantallas/pantalla_juego.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const MyApp());
 }
 
@@ -84,6 +84,7 @@ class MyApp extends StatelessWidget {
             imgMid: imgShip,
             appTip: msgCarga,
             ),
+        'pantalla_friends' : (BuildContext context) => const list_usr(),
       },
     );
   }

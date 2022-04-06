@@ -139,34 +139,7 @@ class _login extends State<Login> {
       stream.listen((DatabaseEvent event) {
         setState(() {
           Map<dynamic, dynamic> value = event.snapshot.value! as Map;
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('User'),
-                content: Text(userCredential.user!.email! +
-                    "\nNivell: " +
-                    value["level"].toString()),
-                actions: <Widget>[
-                  TextButton(
-                    //onPressed: () => Navigator.pushNamed(context, 'carga_test'),
-/*
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PantallaTesteo()),
-                      )
-                    },*/
-
-                    onPressed: () => {Navigator.pushReplacementNamed(context, 'carga_test')},
-
-                    child: const Text('OK'),
-                  ),
-                ],
-              );
-            },
-          );
+          Navigator.pushReplacementNamed(context, 'pantalla_carga');
         });
       });
     } on FirebaseAuthException catch (e) {
