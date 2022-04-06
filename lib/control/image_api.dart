@@ -1,5 +1,7 @@
-import 'dart:collection';
+import 'dart:convert';
+
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
+import 'package:flutter/cupertino.dart';
 
 String cloudinaryCustomFolder = "test/myfolder";
 String cloudinaryApiKey = "912599646435741";
@@ -10,15 +12,16 @@ class ImageApi {
   final Cloudinary cloudinary =
       Cloudinary(cloudinaryApiKey, cloudinaryApiSecret, cloudinaryCloudName);
   final String initUrl = "";
-
-  static String URL =
+  String imgUrl =
+      "https://res.cloudinary.com/didy88ckl/image/upload/v1648893757/";
+  String URL =
       "https://res.cloudinary.com/didy88ckl/image/upload/v1648893757/Images/Clan/key.jpg";
 
   //RUTAS
-  static String pUser = "Images/Profile";
-  static String pClan = "Images/Clan";
-  static String pShip = "Images/Ship";
-  static String pMod = "Images/Mod";
+  String pUser = "Images/Profile/";
+  String pClan = "Images/Clan/";
+  String pShip = "Images/Ship/";
+  String pMod = "Images/Mod/";
 
   ///MANAGE IMAGES
   UploadImage(String filePath, String apiFolder, String fileName) {
@@ -28,6 +31,18 @@ class ImageApi {
         folder: apiFolder,
         resourceType: CloudinaryResourceType.image);
   }
+
+  /*UploadPlaceholder(String urlPlacehldr, String apiFolder, String fileName) {
+    Image ac = Image(image: NetworkImage(urlPlacehldr));
+
+    List<int> bytes = utf8.encode(ac.toString());
+
+    cloudinary.uploadFile(
+        fileBytes: bytes,
+        fileName: fileName,
+        folder: apiFolder,
+        resourceType: CloudinaryResourceType.image);
+  }*/
 
 /*
   String UploadImages() {

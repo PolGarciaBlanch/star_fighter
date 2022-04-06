@@ -22,6 +22,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+List<User> loggedUser = [];
+
 //List<Object> parameters =[111123231323, ""]
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -39,7 +41,6 @@ class MyApp extends StatelessWidget {
     AssetImage imgBackground = const AssetImage('assets/img/backGround.jpg');
     AssetImage imgShip = const AssetImage('assets/img/xWing.png');
 
-    User loggedUser;
     return MaterialApp(
       title: 'Star Fighter',
       theme: ThemeData(
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
-        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
+        /* 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),*/
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'pantalla_qrView': (BuildContext context) => QRView(),
         'pnatalla_qrShow': (BuildContext context) => QRShow(),

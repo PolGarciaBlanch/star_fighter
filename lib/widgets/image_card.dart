@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class ImageFromUrl {
-  static Widget digimonImage(double height, double width, String Url) {
+  static Widget circleImage(
+      double height, double width, String Url, String Alt) {
+    if (Uri.tryParse(Url) == null) {
+      Url = Alt;
+    }
+
     return Container(
       child: Container(
         height: height,

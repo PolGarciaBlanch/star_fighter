@@ -4,6 +4,8 @@ import 'package:star_fighter/obj/obj_custom.dart';
 import 'package:star_fighter/obj/obj_mods.dart';
 import 'package:star_fighter/obj/obj_ship.dart';
 
+import '../control/image_api.dart';
+
 class User {
   String id;
   String name;
@@ -151,10 +153,15 @@ class User {
         modules: []);
   }
 
+  ImageApi imageApi = ImageApi();
   FirebaseData firebase = FirebaseData();
 
   NewUserInstance(User user) {
     firebase.NewObjWithKey(user.toDatabaseJson(), firebase.user, user.id);
+    /*imageApi.UploadPlaceholder(
+        "https://res.cloudinary.com/didy88ckl/image/upload/v1648710084/samples/cloudinary-group.jpg",
+        imageApi.pUser,
+        user.id);*/
   }
 
   //friends

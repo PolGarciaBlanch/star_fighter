@@ -1,3 +1,4 @@
+/*
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
@@ -15,3 +16,4 @@ class MarkersMap {
       required this.iconMarker,
       required this.icono});
 }
+*/

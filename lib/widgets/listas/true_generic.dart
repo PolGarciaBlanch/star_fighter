@@ -39,14 +39,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
           title: const Text("", style: TextStyle(color: Colors.white)),
           centerTitle: false,
           backgroundColor: Colors.black,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pushNamed(context, 'charAdd');
-              },
-            ),
-          ]),
+          actions: <Widget>[]),
       backgroundColor: Colors.yellow,
       body: isLoading
           ? const Center(

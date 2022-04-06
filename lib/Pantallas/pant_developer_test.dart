@@ -17,6 +17,7 @@ import 'package:star_fighter/widgets/listas/cards/card_text.dart';
 import 'package:star_fighter/widgets/listas/lista_navegacion.dart';
 import 'package:star_fighter/widgets/listas/basic_list.dart';
 import 'package:star_fighter/widgets/load.dart';
+import 'package:star_fighter/main.dart';
 
 import '../control/image_picker.dart';
 
@@ -34,6 +35,7 @@ class _PantDevState extends State<PantDev> {
   DialogLists dList = DialogLists();
   CardBuilder cBuilder = CardBuilder();
   ImagePickerLib imgLib = ImagePickerLib();
+  ImageApi imageApi = ImageApi();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
 
@@ -149,8 +151,20 @@ class _PantDevState extends State<PantDev> {
                 TextButton(onPressed: () {}, child: Text("Gen mod")),
                 TextButton(onPressed: () {}, child: Text("Gen ship")),
                 Text("========================="),
-                Text("Delete items:"),
-                TextButton(onPressed: () {}, child: Text("list Clans(delete)")),
+                Text("Load User"),
+                TextButton(
+                    onPressed: () {
+                      fd.GetObjList(
+                          fd.listUser, User.fromDatabaseJson, fd.user);
+                      loggedUser.clear();
+                      if (fd.listUser.length > 0) {
+                        loggedUser.add(fd.listUser.first);
+                      }
+
+                      print(loggedUser.length.toString());
+                    },
+                    child: Text("load user for testing")),
+                TextButton(onPressed: () {}, child: Text("userProfile")),
                 TextButton(onPressed: () {}, child: Text("list mods(delete)")),
                 TextButton(onPressed: () {}, child: Text("list ships(delete)")),
                 Text("========================="),
@@ -191,12 +205,12 @@ class _PantDevState extends State<PantDev> {
                 Text("Test Select Image"),
                 TextButton(
                     onPressed: () {
-                      imgLib.AccCam("key", ImageApi.pClan);
+                      imgLib.AccCam("key", imageApi.pClan);
                     },
                     child: Text("From camera")),
                 TextButton(
                     onPressed: () {
-                      imgLib.AccGalery("key", ImageApi.pClan);
+                      imgLib.AccGalery("key", imageApi.pClan);
                     },
                     child: Text("From file")),
                 Text("Navigate: All options"),
