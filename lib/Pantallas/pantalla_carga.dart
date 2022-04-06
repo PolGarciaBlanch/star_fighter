@@ -44,7 +44,7 @@ class _PantallaCargaState extends State<PantallaCarga>
   @override
   Widget build(BuildContext context) {
     User? user = firebase.currentUser;
-    String path = user == null ? 'pantalla_login' :'pantalla_friends';
+    String path = user == null ? 'pantalla_login' :'pantalla_principal';
     dbData.loadUsrs();
     Timer(const Duration(seconds: 1), () => Navigator.of(context).pushReplacementNamed(path)
     );
