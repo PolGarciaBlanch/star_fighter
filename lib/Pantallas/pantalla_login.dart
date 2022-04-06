@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_principal.dart';
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
+import 'package:star_fighter/control/firabase_data.dart';
+import 'package:star_fighter/main.dart';
+import 'package:star_fighter/obj/obj_user.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,6 +18,8 @@ class Login extends StatefulWidget {
 class _login extends State<Login> {
   FirebaseAuth log = FirebaseAuth.instance;
   FirebaseDatabase firebase = FirebaseDatabase.instance;
+  FirebaseData fireData = FirebaseData();
+
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
 
@@ -134,14 +139,24 @@ class _login extends State<Login> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pwd);
-      Stream<DatabaseEvent> stream =
+      loggedUser.clear();
+      loggedUser.add(await fireData.GetObj(
+          User_.fromDatabaseJson, fireData.user, userCredential.user!.uid));
+      Navigator.pushReplacementNamed(context, 'pantalla_carga');
+      /*
+      User_ user = User_.genUser();
+      user.id = userCredential.user!.uid;
+      fireData.NewObjWithKey(user.toDatabaseJson(), fireData.user,userCredential.user!.uid);
+
+      */
+      /*Stream<DatabaseEvent> stream =
           firebase.ref("users/" + userCredential.user!.uid).onValue;
       stream.listen((DatabaseEvent event) {
         setState(() {
           Map<dynamic, dynamic> value = event.snapshot.value! as Map;
           Navigator.pushReplacementNamed(context, 'pantalla_carga');
         });
-      });
+      });*/
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showDialog(

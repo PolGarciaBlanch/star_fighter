@@ -16,7 +16,7 @@ class FirebaseData {
   List<Clan> listClan = [];
   List<Mod> listMod = [];
   List<Ship> listShip = [];
-  List<User> listUser = [];
+  List<User_> listUser = [];
 
   FirebaseDatabase firebase = FirebaseDatabase.instance;
   var referenceDatabase = FirebaseDatabase.instance;

@@ -23,7 +23,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-List<User> loggedUser = [];
+List<User_> loggedUser = [];
 
 //List<Object> parameters =[111123231323, ""]
 class MyApp extends StatelessWidget {
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         'PantNav': (BuildContext context) => PantNav(lista: "Ajustes"),
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
-        /* 'pantalla_principal': (BuildContext context) => PantallaPrincipal(),*/
+        'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'pantalla_qrView': (BuildContext context) => QRView(),
         'pnatalla_qrShow': (BuildContext context) => QRShow(),

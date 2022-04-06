@@ -46,7 +46,7 @@ class Clan {
     return returnMap; //
   }
 
-  static Clan genClan(User user) {
+  static Clan genClan(User_ user) {
     return Clan(id: "", rank: 0, name: "aaa", desc: "", member: [user.id]);
   }
   //crear clan

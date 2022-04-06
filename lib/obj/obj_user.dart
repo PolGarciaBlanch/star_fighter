@@ -6,7 +6,7 @@ import 'package:star_fighter/obj/obj_ship.dart';
 
 import '../control/image_api.dart';
 
-class User {
+class User_ {
   String id;
   String name;
   String surname;
@@ -18,7 +18,7 @@ class User {
   List<Custom> ships;
   List<String> modules;
 
-  User({
+  User_({
     required this.id,
     required this.name,
     required this.surname,
@@ -30,7 +30,7 @@ class User {
     required this.ships,
     required this.modules,
   });
-  static User fromDatabaseJson(Map<String, dynamic> data, String id) {
+  static User_ fromDatabaseJson(Map<String, dynamic> data, String id) {
     print("voice:" + id);
     List<String> _clan = [];
     if (data.containsKey('clan')) {
@@ -101,7 +101,7 @@ class User {
       credits = data['credits'];
     }
     print("echo:" + id);
-    return User(
+    return User_(
         id: id,
         name: name,
         surname: surname,
@@ -138,9 +138,9 @@ class User {
 
   //llama esta funcion para crear usuarios modifica nombres y lvl y has de poenr el id
 
-  static User genUser() {
+  static User_ genUser() {
     List<String> friendList = [];
-    return User(
+    return User_(
         id: "",
         name: "",
         surname: "",
@@ -156,7 +156,7 @@ class User {
   ImageApi imageApi = ImageApi();
   FirebaseData firebase = FirebaseData();
 
-  NewUserInstance(User user) {
+  NewUserInstance(User_ user) {
     firebase.NewObjWithKey(user.toDatabaseJson(), firebase.user, user.id);
     /*imageApi.UploadPlaceholder(
         "https://res.cloudinary.com/didy88ckl/image/upload/v1648710084/samples/cloudinary-group.jpg",
@@ -165,35 +165,35 @@ class User {
   }
 
   //friends
-  AddFirends(User user, User friend) {
+  AddFirends(User_ user, User_ friend) {
     user.friends.add(friend.id);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  RemoveFriend(User user, User friend) {
+  RemoveFriend(User_ user, User_ friend) {
     user.friends.remove(friend.id);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
   //clans
-  RequestJoinClan(User user, Clan clan) {
+  RequestJoinClan(User_ user, Clan clan) {
     if (user.clan.isEmpty) {
       user.clan.add(clan.id);
     }
   }
 
-  JoinClan(User user, Clan clan) {
+  JoinClan(User_ user, Clan clan) {
     if (user.clan.isEmpty) {
       user.clan.add(clan.id);
     }
   }
 
-  LeaveClan(User user, Clan clan) {
+  LeaveClan(User_ user, Clan clan) {
     user.clan.remove(clan.id);
   }
 
   //Add methods
-  BuyShip(User user, Ship ship) {
+  BuyShip(User_ user, Ship ship) {
     //,{bool = false}
     user.credits = user.credits - ship.price;
     List<String> mods = [];
@@ -202,25 +202,25 @@ class User {
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  BuyMod(User user, Mod mod) {
+  BuyMod(User_ user, Mod mod) {
     user.credits = user.credits - mod.price;
     user.modules.add(mod.id);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  RemoveModFromShip(Custom custom, Mod mod, User user) {
+  RemoveModFromShip(Custom custom, Mod mod, User_ user) {
     custom.mods.remove(mod.id);
     user.modules.add(mod.id);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  AddModToShip(Custom custom, Mod mod, User user) {
+  AddModToShip(Custom custom, Mod mod, User_ user) {
     user.modules.remove(mod.id);
     custom.mods.add(mod.id);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  UserSetShip(Custom custom, User user) {
+  UserSetShip(Custom custom, User_ user) {
     List<Custom> newList = [];
     newList.add(custom);
     user.ships.remove(custom);
@@ -229,7 +229,7 @@ class User {
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  ScrapShip(Custom custom, User user) {
+  ScrapShip(Custom custom, User_ user) {
     int credits = 0;
     //get ship
     //get list of mods
@@ -246,7 +246,7 @@ class User {
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  ScrapMod(Mod mod, User user) {
+  ScrapMod(Mod mod, User_ user) {
     int value = (mod.price * 0.75).toInt();
     user.modules.remove(mod);
     firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);

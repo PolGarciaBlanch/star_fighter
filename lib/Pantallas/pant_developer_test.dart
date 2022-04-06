@@ -88,7 +88,7 @@ class _PantDevState extends State<PantDev> {
                 TextButton(
                     onPressed: () {
                       fd.GetObjList(
-                          fd.listUser, User.fromDatabaseJson, fd.user);
+                          fd.listUser, User_.fromDatabaseJson, fd.user);
                       print("lol");
                     },
                     child: Text("Load Lists User")),
@@ -108,20 +108,20 @@ class _PantDevState extends State<PantDev> {
                       print("lol");
                     },
                     child: Text("Load user[USER CARD]")),
-                TextButton(
+                /*TextButton(
                     onPressed: () {
                       dList.GenerateGenericList(context, fd.listClan,
                           fd.listClan, dList.test, cBuilder.TextCard);
                       print("lol");
                     },
-                    child: Text("Load Clans")),
-                TextButton(
+                    child: Text("Load Clans")),*/
+                /*TextButton(
                     onPressed: () {
                       dList.GenerateGenericList(context, fd.listMod, fd.listMod,
                           dList.test, cBuilder.TextCard);
                       print("lol");
                     },
-                    child: Text("Load mods")),
+                    child: Text("Load mods")),*/
                 TextButton(
                     onPressed: () {
                       dList.GenerateGenericList(context, fd.listShip,
@@ -131,31 +131,30 @@ class _PantDevState extends State<PantDev> {
                     child: Text("Load ships")),
                 Text("========================="),
                 Text("Generate items:"),
-                TextButton(
+                /*TextButton(
                     onPressed: () {
                       User k = User.genUser();
                       Map<String, dynamic> a = k.toDatabaseJson();
                       //fd.NewObj(a, "users/");
                       fd.NewObjWithKey(a, "users/", "fffffff");
                     },
-                    child: Text("Gen User")),
+                    child: Text("Gen User")),*/
                 TextButton(
                     onPressed: () {
-                      User k = User.genUser();
+                      User_ k = User_.genUser();
                       k.id = i.toString();
                       i += 1000;
                       k.NewUserInstance(k);
                       //fd.NewObj(a, "users/");
                     },
                     child: Text("Gen User [V2]")),
-                TextButton(onPressed: () {}, child: Text("Gen mod")),
                 TextButton(onPressed: () {}, child: Text("Gen ship")),
                 Text("========================="),
-                Text("Load User"),
+                Text("Load User "),
                 TextButton(
                     onPressed: () {
                       fd.GetObjList(
-                          fd.listUser, User.fromDatabaseJson, fd.user);
+                          fd.listUser, User_.fromDatabaseJson, fd.user);
                       loggedUser.clear();
                       if (fd.listUser.length > 0) {
                         loggedUser.add(fd.listUser.first);
@@ -163,12 +162,12 @@ class _PantDevState extends State<PantDev> {
 
                       print(loggedUser.length.toString());
                     },
-                    child: Text("load user for testing")),
+                    child: Text("[load first user from list]")),
                 TextButton(
                     onPressed: () async {
                       loggedUser.clear();
                       loggedUser.add(await fd.GetObj(
-                          User.fromDatabaseJson, fd.user, "90000100"));
+                          User_.fromDatabaseJson, fd.user, "90000100"));
                       /*
                       User user = await fd.GetObj(
                           User.fromDatabaseJson, fd.user, "90000100");
@@ -180,10 +179,10 @@ class _PantDevState extends State<PantDev> {
 
                       print(loggedUser.length.toString());
                     },
-                    child: Text("load user for testing with key")),
-                TextButton(onPressed: () {}, child: Text("userProfile")),
+                    child: Text("load user[by key] for testing")),
+                /*TextButton(onPressed: () {}, child: Text("userProfile")),
                 TextButton(onPressed: () {}, child: Text("list mods(delete)")),
-                TextButton(onPressed: () {}, child: Text("list ships(delete)")),
+                TextButton(onPressed: () {}, child: Text("list ships(delete)")),*/
                 Text("========================="),
                 TextButton(
                     onPressed: () {
@@ -193,16 +192,16 @@ class _PantDevState extends State<PantDev> {
                           fd.listShip, dList.test, cBuilder.TextCard);
                     },
                     child: Text("map ship's to list")),
-                TextButton(
+                /* TextButton(
                     onPressed: () {
                       fd.GetObjList(
                           fd.listClan, Clan.fromDatabaseJson, fd.clan);
                       dList.GenerateGenericList(context, fd.listClan,
                           fd.listClan, dList.test, cBuilder.TextCard);
                     },
-                    child: Text("generic getList clan list")),
+                    child: Text("generic getList clan list")),*/
                 Text("Create Objects except users"),
-                TextButton(
+                /*TextButton(
                     onPressed: () {
                       //remove function in Clan obj
                       Clan clan = Clan(
@@ -215,8 +214,8 @@ class _PantDevState extends State<PantDev> {
                       Map<String, dynamic> map = clan.toDatabaseJson();
                       fd.NewObj(map, fd.clan);
                     },
-                    child: Text("Create New Clan[]")),
-                TextButton(onPressed: () {}, child: Text("Create New Mod[]")),
+                    child: Text("Create New Clan[]")),*/
+                /*TextButton(onPressed: () {}, child: Text("Create New Mod[]")),*/
                 TextButton(onPressed: () {}, child: Text("Create New Ship[]")),
                 Text("========================="),
                 Text("Test Select Image"),

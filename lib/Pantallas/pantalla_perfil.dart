@@ -24,7 +24,7 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
   _PantallaPerfilState();
   ImageApi img = ImageApi();
   ImagePickerLib imgLib = ImagePickerLib();
-  User user = loggedUser[0];
+  User_ user = loggedUser[0];
   String altPers =
       "https://res.cloudinary.com/didy88ckl/image/upload/v1649235499/Images/noFile/nouser.jpg";
 

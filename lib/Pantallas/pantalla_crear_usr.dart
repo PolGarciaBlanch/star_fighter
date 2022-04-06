@@ -5,6 +5,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:star_fighter/control/firabase_data.dart';
+import 'package:star_fighter/obj/obj_user.dart';
+
+import '../main.dart';
 
 class Create extends StatefulWidget {
   const Create({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class Create extends StatefulWidget {
 class _create extends State<Create> {
   FirebaseAuth log = FirebaseAuth.instance;
   FirebaseDatabase firebase = FirebaseDatabase.instance;
+  FirebaseData fireData = FirebaseData();
   final textUsr = TextEditingController();
   final textPasswd = TextEditingController();
   final textUsrname = TextEditingController();
@@ -136,12 +141,18 @@ class _create extends State<Create> {
 
   void register(String email, String pwd, String usrname) async {
     try {
-
-      UserCredential usercredentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pwd);
-      firebase.ref("users/" + usercredentials.user!.uid).set({"username": usrname, "credits": 1000, "chosenship": 0});
-      firebase.ref("users/" + usercredentials.user!.uid.toString() + "/ships").set({"ship": 0});
+      UserCredential usercredentials = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: pwd);
+      User_ user = User_.genUser();
+      user.id = usercredentials.user!.uid;
+      user.name = usrname;
+      fireData.NewObjWithKey(
+          user.toDatabaseJson(), fireData.user, usercredentials.user!.uid);
+      loggedUser.clear();
+      loggedUser.add(user);
+      /*firebase.ref("users/" + usercredentials.user!.uid).set({"username": usrname, "credits": 1000, "chosenship": 0});
+      firebase.ref("users/" + usercredentials.user!.uid.toString() + "/ships").set({"ship": 0});*/
       Navigator.pushReplacementNamed(context, 'pantalla_carga');
-
     } on FirebaseAuthException catch (e) {
       showDialog(
           context: context,
