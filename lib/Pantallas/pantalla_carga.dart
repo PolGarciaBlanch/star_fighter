@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:star_fighter/widgets/load.dart';
-import 'package:star_fighter/control/dbData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class PantallaCarga extends StatefulWidget {
@@ -44,8 +43,7 @@ class _PantallaCargaState extends State<PantallaCarga>
   @override
   Widget build(BuildContext context) {
     User? user = firebase.currentUser;
-    String path = user == null ? 'pantalla_login' :'pantalla_friends';
-    dbData.loadUsrs();
+    String path = user == null ? 'pantalla_login' :'pantalla_principal';
     Timer(const Duration(seconds: 1), () => Navigator.of(context).pushReplacementNamed(path)
     );
     return Scaffold(
