@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +30,10 @@ class PantDev extends StatefulWidget {
 }
 
 class _PantDevState extends State<PantDev> {
-  DialogLists dList = new DialogLists();
-  CardBuilder cBuilder = new CardBuilder();
-  ImagePickerLib imgLib = new ImagePickerLib();
+  int i = 90000100;
+  DialogLists dList = DialogLists();
+  CardBuilder cBuilder = CardBuilder();
+  ImagePickerLib imgLib = ImagePickerLib();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
 
@@ -98,6 +101,13 @@ class _PantDevState extends State<PantDev> {
                     child: Text("Load user")),
                 TextButton(
                     onPressed: () {
+                      dList.GenerateGenericList(context, fd.listUser,
+                          fd.listUser, dList.test, cBuilder.UserCard);
+                      print("lol");
+                    },
+                    child: Text("Load user[USER CARD]")),
+                TextButton(
+                    onPressed: () {
                       dList.GenerateGenericList(context, fd.listClan,
                           fd.listClan, dList.test, cBuilder.TextCard);
                       print("lol");
@@ -127,6 +137,15 @@ class _PantDevState extends State<PantDev> {
                       fd.NewObjWithKey(a, "users/", "fffffff");
                     },
                     child: Text("Gen User")),
+                TextButton(
+                    onPressed: () {
+                      User k = User.genUser();
+                      k.id = i.toString();
+                      i += 1000;
+                      k.NewUserInstance(k);
+                      //fd.NewObj(a, "users/");
+                    },
+                    child: Text("Gen User [V2]")),
                 TextButton(onPressed: () {}, child: Text("Gen mod")),
                 TextButton(onPressed: () {}, child: Text("Gen ship")),
                 Text("========================="),

@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
+import 'package:star_fighter/control/firabase_data.dart';
 import 'package:star_fighter/obj/obj_clans.dart';
 import 'package:star_fighter/obj/obj_custom.dart';
 import 'package:star_fighter/obj/obj_mods.dart';
@@ -31,56 +29,86 @@ class User {
     required this.modules,
   });
   static User fromDatabaseJson(Map<String, dynamic> data, String id) {
+    print("voice:" + id);
     List<String> _clan = [];
-    List<Object?> clan_le = data['friends'];
-    for (var i = 0; i < clan_le.length; i++) {
-      _clan.add(data['friends'][i]);
+    if (data.containsKey('clan')) {
+      List<Object?> clan_le = data['clan'];
+      for (var i = 0; i < clan_le.length; i++) {
+        _clan.add(data['clan'][i]);
+      }
     }
 
     List<String> _friends = [];
-    List<Object?> fre_le = data['friends'];
-    for (var i = 0; i < fre_le.length; i++) {
-      _friends.add(data['friends'][i]);
+    if (data.containsKey('friends')) {
+      List<Object?> frie_le = data['friends'];
+      for (var i = 0; i < frie_le.length; i++) {
+        _friends.add(data['friends'][i]);
+      }
     }
 
-    List<String> _mods = [];
-    List<Object?> mod_le = data['modules'];
-    for (var i = 0; i < mod_le.length; i++) {
-      _mods.add(data['modules'][i]);
+    List<String> _modules = [];
+    if (data.containsKey('modules')) {
+      List<Object?> modules_le = data['modules'];
+      for (var i = 0; i < modules_le.length; i++) {
+        _modules.add(data['modules'][i]);
+      }
     }
 
     List<Custom> custom = [];
-    var b = data["ships"];
-    List<Object?> a = data["ships"];
-    for (var i = 0; i < a.length; i++) {
-      var c = b[i];
-      Map d = b[i];
+    if (data.containsKey('ships')) {
+      var b = data["ships"];
+      List<Object?> a = data["ships"];
+      for (var i = 0; i < a.length; i++) {
+        var c = b[i];
+        Map d = b[i];
 
-      List<String> _mods = [];
-      List<Object?> mod_le = d['modules'];
-      for (var i = 0; i < mod_le.length; i++) {
-        _mods.add(data['modules'][i]);
-      }
+        List<String> _mods = [];
+        if (data.containsKey('mods')) {
+          List<Object?> mod_le = d['mods'];
+          for (var i = 0; i < mod_le.length; i++) {
+            _mods.add(d['mods'][i]);
+          }
+        }
 
-      /*Map f = d["mods"];
+        /*Map f = d["mods"];
       var mods = d['images'].map((innerMap) => innerMap['mods']).toList();*/
-      print(d["alias"].toString());
-      custom.add(new Custom(ship: d["ship"], alias: d["alias"], mods: _mods));
+        print(d["alias"].toString());
+        custom.add(Custom(ship: d["ship"], alias: d["alias"], mods: _mods));
+      }
     }
     //Map<dynamic, dynamic> z = data["ships"];
+    String name = "!No Name";
+    if (data.containsKey('name')) {
+      name = data['name'];
+    }
+    String surname = "!No Surname";
+    if (data.containsKey('surname')) {
+      surname = data['surname'];
+    }
+    String alias = "!No Alias";
+    if (data.containsKey('alias')) {
+      alias = data['alias'];
+    }
 
-    List<String> modues = [];
-    print("echo");
+    int lvl = 0;
+    if (data.containsKey('lvl')) {
+      lvl = data['lvl'];
+    }
+    int credits = 0;
+    if (data.containsKey('credits')) {
+      credits = data['credits'];
+    }
+    print("echo:" + id);
     return User(
         id: id,
-        name: data['name'],
-        surname: data['surname'],
-        alias: data['alias'],
-        lvl: data['lvl'],
-        credits: data['credits'],
+        name: name,
+        surname: surname,
+        alias: alias,
+        lvl: lvl,
+        credits: credits,
         clan: _clan,
         friends: _friends,
-        modules: _mods,
+        modules: _modules,
         ships: custom);
   }
 
@@ -109,7 +137,8 @@ class User {
   //llama esta funcion para crear usuarios modifica nombres y lvl y has de poenr el id
 
   static User genUser() {
-    return new User(
+    List<String> friendList = [];
+    return User(
         id: "",
         name: "",
         surname: "",
@@ -117,70 +146,83 @@ class User {
         lvl: 0,
         credits: 100000,
         clan: [],
-        friends: [],
+        friends: friendList,
         ships: [],
         modules: []);
   }
 
-  //friends
-  static AddFirends(User user, User friend) {
-    user.friends.add(friend.id);
+  FirebaseData firebase = FirebaseData();
+
+  NewUserInstance(User user) {
+    firebase.NewObjWithKey(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static RemoveFriend(User user, User friend) {
+  //friends
+  AddFirends(User user, User friend) {
+    user.friends.add(friend.id);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
+  }
+
+  RemoveFriend(User user, User friend) {
     user.friends.remove(friend.id);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
   //clans
-  static RequestJoinClan(User user, Clan clan) {
+  RequestJoinClan(User user, Clan clan) {
     if (user.clan.isEmpty) {
       user.clan.add(clan.id);
     }
   }
 
-  static JoinClan(User user, Clan clan) {
+  JoinClan(User user, Clan clan) {
     if (user.clan.isEmpty) {
       user.clan.add(clan.id);
     }
   }
 
-  static LeaveClan(User user, Clan clan) {
+  LeaveClan(User user, Clan clan) {
     user.clan.remove(clan.id);
   }
 
   //Add methods
-  static BuyShip(User user, Ship ship) {
+  BuyShip(User user, Ship ship) {
     //,{bool = false}
     user.credits = user.credits - ship.price;
     List<String> mods = [];
-    Custom s = new Custom(ship: ship.id, alias: ship.name, mods: mods);
+    Custom s = Custom(ship: ship.id, alias: ship.name, mods: mods);
     user.ships.add(s);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static BuyMod(User user, Mod mod) {
+  BuyMod(User user, Mod mod) {
     user.credits = user.credits - mod.price;
     user.modules.add(mod.id);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static RemoveModFromShip(Custom custom, Mod mod, User user) {
+  RemoveModFromShip(Custom custom, Mod mod, User user) {
     custom.mods.remove(mod.id);
     user.modules.add(mod.id);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static AddModToShip(Custom custom, Mod mod, User user) {
+  AddModToShip(Custom custom, Mod mod, User user) {
     user.modules.remove(mod.id);
     custom.mods.add(mod.id);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static UserSetShip(Custom custom, User user) {
+  UserSetShip(Custom custom, User user) {
     List<Custom> newList = [];
     newList.add(custom);
     user.ships.remove(custom);
     newList.addAll(user.ships);
     user.ships = newList;
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static ScrapShip(Custom custom, User user) {
+  ScrapShip(Custom custom, User user) {
     int credits = 0;
     //get ship
     //get list of mods
@@ -194,11 +236,13 @@ class User {
     }
     user.credits = user.credits + (credits * 0.75).toInt();
     user.ships.remove(custom);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
 
-  static ScrapMod(Mod mod, User user) {
+  ScrapMod(Mod mod, User user) {
     int value = (mod.price * 0.75).toInt();
     user.modules.remove(mod);
+    firebase.ReplaceObj(user.toDatabaseJson(), firebase.user, user.id);
   }
   //sell
 

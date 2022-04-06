@@ -11,6 +11,9 @@ class ImageApi {
       Cloudinary(cloudinaryApiKey, cloudinaryApiSecret, cloudinaryCloudName);
   final String initUrl = "";
 
+  static String URL =
+      "https://res.cloudinary.com/didy88ckl/image/upload/v1648893757/Images/Clan/key.jpg";
+
   //RUTAS
   static String pUser = "Images/Profile";
   static String pClan = "Images/Clan";
