@@ -26,25 +26,25 @@ class PantDev extends StatefulWidget {
 }
 
 class _PantDevState extends State<PantDev> {
-  DialogLists dList = new DialogLists();
-  CardBuilder cBuilder = new CardBuilder();
-  ImagePickerLib imgLib = new ImagePickerLib();
+  DialogLists dList = DialogLists();
+  CardBuilder cBuilder = CardBuilder();
+  ImagePickerLib imgLib = ImagePickerLib();
   List<NavOpt> navOpt = listNavOpt;
   List<NavOpt> item = [];
 
-  FirebaseData fd = new FirebaseData();
+  FirebaseData fd = FirebaseData();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Developer OPT"),
+          title: const Text("Developer OPT"),
         ),
         body: Container(
             color: Colors.yellow,
             width: 500,
             child: Column(
               children: [
-                Text("Navigate:"),
+                const Text("Navigate:"),
                 TextButton(
                     onPressed: () {
                       item = listNavOpt
@@ -55,7 +55,7 @@ class _PantDevState extends State<PantDev> {
                       dList.GenerateGenericList(context, item, item,
                           dList.navigate, cBuilder.TextCard);
                     },
-                    child: Text("press to spawn navigation list [Ajustes]")),
+                    child: const Text("press to spawn navigation list [Ajustes]")),
                 TextButton(
                     onPressed: () {
                       item = listNavOpt

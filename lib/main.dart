@@ -13,6 +13,7 @@ import 'Pantallas/pantalla_qr.dart';
 import 'Pantallas/pantalla_scanqr.dart';
 import 'Pantallas/pantalla_testeo.dart';
 import 'control/firabase_data.dart';
+import 'Pantallas/pantalla_juego.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'pantalla_developer',
+      initialRoute: 'pantalla_carga',
 
 
       //initialRoute: 'pantalla_carga',
@@ -57,9 +58,9 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       routes: {
-        'pantalla_developer': (BuildContext) => PantDev(),
-        'confPerfil': (BuildContext) => PantallaPerfil(),
-        'PantNav': (BuildContext) => PantNav(lista: "Ajustes"),
+        'pantalla_developer': (BuildContext context) => PantDev(),
+        'confPerfil': (BuildContext context) => PantallaPerfil(),
+        'PantNav': (BuildContext context) => PantNav(lista: "Ajustes"),
 
         'pantalla_login': (BuildContext context) => const Login(),
         'pantalla_crea_usr': (BuildContext context) => const Create(),
@@ -67,8 +68,9 @@ class MyApp extends StatelessWidget {
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
 
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
-        //'pantalla_qrView': (BuildContext context) => QRView(),
-        //'pnatalla_qrShow': (BuildContext context) => QRShow(),
+        'pantalla_qrView': (BuildContext context) => QRView(),
+        'pnatalla_qrShow': (BuildContext context) => QRShow(),
+        'pantalla_juego': (BuildContext context) => Game(),
 
         'login_temp': (BuildContext context) => PantallaCarga(
             backGround: imgBackground,

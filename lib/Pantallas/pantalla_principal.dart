@@ -8,6 +8,8 @@ import 'dart:math';
 import 'package:flutter_compass/flutter_compass.dart';
 
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
@@ -43,6 +45,7 @@ class CustomController extends MapController {
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late CustomController controller;
   late GeoPoint actualPoint;
+  var firebase = FirebaseAuth.instance;
   MarkersInfo markersInfo = MarkersInfo();
   double anguloCompas = 0;
 
@@ -87,7 +90,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      // appBar: AppBar(title: const Text('Home')),
       //drawer: buildDrawer(context, LiveLocationPage.route),
       body: Container(
         child: Stack(children: [
@@ -198,7 +201,10 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.shopping_cart),
-                onPressed: () => {},
+                onPressed: () async => {
+                  await firebase.signOut(),
+                  Navigator.pushReplacementNamed(context, 'pantalla_carga')
+                },
               )),
           Positioned(
               top: 130,
