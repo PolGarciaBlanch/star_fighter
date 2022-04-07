@@ -62,6 +62,14 @@ class DialogLists {
         });
   }
 
+  void addId(BuildContext context, Object obj, List<Object> targetList) {
+    String id = (obj as dynamic).id;
+
+    if (!(targetList as List<String>).contains(id)) {
+      (targetList as dynamic).add(id);
+    }
+  }
+
   void navigatePop(BuildContext context, Object obj, List<Object> targetList) {
     Navigator.pop(context, (obj as dynamic).navigatorCode);
   }
