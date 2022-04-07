@@ -99,7 +99,7 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
                     child: IconButton(
                         icon: Icon(Icons.edit_note),
                         onPressed: () {
-                          imgLib.AccGalery(user.id, img.pUser);
+                          //imgLib.AccGalery(user.id, img.pUser);
                         }),
                   )
                 ],
@@ -113,7 +113,7 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
                       child: IconButton(
                           icon: Icon(Icons.edit_note),
                           onPressed: () {
-                            imgLib.AccGalery(user.id, img.pUser);
+                            //imgLib.AccGalery(user.id, img.pUser);
                           }),
                     )
                   ],

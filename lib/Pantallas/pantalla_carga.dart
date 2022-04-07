@@ -52,7 +52,7 @@ class _PantallaCargaState extends State<PantallaCarga>
     User? user = firebase.currentUser;
     String path = user == null ? 'pantalla_login' : 'pantalla_principal';
 
-    Timer(const Duration(seconds: 7), () async {
+    Timer(const Duration(seconds: 12), () async {
       if (user != null) {
         loggedUser.clear();
         fireData.GetObjList(
