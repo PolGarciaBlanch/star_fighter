@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:star_fighter/main.dart';
+import 'package:star_fighter/obj/obj_user.dart';
 import 'package:star_fighter/widgets/load.dart';
 import 'package:star_fighter/control/dbData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,13 +34,13 @@ class PantallaCarga extends StatefulWidget {
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
   FirebaseData fireData = FirebaseData();
+
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
   final List<String> appTip;
   var firebase = FirebaseAuth.instance;
   _PantallaCargaState(this.backGround, this.imgTop, this.imgMid, this.appTip);
-
 
   @override
   void initState() {
@@ -49,16 +50,20 @@ class _PantallaCargaState extends State<PantallaCarga>
   @override
   Widget build(BuildContext context) {
     User? user = firebase.currentUser;
-    String path = user == null ? 'pantalla_login' :'pantalla_principal';
+    String path = user == null ? 'pantalla_login' : 'pantalla_principal';
 
-    Timer(const Duration(seconds: 1), () async{
-      if(user != null){
-          ships.add(await fireData.GetObjList(
-          fireData.listShip ,Ship.fromDatabaseJson, fireData.ship));
+    Timer(const Duration(seconds: 7), () async {
+      if (user != null) {
+        loggedUser.clear();
+        fireData.GetObjList(
+            fireData.listUser, User_.fromDatabaseJson, fireData.user);
+        loggedUser.add(await fireData.GetObj(
+            User_.fromDatabaseJson, fireData.user, user.uid));
+        ships.add(await fireData.GetObjList(
+            fireData.listShip, Ship.fromDatabaseJson, fireData.ship));
       }
       Navigator.of(context).pushReplacementNamed(path);
-    } 
-    );
+    });
     return Scaffold(
         body: LoadSplash(
             backGround: backGround,

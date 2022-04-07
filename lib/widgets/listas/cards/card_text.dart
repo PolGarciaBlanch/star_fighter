@@ -20,7 +20,7 @@ class CardTextState extends State<CardText> {
       (obj as dynamic).name,
       textDirection: TextDirection.ltr,
       style: const TextStyle(
-          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.yellow),
+          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
     );
   }
 }

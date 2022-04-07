@@ -24,7 +24,7 @@ class GenericContainerState extends State<GenericContainer> {
             padding: const EdgeInsets.all(10.0),
             child: widget.child,
             decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.white,
                 border: Border.all(color: Colors.black),
                 boxShadow: const [
                   BoxShadow(

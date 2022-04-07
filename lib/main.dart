@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/Pantallas/pant_developer_test.dart';
 import 'package:star_fighter/Pantallas/pantalla_carga.dart';
 import 'package:star_fighter/Pantallas/pantalla_crear_usr.dart';
+import 'package:star_fighter/Pantallas/pantalla_informacio.dart';
 import 'package:star_fighter/Pantallas/pantalla_login.dart';
 import 'package:star_fighter/obj/obj_user.dart';
 import 'Pantallas/pant_nav.dart';
@@ -50,9 +51,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-
       initialRoute: 'pantalla_carga',
-
 
       //initialRoute: 'pantalla_carga',
 
@@ -74,6 +73,7 @@ class MyApp extends StatelessWidget {
         'pantalla_qrView': (BuildContext context) => QRView(),
         'pnatalla_qrShow': (BuildContext context) => QRShow(),
         'pantalla_juego': (BuildContext context) => Game(),
+        'conf_info': (BuildContext context) => PantallaInfo(),
         'pantalla_amics': (BuildContext context) => lAmics(),
         'login_temp': (BuildContext context) => PantallaCarga(
               backGround: imgBackground,

@@ -20,6 +20,7 @@ class CardUserState extends State<CardUser> {
   String altImg =
       "https://res.cloudinary.com/didy88ckl/image/upload/v1649235578/Images/noFile/noimage.jpg";
   ImageApi img = ImageApi();
+
   CardUserState(Object this.obj);
   @override
   Widget build(BuildContext context) {
@@ -34,12 +35,12 @@ class CardUserState extends State<CardUser> {
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "name:" + (obj as dynamic).name,
+                  "Nom:" + (obj as dynamic).name,
                   textDirection: TextDirection.ltr,
                   style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.yellow),
+                      color: Colors.black),
                 )),
             Align(
                 alignment: Alignment.centerLeft,
@@ -49,7 +50,7 @@ class CardUserState extends State<CardUser> {
                   style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.yellow),
+                      color: Colors.black),
                 )),
           ],
         ),
@@ -61,7 +62,7 @@ class CardUserState extends State<CardUser> {
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "clan:" + clan(obj),
+                  "Clan:" + clan(obj),
                   textDirection: TextDirection.ltr,
                   style: const TextStyle(
                       fontSize: 15,
@@ -71,7 +72,7 @@ class CardUserState extends State<CardUser> {
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "ship:" + ship(obj),
+                  "Nau:" + ship(obj),
                   textDirection: TextDirection.ltr,
                   style: const TextStyle(
                       fontSize: 15,

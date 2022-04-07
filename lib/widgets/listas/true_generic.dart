@@ -40,7 +40,7 @@ class _OptionDisplayState extends State<TrueGeneric> {
           centerTitle: false,
           backgroundColor: Colors.black,
           actions: <Widget>[]),
-      backgroundColor: Colors.yellow,
+      backgroundColor: Colors.white.withOpacity(0.5),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),

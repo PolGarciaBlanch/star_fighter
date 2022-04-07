@@ -3,11 +3,16 @@ import 'package:flutter/cupertino.dart';
 List<NavOpt> listNavOpt = [
   //ajustes
   NavOpt(lists: ["Ajustes"], name: "Perfil", navigatorCode: "confPerfil"),
+  NavOpt(lists: ["Ajustes"], name: "Notificacions", navigatorCode: "conf_info"),
   NavOpt(
-      lists: ["Ajustes"], name: "Notificaciones", navigatorCode: "confNotif"),
-  NavOpt(lists: ["Ajustes"], name: "Pantalla", navigatorCode: "confPantalla"),
-  NavOpt(lists: ["Ajustes"], name: "Audio", navigatorCode: "confAudio"),
-  NavOpt(lists: ["Ajustes"], name: "Acerda de:", navigatorCode: "confInfo"),
+      lists: ["Ajustes"],
+      name: "configuració de visualització",
+      navigatorCode: "conf_info"),
+  NavOpt(
+      lists: ["Ajustes"],
+      name: "configuració de volum",
+      navigatorCode: "conf_info"),
+  NavOpt(lists: ["Ajustes"], name: "Informació", navigatorCode: "conf_info"),
   NavOpt(lists: ["pantalla"], name: "Login", navigatorCode: "pantalla_login"),
   NavOpt(
       lists: ["pantalla"],

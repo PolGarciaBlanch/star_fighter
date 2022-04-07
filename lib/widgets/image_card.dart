@@ -3,6 +3,12 @@ import 'package:flutter/cupertino.dart';
 class ImageFromUrl {
   static Widget circleImage(
       double height, double width, String Url, String Alt) {
+    if (testUrl(Url)) {
+      print("true");
+    } else {
+      print("false");
+    }
+
     bool uri = false;
     uri = Uri.tryParse(Url)?.hasAbsolutePath ?? false;
     if (uri = false) {
@@ -39,18 +45,13 @@ class ImageFromUrl {
       ),
     );
   }
-  /*
-   isValidLink(Uri url)  {
 
-    bool test=false;
-    var client = http.Client();
-    http.Response _response =  client.head(url);
-    if (_response.statusCode == 404) {
-      print('Bad - ${article.downloadUrl}');
-    } else {
-      print('Good - ${article.downloadUrl}');
+  static bool testUrl(String testurl) {
+    try {
+      Image.network(testurl);
+    } catch (e) {
+      return false;
     }
-
-    return test;
-*/
+    return true;
+  }
 }
