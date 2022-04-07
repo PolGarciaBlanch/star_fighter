@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:star_fighter/main.dart';
 import 'package:star_fighter/obj/obj_user.dart';
 import 'package:star_fighter/widgets/load.dart';
-import 'package:star_fighter/control/dbData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:star_fighter/control/firabase_data.dart';
 

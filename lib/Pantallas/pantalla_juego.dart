@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'dart:math';
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
-import 'package:star_fighter/control/dbData.dart';
 import 'package:star_fighter/widgets/image_card.dart';
 import 'package:vibration/vibration.dart';
 

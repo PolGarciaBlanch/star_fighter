@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:star_fighter/control/dbData.dart';
 import 'package:star_fighter/obj/obj_user.dart';
 
 class lAmics extends StatefulWidget {
