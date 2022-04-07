@@ -16,6 +16,7 @@ import 'Pantallas/pantalla_testeo.dart';
 import 'Pantallas/pantalla_friends.dart';
 import 'control/firabase_data.dart';
 import 'Pantallas/pantalla_juego.dart';
+import 'obj/obj_ship.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,7 @@ Future<void> main() async {
 }
 
 List<User_> loggedUser = [];
+List<Ship> ships = [];
 
 //List<Object> parameters =[111123231323, ""]
 class MyApp extends StatelessWidget {
@@ -48,7 +50,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'pantalla_login',
+
+      initialRoute: 'pantalla_carga',
+
 
       //initialRoute: 'pantalla_carga',
 
