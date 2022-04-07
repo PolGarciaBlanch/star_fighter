@@ -10,6 +10,9 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:star_fighter/Pantallas/pantalla_testeo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:star_fighter/obj/card_builder.dart';
+import 'package:star_fighter/obj/dialog_lists.dart';
+import 'package:star_fighter/obj/nav_opt.dart';
 import '../control/markersInfo.dart';
 
 class PantallaPrincipal extends StatefulWidget {
@@ -47,6 +50,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   late GeoPoint actualPoint;
   var firebase = FirebaseAuth.instance;
   MarkersInfo markersInfo = MarkersInfo();
+  DialogLists dList = DialogLists();
+  CardBuilder cBuilder = CardBuilder();
   double anguloCompas = 0;
 
   Future<void> showMarkersInArea() async {
@@ -182,12 +187,25 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               left: 10,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: const CircleBorder()),
-                child: const Icon(Icons.person_add),
+                child: const Icon(Icons.settings),
                 onPressed: () => {
+                  //dList.test(context, item, item);
+
+                  dList.GenerateGenericList(
+                      context,
+                      listNavOpt
+                          .where((i) => i.lists.contains("Ajustes"))
+                          .toList(),
+                      listNavOpt
+                          .where((i) => i.lists.contains("Ajustes"))
+                          .toList(),
+                      dList.navigate,
+                      cBuilder
+                          .TextCard) /*
                   Navigator.pop(
                     context,
                     MaterialPageRoute(builder: (context) => PantallaTesteo()),
-                  )
+                  )*/
                 },
               )),
           Positioned(
@@ -195,14 +213,41 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               left: 10,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),
-                child: Icon(Icons.shopping_cart),
-                onPressed: () async => {
-                  await firebase.signOut(),
-                  Navigator.pushReplacementNamed(context, 'pantalla_carga')
+                child: Icon(Icons.settings_accessibility),
+                onPressed: () => {
+                  Navigator.pop(
+                    context,
+                    Navigator.pushReplacementNamed(context, 'pantalla_amics'),
+                  )
                 },
+                /*onPressed: () async => {
+                  await firebase.signOut(),
+                  Navigator.pushReplacementNamed(context, 'pantalla_amics')
+                },*/
               )),
           Positioned(
               top: 130,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                child: Icon(Icons.shopping_cart_outlined),
+                onPressed: showMarkersInArea,
+              )),
+          Positioned(
+              top: 180,
+              left: 10,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                child: Icon(Icons.track_changes_outlined),
+                onPressed: () => {
+                  Navigator.pop(
+                    context,
+                    Navigator.pushReplacementNamed(context, 'pantalla_juego'),
+                  )
+                },
+              )),
+          Positioned(
+              top: 200,
               left: 10,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),

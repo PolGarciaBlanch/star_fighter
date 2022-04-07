@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
         'pantalla_qrView': (BuildContext context) => QRView(),
         'pnatalla_qrShow': (BuildContext context) => QRShow(),
         'pantalla_juego': (BuildContext context) => Game(),
+        'pantalla_amics': (BuildContext context) => lAmics(),
         'login_temp': (BuildContext context) => PantallaCarga(
               backGround: imgBackground,
               imgTop: imgLogo,
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
               imgMid: imgShip,
               appTip: msgCarga,
             ),
-        'pantalla_friends': (BuildContext context) => const list_usr(),
+        'pantalla_friends': (BuildContext context) => const lAmics(),
       },
     );
   }

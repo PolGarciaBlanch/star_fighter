@@ -126,7 +126,7 @@ class User_ {
     returnMap['surname'] = surname;
     returnMap['alias'] = alias;
     returnMap['lvl'] = lvl;
-    returnMap['chosenDhip'] = chosenShip;
+    returnMap['chosenShip'] = chosenShip;
     returnMap['credits'] = credits;
     returnMap['clan'] = clan;
     returnMap['friends'] = friends;

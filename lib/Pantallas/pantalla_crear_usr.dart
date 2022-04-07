@@ -146,6 +146,7 @@ class _create extends State<Create> {
       User_ user = User_.genUser();
       user.id = usercredentials.user!.uid;
       user.name = usrname;
+      user.alias = usrname;
       fireData.NewObjWithKey(
           user.toDatabaseJson(), fireData.user, usercredentials.user!.uid);
       loggedUser.clear();

@@ -1,82 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:star_fighter/control/dbData.dart';
+import 'package:star_fighter/obj/obj_user.dart';
 
-class list_usr extends StatefulWidget {
-  const list_usr({Key? key}) : super(key: key);
+class lAmics extends StatefulWidget {
+  const lAmics({Key? key}) : super(key: key);
 
   @override
   _list_usr createState() => _list_usr();
 }
 
-class _list_usr extends State<list_usr> {
+class _list_usr extends State<lAmics> {
   var isLoading = false;
-  String admin = '';
-  String opcio = '';
-  String rol = '';
+  List<User_> friendList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: const Text('Llista usuaris'),
-            backgroundColor: Colors.green,
-          ),
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : _buildEmployeeListView(),
-    );
-  }
-
-  _loadFromApi() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    // wait for 2 seconds to simulate loading of data
-    await Future.delayed(const Duration(seconds: 2));
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  // _deleteData() async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-
-  //   await DBProvider.db.deleteAllEmployees();
-
-  //   // wait for 1 second to simulate loading of data
-  //   await Future.delayed(const Duration(seconds: 1));
-
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-
-  // // ignore: avoid_print
-  // print('All employees deleted');
-  // }
-
-  _buildEmployeeListView() {
-    // var lusers = dbData.users as List<Map<dynamic, dynamic>>;
-      var keys = dbData.users.keys;
-          return ListView.separated(
-            separatorBuilder: (context, index) => const Divider(
-              color: Colors.black12,
-            ),
-            itemCount: dbData.users.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Text(
-                  "${index + 1}",
-                  style: const TextStyle(fontSize: 20.0),
+        appBar: AppBar(
+          title: const Text('Llista amics'),
+          backgroundColor: Colors.white,
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      textStyle: const TextStyle(fontSize: 25)),
+                  onPressed: () async {
+                    Navigator.pushReplacementNamed(context, 'pantalla_qrView');
+                    //carga_test
+                  },
+                  child: const Text('Captura QR'),
                 ),
-                title: Text("Usuari: ${dbData.users[keys.elementAt(index)]["username"]}"),
-                subtitle: Text('ADMINISTRADOR: $admin'),
-              );
-            },
-          );
-        }
-      }
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      textStyle: const TextStyle(fontSize: 25)),
+                  onPressed: () async {
+                    Navigator.pushReplacementNamed(context, 'pnatalla_qrShow');
+                  },
+                  child: const Text('Mostra QR'),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      textStyle: const TextStyle(fontSize: 25)),
+                  onPressed: () async {
+                    //carga_test
+                  },
+                  child: const Text('Llista Amics'),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      textStyle: const TextStyle(fontSize: 25)),
+                  onPressed: () async {
+                    //carga_test
+                  },
+                  child: const Text('Llista Usuaris'),
+                ),
+              ),
+            ),
+          ],
+        )));
+  }
+}

@@ -118,6 +118,12 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
                   ],
                 ),
               ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, 'pantalla_developer');
+                  },
+                  child: Text("[Developer tests]")),
             ],
           ),
         ));
