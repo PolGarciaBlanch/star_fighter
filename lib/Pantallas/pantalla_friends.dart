@@ -116,8 +116,8 @@ class _list_usr extends State<lAmics> {
                     //carga_test
 
                     print("lol");
-                    dList.GenerateGenericList(context, fd.listUser, fd.listUser,
-                        dList.test, cBuilder.UserCard);
+                    dList.GenerateGenericList(context, fd.listUser,
+                        loggedUser[0].friends, dList.addId, cBuilder.UserCard);
                     print("lol");
                   },
                   child: const Text('Llista Usuaris'),
