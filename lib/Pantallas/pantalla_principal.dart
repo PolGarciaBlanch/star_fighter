@@ -55,9 +55,11 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       double latDistance = controllerPos.latitude - mrkPos.latitude;
       double lonDistance = controllerPos.longitude - mrkPos.longitude;
 
-      double Distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
+      double distance = sqrt(pow(latDistance, 2) + pow(lonDistance, 2));
 
-      if (markersInfo.radMarker >= Distance) {}
+      if (markersInfo.radMarker >= distance) {
+        markersInfo.markersNames.add(marker.text);
+      }
     }
     markersInfo.visibleListView = !markersInfo.visibleListView;
     setState(() {});
@@ -145,6 +147,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     "lootbox",
                     "green",
                     60,
+                    "lootbox",
                     controller,
                     "LootBox");
 
@@ -154,14 +157,19 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     "station",
                     "blue",
                     60,
+                    "station",
                     controller,
                     "Station");
-                
-                  markersInfo.generateMarker(
-                      myLocation.latitude + 0.0007,
-                      myLocation.longitude + 0.001,
-                      "combat", "red", 60,
-                      controller, "Combat");                  
+
+                markersInfo.generateMarker(
+                    myLocation.latitude + 0.0007,
+                    myLocation.longitude + 0.001,
+                    "combat",
+                    "red",
+                    60,
+                    "combat",
+                    controller,
+                    "Combat");
               }
             },
           ),
@@ -184,7 +192,6 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                   )
                 },
               )),
-
           Positioned(
               top: 80,
               left: 10,

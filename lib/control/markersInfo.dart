@@ -14,17 +14,23 @@ class MarkersInfo {
   bool visibleListView = false;
 
   void generateMarker(double latitude, double longitude, String iconName,
-      String color, double sizeIcon, CustomController controller, String name) {
+      String color, double sizeIcon, String functionName, CustomController controller, String name) {
     MarkerIcon mrkIcon = newMarkerIcon(iconName, color, sizeIcon);
-
 
     GeoPoint point = GeoPoint(latitude: latitude, longitude: longitude);
 
-    MarkersMap varMrk = MarkersMap(location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name);
+    MarkersMap varMrk = MarkersMap(
+        location: point, iconMarker: mrkIcon, icono: mrkIcon.icon, text: name, functionName: functionName);
 
     markers.add(varMrk);
 
     controller.addMarker(point, markerIcon: mrkIcon, angle: 0);
+
+    controller.setMarkerIcon(
+        GeoPoint(
+            latitude: latitude,
+            longitude: longitude + 0.001),
+        newMarkerIcon("interrogant", "red", 60));
   }
 
   MarkerIcon newMarkerIcon(String iconName, String color, double sizeIcon) {
@@ -45,6 +51,7 @@ class MarkersInfo {
               child: ListTile(
                 leading: getIconoFromListMarkers(markersNames[index]),
                 title: Text(markersNames[index]),
+                onTap: ,
               ),
             );
           },
@@ -121,6 +128,13 @@ class MarkersInfo {
           size: sizeIcon,
         );
         break;
+      case "interrogant":
+        icono = Icon(
+          Icons.help_outline,
+          color: GetColorFromString(color),
+          size: sizeIcon,
+        );
+        break;
       case "game1":
         icono = Icon(
           Icons.videogame_asset_rounded,
@@ -160,5 +174,25 @@ class MarkersInfo {
         break;
     }
     return icono;
+  }
+
+  void DoActionMarker(BuildContext context, String functionName){
+    switch (functionName) {
+      case "game1":
+        Navigator.pushReplacementNamed(context, 'carga_test');
+        break;
+      case "station":
+        //Navigator.pushReplacementNamed(context, 'carga_test');
+        break;
+      case "lootbox":
+        //Navigator.pushReplacementNamed(context, 'carga_test');
+        break;
+      case "combat":
+        //Navigator.pushReplacementNamed(context, 'carga_test');
+        break;
+      default:
+        //Navigator.pushReplacementNamed(context, 'carga_test');
+        break;
+    }
   }
 }
