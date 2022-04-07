@@ -164,7 +164,7 @@ class _login extends State<Login> {
           builder: (context) {
             return AlertDialog(
               title: const Text('Error'),
-              content: const Text("Email no trobat"),
+              content: const Text("Email no encontrado"),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),
@@ -196,7 +196,7 @@ class _login extends State<Login> {
           builder: (context) {
             return AlertDialog(
               title: const Text('Error'),
-              content: const Text("Email invàlid"),
+              content: const Text("Email inválido"),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),

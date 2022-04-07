@@ -36,8 +36,8 @@ class FirebaseData {
     return obj;
   }
 
-  GetObjList(List<Object> genericList, Function converter, String path) {
-    Stream<DatabaseEvent> stream = firebase.ref(path).onValue;
+  GetObjList(List<Object> genericList, Function converter, String path) async {
+    Stream<DatabaseEvent> stream =  firebase.ref(path).onValue;
     stream.listen((DatabaseEvent event) {
       var temp = Map<dynamic, dynamic>.from(event.snapshot.value! as Map);
       genericList.clear();

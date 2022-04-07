@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:star_fighter/main.dart';
 import 'package:star_fighter/widgets/load.dart';
 import 'package:star_fighter/control/dbData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:star_fighter/control/firabase_data.dart';
+
+import '../obj/obj_ship.dart';
 
 class PantallaCarga extends StatefulWidget {
   final AssetImage backGround;
@@ -28,6 +32,7 @@ class PantallaCarga extends StatefulWidget {
 
 class _PantallaCargaState extends State<PantallaCarga>
     with TickerProviderStateMixin {
+  FirebaseData fireData = FirebaseData();
   final AssetImage backGround;
   final AssetImage imgTop;
   final AssetImage imgMid;
@@ -45,8 +50,14 @@ class _PantallaCargaState extends State<PantallaCarga>
   Widget build(BuildContext context) {
     User? user = firebase.currentUser;
     String path = user == null ? 'pantalla_login' :'pantalla_principal';
-    dbData.loadUsrs();
-    Timer(const Duration(seconds: 1), () => Navigator.of(context).pushReplacementNamed(path)
+
+    Timer(const Duration(seconds: 1), () async{
+      if(user != null){
+          ships.add(await fireData.GetObjList(
+          fireData.listShip ,Ship.fromDatabaseJson, fireData.ship));
+      }
+      Navigator.of(context).pushReplacementNamed(path);
+    } 
     );
     return Scaffold(
         body: LoadSplash(
