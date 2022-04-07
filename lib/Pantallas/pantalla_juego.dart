@@ -43,16 +43,15 @@ class _game extends State<Game> {
 
   Widget build(BuildContext context) {
     if (!isLoading) {
-      timer = Timer.periodic(const Duration(seconds: 5), (Timer t) async{
+      timer = Timer.periodic(const Duration(seconds: 5), (Timer t) async {
         if (stop) {
           timer.cancel();
         } else {
-            currentHpUsr = currentHpUsr - atacEnemy;
-            if (await Vibration.hasVibrator()) {
-              Vibration.vibrate();
-            }
+          currentHpUsr = currentHpUsr - atacEnemy;
+          if (await Vibration.hasVibrator()) {
+            Vibration.vibrate();
+          }
           setState(() {
-
             if (currentHpUsr / vidaUsr * 100 > 50) {
               colorStatusUsr = Colors.green;
             } else if (currentHpUsr / vidaUsr * 100 < 25) {
@@ -219,9 +218,9 @@ class _game extends State<Game> {
     value = event.snapshot.value! as Map;
     int idNav = value["chosenShip"];
     event = await firebase.ref("shop/ship/$idNav").once();
-    value = event.snapshot.value! as Map;
-    atacUsr = value["Attack"];
-    vidaUsr = value["Hp"];
+    //value = event.snapshot.value! as Map;
+    atacUsr = 10; //value["Attack"];
+    vidaUsr = 100; //value["Hp"];
     currentHpUsr = vidaUsr;
     setState(() {
       isLoading = false;

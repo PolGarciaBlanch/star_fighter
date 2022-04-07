@@ -11,6 +11,7 @@ class User_ {
   String name;
   String surname;
   String alias;
+  int chosenShip;
   int lvl;
   int credits;
   List<String> clan;
@@ -23,6 +24,7 @@ class User_ {
     required this.name,
     required this.surname,
     required this.alias,
+    required this.chosenShip,
     required this.lvl,
     required this.credits,
     required this.clan,
@@ -91,7 +93,10 @@ class User_ {
     if (data.containsKey('alias')) {
       alias = data['alias'];
     }
-
+    int chosenShip = 1;
+    if (data.containsKey('chosenShip')) {
+      chosenShip = data['chosenShip'];
+    }
     int lvl = 0;
     if (data.containsKey('lvl')) {
       lvl = data['lvl'];
@@ -107,6 +112,7 @@ class User_ {
         surname: surname,
         alias: alias,
         lvl: lvl,
+        chosenShip: chosenShip,
         credits: credits,
         clan: _clan,
         friends: _friends,
@@ -120,6 +126,7 @@ class User_ {
     returnMap['surname'] = surname;
     returnMap['alias'] = alias;
     returnMap['lvl'] = lvl;
+    returnMap['chosenDhip'] = chosenShip;
     returnMap['credits'] = credits;
     returnMap['clan'] = clan;
     returnMap['friends'] = friends;
@@ -140,16 +147,19 @@ class User_ {
 
   static User_ genUser() {
     List<String> friendList = [];
+    Custom custom = Custom(ship: "0", alias: "Martell Oxidat", mods: []);
+    List<Custom> c = [custom];
     return User_(
         id: "",
         name: "",
         surname: "",
         alias: "",
         lvl: 0,
+        chosenShip: 0,
         credits: 100000,
         clan: [],
         friends: friendList,
-        ships: [],
+        ships: c,
         modules: []);
   }
 
