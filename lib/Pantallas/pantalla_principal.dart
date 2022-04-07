@@ -215,10 +215,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.settings_accessibility),
                 onPressed: () => {
-                  Navigator.pop(
-                    context,
-                    Navigator.pushReplacementNamed(context, 'pantalla_amics'),
-                  )
+                  Navigator.pushNamed(context, 'pantalla_amics'),
                 },
                 /*onPressed: () async => {
                   await firebase.signOut(),
@@ -240,14 +237,11 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.track_changes_outlined),
                 onPressed: () => {
-                  Navigator.pop(
-                    context,
-                    Navigator.pushReplacementNamed(context, 'pantalla_juego'),
-                  )
+                  Navigator.pushNamed(context, 'pantalla_juego'),
                 },
               )),
           Positioned(
-              top: 200,
+              top: 230,
               left: 10,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),

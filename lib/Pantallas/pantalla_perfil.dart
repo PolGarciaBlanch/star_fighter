@@ -151,7 +151,7 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
 
   _ReloadImage() async {
     // wait for 2 seconds to simulate loading of data
-    await Future.delayed(const Duration(seconds: 10));
+    /*await Future.delayed(const Duration(seconds: 10));*/
 
     setState(() {
       cont = LoadImage();
