@@ -6,7 +6,7 @@ class ImageFromUrl {
     if (Uri.tryParse(Url) == null) {
       Url = Alt;
     }
-
+    print(Url);
     return Container(
       child: Container(
         height: height,

@@ -27,6 +27,15 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
   User_ user = loggedUser[0];
   String altPers =
       "https://res.cloudinary.com/didy88ckl/image/upload/v1649235499/Images/noFile/nouser.jpg";
+  Widget cont = ImageFromUrl.circleImage(
+      200,
+      200,
+      "https://res.cloudinary.com/didy88ckl/image/upload/v1649235499/Images/noFile/nouser.jpg",
+      "https://res.cloudinary.com/didy88ckl/image/upload/v1649235499/Images/noFile/nouser.jpg");
+  @override
+  void initState() {
+    cont = LoadImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +44,16 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
           centerTitle: true,
           title: const Text('Profile'),
           backgroundColor: Colors.redAccent,
-          actions: <Widget>[],
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.replay_rounded),
+              onPressed: () async {
+                await _ReloadImage();
+                //ApiDataTrader.initialApiLoad();
+                //DBProvider.db.getAllCharacters(characters);
+              },
+            ),
+          ],
         ),
         body: Container(
           color: Colors.yellow,
@@ -103,5 +121,19 @@ class _PantallaPerfilState extends State<PantallaPerfil> {
             ],
           ),
         ));
+  }
+
+  _ReloadImage() async {
+    // wait for 2 seconds to simulate loading of data
+    await Future.delayed(const Duration(seconds: 10));
+
+    setState(() {
+      cont = LoadImage();
+    });
+  }
+
+  LoadImage() {
+    return ImageFromUrl.circleImage(
+        200, 200, img.imgUrl + img.pUser + user.id + ".jpg", altPers);
   }
 }
