@@ -48,7 +48,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'pantalla_developer', //'pantalla_carga',
+
+      initialRoute: 'pantalla_juego',
+
 
       //initialRoute: 'pantalla_carga',
 
