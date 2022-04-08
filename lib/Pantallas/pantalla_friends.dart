@@ -41,6 +41,7 @@ class _list_usr extends State<lAmics> {
               onPressed: () {
                 fd.GetObjFix(loggedUser, User_.fromDatabaseJson, fd.user,
                     loggedUser[0].id);
+                fd.GetObjList(fd.listUser, User_.fromDatabaseJson, fd.user);
                 //ApiDataTrader.initialApiLoad();
                 //DBProvider.db.getAllCharacters(characters);
               },

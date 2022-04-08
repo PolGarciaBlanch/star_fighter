@@ -12,8 +12,7 @@ class ImageApi {
   final Cloudinary cloudinary =
       Cloudinary(cloudinaryApiKey, cloudinaryApiSecret, cloudinaryCloudName);
   final String initUrl = "";
-  String imgUrl =
-      "https://res.cloudinary.com/didy88ckl/image/upload/v1649347233/";
+  String imgUrl = "https://res.cloudinary.com/didy88ckl/image/upload/";
   String URL =
       "https://res.cloudinary.com/didy88ckl/image/upload/v1648893757/Images/Clan/key.jpg";
 
