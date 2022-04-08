@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:star_fighter/main.dart';
 import 'package:star_fighter/obj/obj_clans.dart';
 import 'package:star_fighter/obj/obj_mods.dart';
 import 'package:star_fighter/obj/obj_ship.dart';
@@ -36,8 +37,23 @@ class FirebaseData {
     return obj;
   }
 
+  GetObjFix(
+      List<User_> user, Function converter, String path, String key) async {
+    Object obj;
+    Map<String, dynamic> temp = Map();
+    Stream<DatabaseEvent> stream = firebase.ref(path + key).onValue;
+    stream.listen((DatabaseEvent event) {
+      temp = Map<String, dynamic>.from(event.snapshot.value! as Map);
+      if (temp != null) {
+        obj = converter(temp, key);
+        loggedUser.clear();
+        loggedUser.add(obj as User_);
+      }
+    });
+  }
+
   GetObjList(List<Object> genericList, Function converter, String path) async {
-    Stream<DatabaseEvent> stream =  firebase.ref(path).onValue;
+    Stream<DatabaseEvent> stream = firebase.ref(path).onValue;
     stream.listen((DatabaseEvent event) {
       var temp = Map<dynamic, dynamic>.from(event.snapshot.value! as Map);
       genericList.clear();

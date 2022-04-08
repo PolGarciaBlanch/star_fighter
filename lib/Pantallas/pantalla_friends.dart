@@ -35,6 +35,17 @@ class _list_usr extends State<lAmics> {
         appBar: AppBar(
           title: const Text('Llista amics'),
           backgroundColor: Colors.black,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.replay_rounded),
+              onPressed: () {
+                fd.GetObjFix(loggedUser, User_.fromDatabaseJson, fd.user,
+                    loggedUser[0].id);
+                //ApiDataTrader.initialApiLoad();
+                //DBProvider.db.getAllCharacters(characters);
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -54,14 +65,27 @@ class _list_usr extends State<lAmics> {
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
                       onPressed: () async {
-                        var uidfriend = await Navigator.pushNamed(context, 'pantalla_qrView');
+                        var uidfriend = await Navigator.pushNamed(
+                            context, 'pantalla_qrView');
 
-                        if(uidfriend != null){
-                          var friend = fd.GetObj(User_.fromDatabaseJson, fd.user, uidfriend.toString());
-                          if(friend != null){
+                        if (uidfriend != null) {
+                          var friend = fd.GetObj(User_.fromDatabaseJson,
+                              fd.user, uidfriend.toString());
+                          if (friend != null) {
                             var firebase = FirebaseDatabase.instance;
-                            firebase.ref("users/" + FirebaseAuth.instance.currentUser!.uid + "/friends").set({"$uidfriend" : uidfriend});
-                            firebase.ref("users/" + uidfriend.toString() + "/friends").set({"${FirebaseAuth.instance.currentUser!.uid}" : FirebaseAuth.instance.currentUser!.uid });
+                            firebase
+                                .ref("users/" +
+                                    FirebaseAuth.instance.currentUser!.uid +
+                                    "/friends")
+                                .set({"$uidfriend": uidfriend});
+                            firebase
+                                .ref("users/" +
+                                    uidfriend.toString() +
+                                    "/friends")
+                                .set({
+                              "${FirebaseAuth.instance.currentUser!.uid}":
+                                  FirebaseAuth.instance.currentUser!.uid
+                            });
                           }
                         }
                         //carga_test
@@ -87,14 +111,15 @@ class _list_usr extends State<lAmics> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                  content:Container( 
-                                    height: 300,
-                                    width: 300,
-                                    child: QrImage(
-                                data: FirebaseAuth.instance.currentUser!.uid,
-                                version: QrVersions.auto,
-                                size: 200.0,
-                              )));
+                                  content: Container(
+                                      height: 300,
+                                      width: 300,
+                                      child: QrImage(
+                                        data: FirebaseAuth
+                                            .instance.currentUser!.uid,
+                                        version: QrVersions.auto,
+                                        size: 200.0,
+                                      )));
                             });
                       },
                       child: const Text('Mostra QR'),

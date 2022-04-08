@@ -44,7 +44,7 @@ class User_ {
 
     List<String> _friends = [];
     if (data.containsKey('friends')) {
-      List<Object?> frie_le = data['friends'];
+      Map frie_le = data['friends'];
       for (var i = 0; i < frie_le.length; i++) {
         _friends.add(data['friends'][i]);
       }
