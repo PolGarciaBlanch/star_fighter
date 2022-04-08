@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:star_fighter/control/dbData.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:star_fighter/control/firabase_data.dart';
 import 'package:star_fighter/main.dart';
 import 'package:star_fighter/obj/card_builder.dart';
@@ -52,7 +54,16 @@ class _list_usr extends State<lAmics> {
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
                       onPressed: () async {
-                        Navigator.pushNamed(context, 'pantalla_qrView');
+                        var uidfriend = await Navigator.pushNamed(context, 'pantalla_qrView');
+
+                        if(uidfriend != null){
+                          var friend = fd.GetObj(User_.fromDatabaseJson, fd.user, uidfriend.toString());
+                          if(friend != null){
+                            var firebase = FirebaseDatabase.instance;
+                            firebase.ref("users/" + FirebaseAuth.instance.currentUser!.uid + "/friends").set({"$uidfriend" : uidfriend});
+                            firebase.ref("users/" + uidfriend.toString() + "/friends").set({"$FirebaseAuth.instance.currentUser!.uid " : FirebaseAuth.instance.currentUser!.uid });
+                          }
+                        }
                         //carga_test
                       },
                       child: const Text('Captura QR'),
@@ -72,7 +83,19 @@ class _list_usr extends State<lAmics> {
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
                       onPressed: () async {
-                        Navigator.pushNamed(context, 'pantalla_qrShow');
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                  content:Container( 
+                                    height: 300,
+                                    width: 300,
+                                    child: QrImage(
+                                data: FirebaseAuth.instance.currentUser!.uid,
+                                version: QrVersions.auto,
+                                size: 200.0,
+                              )));
+                            });
                       },
                       child: const Text('Mostra QR'),
                     ),

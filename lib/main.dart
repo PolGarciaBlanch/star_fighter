@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
 
-      initialRoute: 'pantalla_developer',
+      initialRoute: 'pantalla_carga',
 
       //initialRoute: 'pantalla_carga',
 
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
         'pantalla_principal': (BuildContext context) => PantallaPrincipal(),
         'pantalla_testeo': (BuildContext context) => PantallaTesteo(),
         'pantalla_qrView': (BuildContext context) => QRView(),
-        'pnatalla_qrShow': (BuildContext context) => QRShow(),
+        'pantalla_qrShow': (BuildContext context) => QRShow(),
         'pantalla_juego': (BuildContext context) => Game(),
         'conf_info': (BuildContext context) => PantallaInfo(),
         'pantalla_amics': (BuildContext context) => lAmics(),

@@ -215,7 +215,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 style: ElevatedButton.styleFrom(shape: CircleBorder()),
                 child: Icon(Icons.settings_accessibility),
                 onPressed: () => {
-                    Navigator.pushReplacementNamed(context, 'pantalla_amics'),
+                    Navigator.pushNamed(context, 'pantalla_amics'),
                 },
                 /*onPressed: () async => {
                   await firebase.signOut(),

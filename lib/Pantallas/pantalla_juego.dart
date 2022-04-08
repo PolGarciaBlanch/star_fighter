@@ -92,10 +92,6 @@ class _game extends State<Game> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'vidaEnemy: $currentHpEne',
-                    style: const TextStyle(fontSize: 50, color: Colors.white),
-                  ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
                     width: 300,
@@ -172,9 +168,9 @@ class _game extends State<Game> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: const Text('Victoria'),
+                                    title: const Text('Victòria'),
                                     content:
-                                        Text('Has ganado $credits créditos'),
+                                        Text('Has guanyat $credits crèdits'),
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
@@ -217,9 +213,9 @@ class _game extends State<Game> {
     value = event.snapshot.value! as Map;
     int idNav = value["chosenShip"];
     event = await firebase.ref("shop/ship/$idNav").once();
-    //value = event.snapshot.value! as Map;
-    atacUsr = 10; //value["Attack"];
-    vidaUsr = 100; //value["Hp"];
+    value = event.snapshot.value! as Map;
+    atacUsr = value["Attack"];
+    vidaUsr = value["Hp"];
     currentHpUsr = vidaUsr;
     setState(() {
       isLoading = false;
