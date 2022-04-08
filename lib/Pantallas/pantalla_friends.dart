@@ -61,7 +61,7 @@ class _list_usr extends State<lAmics> {
                           if(friend != null){
                             var firebase = FirebaseDatabase.instance;
                             firebase.ref("users/" + FirebaseAuth.instance.currentUser!.uid + "/friends").set({"$uidfriend" : uidfriend});
-                            firebase.ref("users/" + uidfriend.toString() + "/friends").set({"$FirebaseAuth.instance.currentUser!.uid " : FirebaseAuth.instance.currentUser!.uid });
+                            firebase.ref("users/" + uidfriend.toString() + "/friends").set({"${FirebaseAuth.instance.currentUser!.uid}" : FirebaseAuth.instance.currentUser!.uid });
                           }
                         }
                         //carga_test
