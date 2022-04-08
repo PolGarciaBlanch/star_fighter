@@ -139,8 +139,14 @@ class _list_usr extends State<lAmics> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.red,
                           textStyle: const TextStyle(fontSize: 25)),
-                      onPressed: () async {
+                      onPressed: () {
                         //carga_test
+                        loggedUser[0].friends.forEach((element) {
+                          friend.add(fd.GetObj(
+                                  User_.fromDatabaseJson, fd.user, element)
+                              as User_);
+                        });
+
                         friend = fd.listUser
                             .where((i) => loggedUser[0].friends.contains(i.id))
                             .toList();
@@ -167,6 +173,8 @@ class _list_usr extends State<lAmics> {
                     print("lol");
                     dList.GenerateGenericList(context, fd.listUser,
                         loggedUser[0].friends, dList.addId, cBuilder.UserCard);
+                    fd.NewObjWithKey(loggedUser[0].toDatabaseJson(), fd.user,
+                        loggedUser[0].id);
                     print("lol");
                   },
                   child: const Text('Llista Usuaris'),
