@@ -28,9 +28,13 @@ class FirebaseData {
     Stream<DatabaseEvent> stream = firebase.ref(path + key).onValue;
     stream.listen((DatabaseEvent event) {
       temp = Map<String, dynamic>.from(event.snapshot.value! as Map);
-      /*if (temp == null) {
-        return ;
-      }*/
+
+      ////// si peta comenta esto
+      if (temp != null) {
+        obj = converter(temp, key);
+        loggedUser.clear();
+        loggedUser.add(obj as User_);
+      }
     });
     obj = converter(temp, key);
 
