@@ -25,6 +25,7 @@ class _game extends State<Game> {
   late int vidaEnemy;
   late int currentHpEne;
   late int atacEnemy;
+  late int creditsAct;
   var colorStatusEne = Colors.green;
   var colorStatusUsr = Colors.green;
   bool isLoading = true;
@@ -62,6 +63,7 @@ class _game extends State<Game> {
               currentHpUsr = 0;
               stop = true;
               showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -100,6 +102,7 @@ class _game extends State<Game> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       child: LinearProgressIndicator(
                         value: currentHpEne / vidaEnemy,
+                        semanticsLabel: "ENEMIC",
                         valueColor:
                             AlwaysStoppedAnimation<Color>(colorStatusEne),
                         backgroundColor: Color(0xffD6D6D6),
@@ -130,6 +133,7 @@ class _game extends State<Game> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       child: LinearProgressIndicator(
                         value: currentHpUsr / vidaUsr,
+                        semanticsLabel: "NAU",
                         valueColor:
                             AlwaysStoppedAnimation<Color>(colorStatusUsr),
                         backgroundColor: Color(0xffD6D6D6),
@@ -166,6 +170,7 @@ class _game extends State<Game> {
                               int credits = rng.nextInt(701) + 200;
                               showDialog(
                                 context: context,
+                                barrierDismissible: false,
                                 builder: (context) {
                                   return AlertDialog(
                                     title: const Text('Victòria'),
@@ -174,6 +179,8 @@ class _game extends State<Game> {
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
+                                          creditsAct = creditsAct + credits; 
+                                          firebase.ref("users/" + user.currentUser!.uid).set({"credits" : creditsAct});
                                           Navigator.pop(context, 'OK');
                                           Navigator.of(context).pop();
                                         },
@@ -212,6 +219,7 @@ class _game extends State<Game> {
     event = await firebase.ref("users/" + user.currentUser!.uid).once();
     value = event.snapshot.value! as Map;
     int idNav = value["chosenShip"];
+    creditsAct = value["credits"];
     event = await firebase.ref("shop/ship/$idNav").once();
     value = event.snapshot.value! as Map;
     atacUsr = value["Attack"];

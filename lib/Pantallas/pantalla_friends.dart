@@ -72,7 +72,7 @@ class _list_usr extends State<lAmics> {
                         if (uidfriend != null) {
                           var friend = fd.GetObj(User_.fromDatabaseJson,
                               fd.user, uidfriend.toString());
-                          if (friend != null) {
+                          try {
                             var firebase = FirebaseDatabase.instance;
                             firebase
                                 .ref("users/" +
@@ -87,6 +87,25 @@ class _list_usr extends State<lAmics> {
                               "${FirebaseAuth.instance.currentUser!.uid}":
                                   FirebaseAuth.instance.currentUser!.uid
                             });
+                          } catch(Exception){
+                            return showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Error'),
+                                    content:
+                                        Text('Codi invàlid'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, 'OK');
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                           }
                         }
                         //carga_test
@@ -146,7 +165,6 @@ class _list_usr extends State<lAmics> {
                             .toList();
                         dList.GenerateGenericList(context, friend, fd.listUser,
                             dList.test, cBuilder.UserCard);
-                        print("lol");
                       },
                       child: const Text('Llista Amics'),
                     ),
